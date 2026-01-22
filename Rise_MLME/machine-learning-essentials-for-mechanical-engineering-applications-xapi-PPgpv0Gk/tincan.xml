@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tincan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://projecttincan.com/tincan.xsd">
+  <activities>
+    <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise" type="http://adlnet.gov/expapi/activities/course">
+      <name lang="en-US">Machine Learning Essentials for Mechanical Engineering Applications</name>
+      <description lang="en-US">Learn how machine learning solves real engineering problems—from predictive maintenance to defect detection. This interactive, beginner-friendly course covers key ML types, data preprocessing, model evaluation, and real-world applications in mechanical systems. No prior experience required—just curiosity and a drive to innovate.</description>
+      <launch lang="en-US">index.html</launch>
+    </activity>
+      <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise/EBu8EwugPsAX6jp19Ins5jDcKL3H_bu_" type="http://adlnet.gov/expapi/activities/module">
+      <name lang="en-US">Course Orientation &amp; Learning Objectives/blocks</name>
+      <description lang="en-US"></description>
+    </activity>
+          <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise/rxNh1uaV93wV-wf27BdPtLww4u_wFspK" type="http://adlnet.gov/expapi/activities/module">
+      <name lang="en-US">Applications of Machine Learning in Mechanical Engineering/blocks</name>
+      <description lang="en-US"></description>
+    </activity>
+          <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise/q24Pv1Hq8wDUJN5yJHts-hsN2nwFnNxJ" type="http://adlnet.gov/expapi/activities/module">
+      <name lang="en-US">Fundamentals of ML in Mechanical Engineering/blocks</name>
+      <description lang="en-US"></description>
+    </activity>
+          <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise/1NM0p2JctOa7rpEP2EhaV9E9bKpUOb9W" type="http://adlnet.gov/expapi/activities/module">
+      <name lang="en-US">Data Preprocessing for Engineering Datasets/blocks</name>
+      <description lang="en-US"></description>
+    </activity>
+          <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise/jPFnUxXU3J1SGJMQ4znYWiZdWwgwu14-" type="http://adlnet.gov/expapi/activities/module">
+      <name lang="en-US">Evaluating Model Performance: Error Metrics in Regression./blocks</name>
+      <description lang="en-US"></description>
+    </activity>
+          <activity id="http://CKDQgUTumBsnVQb9XiucMya766IbUKM9_rise/3kykdF8qrAnKOvqNciU7cP8VhXMW6o0K" type="http://adlnet.gov/expapi/activities/module">
+      <name lang="en-US">Scenario Practice &amp; Final Assessment/blocks</name>
+      <description lang="en-US"></description>
+    </activity>
+        </activities>
+</tincan>
