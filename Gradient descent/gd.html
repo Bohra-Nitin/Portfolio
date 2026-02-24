@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gradient Descent | Action-First Learning Experience</title>
+  <link rel="icon" href="ml_icon.png" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-900 bg-white">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold flex items-center space-x-3">
+      <img src="ml_icon.png" alt="Machine Learning Icon" class="w-6 h-6" />
+      <span>Gradient Descent — Interactive ML Experience</span>
+    </h1>
+    <nav>
+      <ul class="flex space-x-4 text-blue-700">
+        <li><a href="#overview" class="hover:underline">Overview</a></li>
+        <li><a href="#problem" class="hover:underline">Design Problem</a></li>
+        <li><a href="#approach" class="hover:underline">Design Approach</a></li>
+        <li><a href="#experience" class="hover:underline">Learning Flow</a></li>
+        <li><a href="#design-decisions" class="hover:underline">Design Decisions</a></li>
+        <li><a href="#screens" class="hover:underline">Screens</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="py-20 bg-gradient-to-r from-indigo-50 to-white">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
+      Understanding Gradient Descent
+    </h1>
+
+    <p class="mt-6 text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+      An action-first, scenario-driven learning experience designed to help learners
+      intuitively understand learning rate, step size, and optimization stability —
+      before introducing mathematical abstraction.
+    </p>
+
+    <a href="story.html" target="_blank"
+       class="mt-8 inline-block bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition">
+      Launch Interactive Prototype
+    </a>
+  </div>
+</section>
+
+<!-- ================= OVERVIEW ================= -->
+<section id="overview" class="max-w-6xl mx-auto px-4 py-20">
+  <h2 class="text-3xl font-bold mb-6 text-indigo-700">Project Overview</h2>
+
+  <p class="text-lg text-gray-700 leading-relaxed max-w-4xl">
+    This interactive module teaches Gradient Descent using an action-first approach.
+    Learners first experience model instability, then manipulate learning rate,
+    observe convergence patterns, and only later encounter the mathematical update rule.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-8 mt-10">
+    <div class="bg-white shadow-lg rounded-xl p-6">
+      <h4 class="text-xl font-semibold text-indigo-600 mb-2">Target Audience</h4>
+      <p>Engineering students, AI beginners, and technical professionals entering machine learning.</p>
+    </div>
+    <div class="bg-white shadow-lg rounded-xl p-6">
+      <h4 class="text-xl font-semibold text-indigo-600 mb-2">Duration</h4>
+      <p>Micro-module (~12–15 minutes) with interactive exploration and decision challenge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESIGN PROBLEM ================= -->
+<section id="problem" class="bg-gray-50 py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-6 text-indigo-700">The Design Problem</h2>
+
+    <p class="text-lg text-gray-700 leading-relaxed max-w-4xl">
+      Most learners encounter Gradient Descent as an equation before they understand
+      its behavior. This often leads to cognitive overload and shallow memorization.
+    </p>
+
+    <ul class="mt-6 list-disc pl-6 text-gray-700 space-y-3 text-lg max-w-4xl">
+      <li>Terminology introduced before intuition.</li>
+      <li>Equations explained without behavioral context.</li>
+      <li>Learning rate misunderstood as a fixed constant rather than a control parameter.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= DESIGN APPROACH ================= -->
+<section id="approach" class="py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-6 text-indigo-700">Instructional Design Approach</h2>
+
+    <ul class="list-disc pl-6 text-lg text-gray-700 space-y-3 max-w-4xl">
+      <li><strong>Action-First Learning:</strong> Learners manipulate learning rate before seeing equations.</li>
+      <li><strong>Delayed Labeling:</strong> The term “Gradient Descent” introduced only after understanding behavior.</li>
+      <li><strong>Pattern Recognition:</strong> Side-by-side visual comparison reinforces stability vs speed trade-offs.</li>
+      <li><strong>Confidence Calibration:</strong> Final slide prevents overgeneralization of “moderate is always best.”</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LEARNING FLOW ================= -->
+<section id="experience" class="bg-indigo-50 py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-10 text-indigo-700">Learning Flow</h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white shadow-lg rounded-xl p-6">
+        <h4 class="text-lg font-semibold text-indigo-600 mb-2">Experience</h4>
+        <p>Learners observe instability and adjust step size interactively.</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-6">
+        <h4 class="text-lg font-semibold text-indigo-600 mb-2">Explain</h4>
+        <p>The update rule is revealed with conceptual explanations of gradient and learning rate.</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-6">
+        <h4 class="text-lg font-semibold text-indigo-600 mb-2">Apply</h4>
+        <p>A deployment decision challenge tests real-world reasoning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESIGN DECISIONS ================= -->
+<section id="design-decisions" class="py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-6 text-indigo-700">Key Design Decisions</h2>
+
+    <ul class="list-disc pl-6 text-lg text-gray-700 space-y-3 max-w-4xl">
+      <li>Step arrow visual reused across slides for cognitive consistency.</li>
+      <li>Learning rate described as controlling step size — not equated to it.</li>
+      <li>Equation introduced only after behavior exploration.</li>
+      <li>Minimal animation to reduce cognitive load.</li>
+      <li>WCAG-compliant color contrasts maintained throughout.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SAMPLE SCREENS ================= -->
+<section id="screens" class="bg-gray-50 py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-10 text-indigo-700">Sample Screens</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <img src="gd_screen1.png" alt="Interactive Learning Rate Control"
+           class="rounded-xl shadow-md hover:scale-105 transition duration-300" />
+      <img src="gd_screen2.png" alt="Equation Explanation Slide"
+           class="rounded-xl shadow-md hover:scale-105 transition duration-300" />
+      <img src="gd_screen3.png" alt="Decision Challenge Slide"
+           class="rounded-xl shadow-md hover:scale-105 transition duration-300" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-white shadow-inner py-6 mt-10">
+  <div class="max-w-6xl mx-auto px-4 text-center text-gray-600">
+    <p>&copy; 2026 Dr. Bohra Nitin Kumar | Instructional Design & Technical Learning Experience</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "version": "3.105.35604.0",
+  "course_id": "6QNuV9xieVb",
+  "title": "Traffic_demo_jan_26",
+  "thumbnail": "story_content/thumbnail.jpg",
+  "scenes": [
+    {
+      "title": "Intro Scene"
+    }
+  ],
+  "slides": [
+    {
+      "id": "6QwDKWsEdCd",
+      "title": "Title Slide",
+      "scene_index": "1.1"
+    },
+    {
+      "id": "6r8rJUb0BL4",
+      "title": "Categorize the signs",
+      "scene_index": "1.2"
+    },
+    {
+      "id": "5bFDVfh8WLK",
+      "title": "Visual Deduction",
+      "scene_index": "1.3"
+    },
+    {
+      "id": "6cshB6SvpjQ",
+      "title": "Final Road Test",
+      "scene_index": "1.4"
+    }
+  ],
+  "player": {
+    "name": "unified",
+    "width": 1540,
+    "height": 814
+  },
+  "stage": {
+    "width": 1280,
+    "height": 720
+  }
+}

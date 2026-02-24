@@ -1,0 +1,62 @@
+{
+  "version": "3.105.35604.0",
+  "course_id": "6XwBUxzoFAd",
+  "title": "GD",
+  "thumbnail": "story_content/thumbnail.jpg",
+  "scenes": [
+    {
+      "title": "Intro Scene"
+    }
+  ],
+  "slides": [
+    {
+      "id": "5Xq1HGDAhYv",
+      "title": "Train the model",
+      "scene_index": "1.1"
+    },
+    {
+      "id": "5qs9p4WBtAx",
+      "title": "Control the step size",
+      "scene_index": "1.2"
+    },
+    {
+      "id": "6RjSXRmreBK",
+      "title": "Spot the pattern",
+      "scene_index": "1.3"
+    },
+    {
+      "id": "628anjNzKJ3",
+      "title": "Why this happens",
+      "scene_index": "1.4"
+    },
+    {
+      "id": "6MqgsPC0g16",
+      "title": "What we just used",
+      "scene_index": "1.5"
+    },
+    {
+      "id": "6WCRqrRJL4N",
+      "title": "Make the call",
+      "scene_index": "1.6"
+    },
+    {
+      "id": "6RJQjUNtjYz",
+      "title": "Key Takeaways",
+      "scene_index": "1.7"
+    },
+    {
+      "id": "5x2O1GMbeDn",
+      "title": "Before you apply this",
+      "scene_index": "1.8"
+    }
+  ],
+  "player": {
+    "name": "unified",
+    "width": 1540,
+    "height": 814
+  },
+  "stage": {
+    "width": 1280,
+    "height": 720
+  }
+}
