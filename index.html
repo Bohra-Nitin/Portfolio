@@ -21,12 +21,29 @@
     }
     /* Add tilt effect to project images */
     .project-img {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1.25rem;         /* space above */
+  background-color: white;    /* clean background */
+}
+
+.project-img img {
+  width: 80%;                 /* scale down a bit */
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;        /* rounded rectangle */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* soft shadow */
   transition: transform 0.35s ease;
 }
 
-.project-img:hover {
-  transform: scale(1.1);
+.project-img img:hover {
+  transform: scale(1.03);     /* zoom effect */
 }
+
+
   </style>
 </head>
 <body class="font-sans text-gray-800">
@@ -134,148 +151,259 @@
     <div class="grid md:grid-cols-3 gap-8">
 
       <!-- Project 1 Card -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <a href="Python_project/python-project.html">
-          <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-sm project-img">
-            Project Image
-          </div>
-        </a>
-        <div class="p-6">
-          <h5 class="text-base font-semibold mb-2">SDG Goals for Higher Educational Institutions</h5>
-          <p class="text-gray-600 text-sm">
-          <div class="flex flex-wrap items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Audience:</h4></span>
-            <span><p class="text-sm mb-0">Faculty and Administrators</p></span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Tools:</h4></span>
-            <span class="text-sm mb-0">HTML, CSS, JavaScript</span>
-          </div>
-          </p>
-        </div>
+     <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+  <!-- Wrap both image and text in the same link -->
+  <a href="/Traffic/traffic.html" target="_blank" class="block group">
+    <!-- Image -->
+    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
+      <img 
+        src="/Traffic/Traffic.gif"
+        alt="Traffic Demo Course"
+        class="w-full h-auto object-cover"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div class="p-6">
+      <!-- Title left aligned -->
+      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-teal-700 transition">
+        Interactive Traffic Signs Demo Course
+      </h5>
+      
+      <!-- Audience section -->
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Novice Drivers, Compliance Trainees, Road Safety Learners
+        </p>
       </div>
+
+      <!-- Tools section -->
+      <div>
+        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Articulate Storyline, HTML5, Tailwind CSS
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
 
       <!-- Project 2 Card -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <a href="Rise_MLME/mlme1.html" >
-          <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-sm project-img">
-    
-    <img 
-      src="mlme.png"
-      alt="Machine Learning in Mechanical Engineering"
-      class="w-full h-full object-cover"
-    />
-  </div>
-        </a>
-        <div class="p-6">
-          <h5 class="text-base font-semibold mb-2">Machine Learning Essentials for Mechanical Engineering Applications</h5>
-          <p class="text-gray-600 text-sm">
-          <div class="flex flex-wrap items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Audience:</h4></span>
-            <span><p class="text-sm mb-0">Mechanical Engineers who want leverage ML</p></span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Tools:</h4></span>
-            <span class="text-sm mb-0">Articulate Rise</span>
-          </div>
-          </p>
-        </div>
+      <!-- Project (Machine Learning Essentials) -->
+<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+  <!-- Wrap both image and text in the same link -->
+  <a href="Rise_MLME/mlme1.html" target="_blank" class="block group">
+    <!-- Image -->
+    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
+      <img 
+        src="/Rise_MLME/mlme1.gif"
+        alt="Machine Learning in Mechanical Engineering"
+        class="w-full h-auto object-cover"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div class="p-6">
+      <!-- Title left aligned -->
+      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
+        Machine Learning Essentials for Mechanical Engineering Applications
+      </h5>
+      
+      <!-- Audience section -->
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Mechanical Engineers who want to leverage ML
+        </p>
       </div>
+
+      <!-- Tools section -->
+      <div>
+        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Articulate Rise
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
 
       <!-- Project 3 Card -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <a href="#" target="_blank">
-          <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-sm project-img">
-            Project Image
-          </div>
-        </a>
-        <div class="p-6">
-          <h5 class="text-base font-semibold mb-2">GITHUB</h5>
-          <p class="text-gray-600 text-sm">
-          <div class="flex flex-wrap items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Audience:</h4></span>
-            <span><p class="text-sm mb-0"></p></span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Tools:</h4></span>
-            <span class="text-sm mb-0">Articulate Storyline</span>
-          </div>
-          </p>
-        </div>
+  <!-- Gradient Descent Project Card -->
+<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+  <!-- Wrap both image and text in the same link -->
+  <a href="/Gradient descent/gd.html" target="_blank" class="block group">
+    
+    <!-- Image -->
+    <div class="w-full h-40 bg-white flex items-center justify-center project-img overflow-hidden">
+      <img 
+        src="/Gradient descent/gd.gif"
+        alt="Gradient Descent Interactive Learning Experience"
+        class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div class="p-6">
+
+      <!-- Title -->
+      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-indigo-700 transition">
+        Gradient Descent – Action-First Interactive ML Module
+      </h5>
+      
+      <!-- Audience section -->
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Engineering Students, AI Beginners, Technical Professionals
+        </p>
       </div>
 
-      <!-- Project 4 (Duplicate of Project 1) -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <a href="/QA_Checklist/QA_checklist.html">
-          <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-sm project-img">
-    <img 
-      src="/QA_Checklist/QA_checklist.png"
-      alt="QA checklist"
-      class="w-full h-full object-cover"
-    />
-  </div>
-        </a>
-        <div class="p-6">
-          <h5 class="text-base font-semibold mb-2">eLearning Quality Assurance Checklist</h5>
-          <p class="text-gray-600 text-sm">
-          <div class="flex flex-wrap items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Audience:</h4></span>
-            <span><p class="text-sm mb-0">Faculty and Administrators</p></span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Tools:</h4></span>
-            <span class="text-sm mb-0">HTML, CSS, JavaScript</span>
-          </div>
-          </p>
-        </div>
-      </div>
-
-      <!-- Project 5 (Duplicate of Project 2) -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <a href="/AI_ethics/AI-ethics.html" target="_blank">
-          <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-sm project-img">
-            Project Image
-          </div>
-        </a>
-        <div class="p-6">
-          <h5 class="text-base font-semibold mb-2">Machine Learning in Mechanical Engineering: An Introduction</h5>
-          <p class="text-gray-600 text-sm">
-          <div class="flex flex-wrap items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Audience:</h4></span>
-            <span><p class="text-sm mb-0">Mechanical Engineers who want leverage ML</p></span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Tools:</h4></span>
-            <span class="text-sm mb-0">Articulate Rise</span>
-          </div>
-          </p>
-        </div>
-      </div>
-
-      <!-- Project 6 (Duplicate of Project 3) -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <a href="#" target="_blank">
-          <div class="w-full h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-sm project-img">
-            Project Image
-          </div>
-        </a>
-        <div class="p-6">
-          <h5 class="text-base font-semibold mb-2">GITHUB</h5>
-          <p class="text-gray-600 text-sm">
-          <div class="flex flex-wrap items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Audience:</h4></span>
-            <span><p class="text-sm mb-0"></p></span>
-          </div>
-          <div class="flex items-center space-x-2">
-            <span><h4 class="text-sm font-semibold mb-0">Tools:</h4></span>
-            <span class="text-sm mb-0">Articulate Storyline</span>
-          </div>
-          </p>
-        </div>
+      <!-- Tools section -->
+      <div>
+        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Articulate Storyline, Python (Visualization), HTML5, Tailwind CSS
+        </p>
       </div>
 
     </div>
-  </div>
+  </a>
+</div>
+
+
+      <!-- Project 4 (Duplicate of Project 1) -->
+      <!-- Project (eLearning QA Checklist) -->
+<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+  <!-- Wrap both image and text in the same link -->
+  <a href="/QA_Checklist/QA_checklist.html" target="_blank" class="block group">
+    <!-- Image -->
+    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
+      <img 
+        src="/QA_Checklist/3.png"
+        alt="QA checklist"
+        class="w-full h-auto object-cover"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div class="p-6">
+      <!-- Title left aligned -->
+      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
+        eLearning Quality Assurance Checklist
+      </h5>
+      
+      <!-- Audience section -->
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Faculty and Administrators
+        </p>
+      </div>
+
+      <!-- Tools section -->
+      <div>
+        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          HTML, CSS, JavaScript
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+      <!-- Project 5 (Duplicate of Project 2) -->
+     <!-- Project 5 (Learning Needs Analysis) -->
+<!-- Project 5 (Learning Needs Analysis) -->
+<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+  <!-- Wrap both image and text in the same link -->
+  <a href="/LNA/lna.html" target="_blank" class="block group">
+    <!-- Image -->
+    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
+      <img 
+        src="/LNA/screen1.png"
+        alt="LNA_template"
+        class="w-full h-auto object-cover"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div class="p-6">
+      <!-- Title left aligned -->
+      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
+        Learning Needs Analysis Template
+      </h5>
+      
+      <!-- Audience section -->
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Instructional Designers, L&D Consultants, Academic Designers, QA and Strategy Teams
+        </p>
+      </div>
+
+      <!-- Tools section -->
+      <div>
+        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Adobe InDesign, UX Writing Principles, Performance Consulting Frameworks
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+     
+
+    
+    
+
+
+      <!-- Project 6 (Duplicate of Project 3) -->
+  <!-- Project 5 (Learning Needs Analysis) -->
+<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+  <!-- Wrap both image and text in the same link -->
+  <a href="/LNA/lna.html" target="_blank" class="block group">
+    <!-- Image -->
+    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
+      <img 
+        src="/LNA/screen1.png"
+        alt="LNA_template"
+        class="w-full h-auto object-cover"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div class="p-6">
+      <!-- Title left aligned -->
+      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
+        Learning Needs Analysis Template
+      </h5>
+      
+      <!-- Audience section -->
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Instructional Designers, L&D Consultants, Academic Designers, QA and Strategy Teams
+        </p>
+      </div>
+
+      <!-- Tools section -->
+      <div>
+        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
+        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
+          Adobe InDesign, UX Writing Principles, Performance Consulting Frameworks
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
 </section>
 
   <!-- ========== CONTACT SECTION ========== -->
@@ -313,4 +441,3 @@
 
 </body>
 </html>
-
