@@ -11,6 +11,17 @@
   <!-- TailwindCSS CDN for utility-first styling -->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
+<script>
+function openVideo() {
+  document.getElementById("videoModal").classList.remove("hidden");
+  document.getElementById("videoModal").classList.add("flex");
+}
+
+function closeVideo() {
+  document.getElementById("videoModal").classList.add("hidden");
+}
+</script>
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Small custom style for subtle background texture + hover tilt -->
   <style>
@@ -274,7 +285,116 @@
   </a>
 </div>
 
+<div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
+     onclick="openVideo()">
+  
+  <!-- Thumbnail -->
+  <!-- Thumbnail -->
+<div class="w-full h-40 bg-white flex items-center justify-center project-img overflow-hidden relative group">
+  
+  <!-- GIF -->
+  <img 
+    src="/Exceltoclickup/cover.gif"
+    alt="ClickUp Excel Import Tutorial"
+    class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+  />
 
+  <!-- Play Icon (Fixed) -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80 group-hover:opacity-100 transition">
+    <div class="bg-black/50 rounded-full p-3 flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="h-6 w-6 text-white" 
+           fill="currentColor" 
+           viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+  <!-- Content -->
+  <div class="p-6 space-y-4">
+    <h5 class="text-base font-semibold hover:text-indigo-700 transition">
+      Excel to ClickUp – Project Plan Import Tutorial
+    </h5>
+
+    <div>
+      <h4 class="text-sm font-semibold">Audience:</h4>
+      <p class="text-sm text-gray-600">
+        Instructional Designers, Project Managers, eLearning Developers
+      </p>
+    </div>
+
+    <div>
+      <h4 class="text-sm font-semibold">Tools:</h4>
+      <p class="text-sm text-gray-600">
+        Camtasia, ClickUp, Excel, HTML5, Tailwind CSS
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Video Modal -->
+<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+
+  <div class="bg-white rounded-lg overflow-hidden w-11/12 md:w-3/4 lg:w-1/2 relative">
+
+    <!-- Video -->
+    <video 
+      id="projectVideo"
+      class="w-full"
+      controls
+      controlsList="nodownload"
+      oncontextmenu="return false;"
+    >
+      <source src="Exceltoclickup/final22.mp4" type="video/mp4">
+    </video>
+
+    <!-- Close Button -->
+    <button onclick="closeVideo()" 
+            class="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-3 py-1 rounded">
+      ✕
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- Script -->
+<script>
+function openVideo() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("projectVideo");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  video.currentTime = 0;
+  video.play();
+}
+
+function closeVideo() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("projectVideo");
+
+  video.pause();              // ✅ stops audio
+  video.currentTime = 0;      // ✅ resets video
+
+  modal.classList.add("hidden");
+}
+</script>
+
+<!-- Script -->
+
+
+
+
+
+
+
+      
       <!-- Project 4 (Duplicate of Project 1) -->
       <!-- Project (eLearning QA Checklist) -->
 <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
@@ -358,51 +478,12 @@
 </div>
 
 
-     
-
     
     
+    
 
 
-      <!-- Project 6 (Duplicate of Project 3) -->
-  <!-- Project 5 (Learning Needs Analysis) -->
-<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
-  <!-- Wrap both image and text in the same link -->
-  <a href="LNA/lna.html" target="_blank" class="block group">
-    <!-- Image -->
-    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
-      <img 
-        src="LNA/screen1.png"
-        alt="LNA_template"
-        class="w-full h-auto object-cover"
-      />
-    </div>
 
-    <!-- Text content -->
-    <div class="p-6">
-      <!-- Title left aligned -->
-      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
-        Learning Needs Analysis Template
-      </h5>
-      
-      <!-- Audience section -->
-      <div class="mb-4">
-        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Instructional Designers, L&D Consultants, Academic Designers, QA and Strategy Teams
-        </p>
-      </div>
-
-      <!-- Tools section -->
-      <div>
-        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Adobe InDesign, UX Writing Principles, Performance Consulting Frameworks
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
 
 </section>
 
