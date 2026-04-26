@@ -5,7 +5,7 @@
    Replace with your real details
 ---------------------------------- */
 ADL.XAPIWrapper.changeConfig({
-    endpoint: "https://cloud.scorm.com/lrs/YOUR_APP_ID/xAPI/",
+    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
     auth: "Basic YOUR_BASE64_CREDENTIALS"
 });
 
