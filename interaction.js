@@ -5,7 +5,7 @@
    Replace with your real details
 ---------------------------------- */
 ADL.XAPIWrapper.changeConfig({
-    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
+    endpoint: "https://cloud.scorm.com/lrs/YOUR_APP_ID/xAPI/",
     auth: "Basic YOUR_BASE64_CREDENTIALS"
 });
 
@@ -19,24 +19,42 @@ let objectID = "https://yourusername.github.io/portfolio/";
 
 
 /* ---------------------------------
-   When portfolio.html loads
+   Auto send only when portfolio.html loads
+   and valid details already exist
 ---------------------------------- */
 window.onload = function () {
 
-    // Read values saved from index.html
     userName = localStorage.getItem("username");
     emailAddress = localStorage.getItem("email");
 
-    // If user opens portfolio directly
-    if (!userName || !emailAddress) {
+    // If details exist, send statement silently
+    if (userName && emailAddress) {
+        sendVisited();
+    }
+};
+
+
+/* ---------------------------------
+   Called from index.html button click
+---------------------------------- */
+function goPortfolio() {
+
+    let enteredName = document.getElementById("username").value.trim();
+    let enteredEmail = document.getElementById("email").value.trim();
+
+    // Show message only when button clicked
+    if (enteredName === "" || enteredEmail === "") {
         alert("Please enter Name and Email first.");
-        window.location.href = "index.html";
         return;
     }
 
-    // Auto send statement
-    sendVisited();
-};
+    // Save data
+    localStorage.setItem("username", enteredName);
+    localStorage.setItem("email", enteredEmail);
+
+    // Open portfolio
+    window.location.href = "portfolio.html";
+}
 
 
 /* ---------------------------------
@@ -54,7 +72,7 @@ function sendVisited() {
 
 
 /* ---------------------------------
-   Generic xAPI Statement Function
+   Generic xAPI Statement
 ---------------------------------- */
 function sendStatement(verbID, verb, objName, objDesc) {
 
@@ -86,17 +104,6 @@ function sendStatement(verbID, verb, objName, objDesc) {
         }
     };
 
-    /* Send statement to SCORM Cloud */
-    ADL.XAPIWrapper.sendStatement(statementInfo, function (response, obj) {
-
-        console.log("SCORM Response:", response);
-
-        if (response.status == 200 || response.status == 204) {
-            alert("Success! Information sent to SCORM Cloud.");
-        } else {
-            alert("Failed to send information.");
-            console.log(response.responseText);
-        }
-
-    });
+    // Send silently
+    ADL.XAPIWrapper.sendStatement(statementInfo);
 }
