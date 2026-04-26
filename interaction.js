@@ -1,23 +1,32 @@
+// interaction.js
+
 // Variables
 let userName = "";
 let emailAddress = "";
-let objectID = "https://bohra-nitin.github.io/Portfolio";
+let objectID = "https://yourusername.github.io/portfolio/";
 
-/* Get data from form page */
+/* When portfolio.html opens */
 window.onload = function () {
+
+    // Get saved data from index.html
     userName = localStorage.getItem("username");
     emailAddress = localStorage.getItem("email");
 
-    /* If user opens portfolio directly */
+    // If opened directly without entering details
     if (!userName || !emailAddress) {
         alert("Please enter Name and Email first.");
         window.location.href = "index.html";
+        return;
     }
+
+    // Auto send xAPI statement
+    sendVisited();
 };
 
 
-/* Called when user clicks Visit Portfolio button */
+/* Portfolio Visit Statement */
 function sendVisited() {
+
     sendStatement(
         "http://adlnet.gov/expapi/verbs/experienced",
         "visited",
@@ -27,7 +36,7 @@ function sendVisited() {
 }
 
 
-/* Generic xAPI Statement Function */
+/* Generic Statement Function */
 function sendStatement(verbID, verb, objName, objDesc) {
 
     let statementInfo = {
@@ -58,7 +67,16 @@ function sendStatement(verbID, verb, objName, objDesc) {
         }
     };
 
-    ADL.XAPIWrapper.sendStatement(statementInfo);
+    /* Send to SCORM Cloud */
+    ADL.XAPIWrapper.sendStatement(statementInfo, function (response, obj) {
 
-    console.log("xAPI Statement Sent");
+        console.log("SCORM Response:", response);
+
+        if (response.status == 200 || response.status == 204) {
+            alert("Success! Information sent to SCORM Cloud.");
+        } else {
+            alert("Failed to send information to SCORM Cloud.");
+        }
+
+    });
 }
