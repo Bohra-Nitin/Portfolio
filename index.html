@@ -1,529 +1,97 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Sets the character encoding to UTF-8 so all symbols are supported -->
-  <meta charset="UTF-8">
-  <!-- Makes the website responsive across devices -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Title shown on the browser tab -->
-  <title>Bohra Nitin Kumar | Instructional Designer Portfolio</title>
-  <!-- TailwindCSS CDN for utility-first styling -->
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Portfolio</title>
 
-<script>
-function openVideo() {
-  document.getElementById("videoModal").classList.remove("hidden");
-  document.getElementById("videoModal").classList.add("flex");
-}
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+        }
 
-function closeVideo() {
-  document.getElementById("videoModal").classList.add("hidden");
-}
-</script>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Small custom style for subtle background texture + hover tilt -->
-  <style>
-    body {
-      /* Very subtle dotted texture using radial gradient */
-      background-image: radial-gradient(circle, #e5e5e5 1.2px, transparent 1px);
-      background-size: 20px 20px;
-    }
-    /* Add tilt effect to project images */
-    .project-img {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 1.25rem;         /* space above */
-  background-color: white;    /* clean background */
-}
+        .box{
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+            width:350px;
+        }
 
-.project-img img {
-  width: 80%;                 /* scale down a bit */
-  height: auto;
-  object-fit: contain;
-  border-radius: 6px;        /* rounded rectangle */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* soft shadow */
-  transition: transform 0.35s ease;
-}
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+        }
 
-.project-img img:hover {
-  transform: scale(1.03);     /* zoom effect */
-}
+        input{
+            width:100%;
+            padding:10px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
 
+        button{
+            width:100%;
+            padding:12px;
+            background:#007bff;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
 
-  </style>
+        button:hover{
+            background:#0056b3;
+        }
+    </style>
 </head>
-<body class="font-sans text-gray-800">
 
-  <!-- ========== HEADER / NAVBAR ========== -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto px-1 py-4 flex justify-between items-center">
-    <!-- Left side: Portfolio title -->
-    <h1 class="text-xl font-bold  text-gray-900 flex items-center space-x-4">
-        <img src="favicon.ico" alt="Logo" class="w-6 h-6 inline-block" />
-        <span>Dr. Bohra Nitin Kumar</span>
-    </h1>
+<body>
 
-    <!-- Right side: Navigation links -->
-    <nav>
-      <ul class="flex space-x-4">
-        <li>
-          <a href="#about" class="px-4 py-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
-            About
-          </a>
-        </li>
-        <li>
-          <a href="#work" class="px-4 py-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
-            Work
-          </a>
-        </li>
-        <li>
-          <a href="#contact" class="px-4 py-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
-            Contact
-          </a>
-        </li>
-        </li>
-        <li>
-        <a href="resume.pdf" download class="px-4 py-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
-            Resume
-        </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<div class="box">
+    <h2>Visit Portfolio</h2>
 
+    <input type="text" id="username" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
 
-  <!-- ========== HERO SECTION ========== -->
-<section
-  class="text-center py-[80px]  bg-gradient-to-r from-blue-50 to-white relative overflow-hidden"
-  style="background-image: url('bg5.png'); background-size: cover; background-position: center;"
->
-  <!-- Semi-transparent overlay to soften the background image -->
-  <div class="absolute inset-0 bg-white bg-opacity-85"></div>
-
-  <!-- Content sits above the overlay -->
-  <div class="relative max-w-4xl mx-auto text-center">
-    <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
-      <span class="text-gray-900">INSTRUCTIONAL</span>
-      <span class="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-600">
-        DESIGNER
-        <svg class="absolute -bottom-1 left-0 w-full h-2" viewBox="0 0 55 5" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <path d="M0.652466 4.00002C15.8925 2.66668 48.0351 0.400018 54.6853 2.00002" stroke="#06b6d4" stroke-width="2" fill="none" />
-        </svg>
-      </span>
-    </h1>
-  </div>
-
-
-
-    <p class="relative text-xl text-gray-900 max-w-2xl mx-auto">
-      Transforming ideas into learning experiences that make a <em class="text-purple-600 font-semibold animate-pulse">difference</em>.
-    </p>
-  </div>
-</section>
-
-  <!-- ========== ABOUT SECTION ========== -->
-  <section id="about" class="max-w-6xl mx-auto px-4 py-16">
-    <!-- Section title -->
-    <h2 class="text-3xl font-bold mb-8 text-gray-900">About Me</h2>
-    <div class="flex flex-col md:flex-row items-center gap-8">
-      
-      <!-- Profile Picture Placeholder (circular) -->
-      <div class="flex-shrink-0">
-        <div class="w-48 h-48 rounded-full overflow-hidden bg-gray-300 flex items-center justify-center text-gray-500 text-sm">
-          <img src="profile.jpg" class="w-full h-full object-cover rounded-full">
-        </div>
-      </div>
-      
-      <!-- About text -->
-      <div>
-        <p class="text-lg leading-relaxed text-justify">
-         With over a decade of combined experience in university-level teaching and academic research, 
-         I bring a deep understanding of how people learn and how to design impactful learning experiences.
-            I’m skilled at simplifying complex concepts and designing content that resonates with diverse audiences. 
-            I am channeling that expertise into instructional design, creating human-centered learning experiences that are impactful, strategically aligned, and built to support organizational growth.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== WORK SECTION ========== -->
-<section id="work" class="bg-gray-50 py-16">
-  <div class="max-w-6xl mx-auto px-4">
-    <!-- Section title -->
-    <h2 class="text-3xl font-bold mb-12 text-gray-900 text-center">Selected Work</h2>
-
-    <!-- Grid for project cards -->
-    <div class="grid md:grid-cols-3 gap-8">
-
-      <!-- Project 1 Card -->
-     <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
-  <!-- Wrap both image and text in the same link -->
-  <a href="Traffic/traffic.html" target="_blank" class="block group">
-    <!-- Image -->
-    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
-      <img 
-        src="Traffic/Traffic.gif"
-        alt="Traffic Demo Course"
-        class="w-full h-auto object-cover"
-      />
-    </div>
-
-    <!-- Text content -->
-    <div class="p-6">
-      <!-- Title left aligned -->
-      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-teal-700 transition">
-        Interactive Traffic Signs Demo Course
-      </h5>
-      
-      <!-- Audience section -->
-      <div class="mb-4">
-        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Novice Drivers, Compliance Trainees, Road Safety Learners
-        </p>
-      </div>
-
-      <!-- Tools section -->
-      <div>
-        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Articulate Storyline, HTML5, Tailwind CSS
-        </p>
-      </div>
-    </div>
-  </a>
+    <button onclick="goPortfolio()">Visit Portfolio</button>
 </div>
 
 
-      <!-- Project 2 Card -->
-      <!-- Project (Machine Learning Essentials) -->
-<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
-  <!-- Wrap both image and text in the same link -->
-  <a href="Rise_MLME/mlme1.html" target="_blank" class="block group">
-    <!-- Image -->
-    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
-      <img 
-        src="mlme1.gif"
-        alt="Machine Learning in Mechanical Engineering"
-        class="w-full h-auto object-cover"
-      />
-    </div>
+<!-- Your existing JS files -->
 
-    <!-- Text content -->
-    <div class="p-6">
-      <!-- Title left aligned -->
-      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
-        Machine Learning Essentials for Mechanical Engineering Applications
-      </h5>
-      
-      <!-- Audience section -->
-      <div class="mb-4">
-        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Mechanical Engineers who want to leverage ML
-        </p>
-      </div>
+<script src="js/cryptojs_v3.1.2.js"></script>
+<script src="js/xapiwrapper.js"></script>
+<script src="js/interaction.js"></script>
 
-      <!-- Tools section -->
-      <div>
-        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Articulate Rise
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
-
-
-      <!-- Project 3 Card -->
-  <!-- Gradient Descent Project Card -->
-<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
-  <!-- Wrap both image and text in the same link -->
-  <a href="Gradient descent/gd.html" target="_blank" class="block group">
-    
-    <!-- Image -->
-    <div class="w-full h-40 bg-white flex items-center justify-center project-img overflow-hidden">
-      <img 
-        src="Gradient descent/gd.gif"
-        alt="Gradient Descent Interactive Learning Experience"
-        class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-      />
-    </div>
-
-    <!-- Text content -->
-    <div class="p-6">
-
-      <!-- Title -->
-      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-indigo-700 transition">
-        Gradient Descent – Action-First Interactive ML Module
-      </h5>
-      
-      <!-- Audience section -->
-      <div class="mb-4">
-        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Engineering Students, AI Beginners, Technical Professionals
-        </p>
-      </div>
-
-      <!-- Tools section -->
-      <div>
-        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Articulate Storyline, Python (Visualization), HTML5, Tailwind CSS
-        </p>
-      </div>
-
-    </div>
-  </a>
-</div>
-
-<div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
-     onclick="openVideo()">
-  
-  <!-- Thumbnail -->
-  <!-- Thumbnail -->
-<div class="w-full h-40 bg-white flex items-center justify-center project-img overflow-hidden relative group">
-  
-  <!-- GIF -->
-  <img 
-    src="Exceltoclcikup/cover.gif"
-    alt="ClickUp Excel Import Tutorial"
-    class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-  />
-
-  <!-- Play Icon (Fixed) -->
-  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80 group-hover:opacity-100 transition">
-    <div class="bg-black/50 rounded-full p-3 flex items-center justify-center">
-      <svg xmlns="http://www.w3.org/2000/svg" 
-           class="h-6 w-6 text-white" 
-           fill="currentColor" 
-           viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-    </div>
-  </div>
-
-</div>
-  <!-- Content -->
-  <div class="p-6 space-y-4">
-    <h5 class="text-base font-semibold hover:text-indigo-700 transition">
-      Excel to ClickUp – Project Plan Import Tutorial
-    </h5>
-
-    <div>
-      <h4 class="text-sm font-semibold">Audience:</h4>
-      <p class="text-sm text-gray-600">
-        Instructional Designers, Project Managers, eLearning Developers
-      </p>
-    </div>
-
-    <div>
-      <h4 class="text-sm font-semibold">Tools:</h4>
-      <p class="text-sm text-gray-600">
-        Camtasia, ClickUp, Excel, HTML5, Tailwind CSS
-      </p>
-    </div>
-  </div>
-</div>
-
-
-<!-- Video Modal -->
-<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
-
-  <div class="bg-white rounded-lg overflow-hidden w-11/12 md:w-3/4 lg:w-1/2 relative">
-
-    <!-- Video -->
-    <video 
-      id="projectVideo"
-      class="w-full"
-      controls
-      controlsList="nodownload"
-      oncontextmenu="return false;"
-    >
-      <source src="Exceltoclcikup/final22.mp4" type="video/mp4">
-    </video>
-
-    <!-- Close Button -->
-    <button onclick="closeVideo()" 
-            class="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-3 py-1 rounded">
-      ✕
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- Script -->
 <script>
-function openVideo() {
-  const modal = document.getElementById("videoModal");
-  const video = document.getElementById("projectVideo");
+function goPortfolio()
+{
+    let username = document.getElementById("username").value.trim();
+    let email = document.getElementById("email").value.trim();
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
+    if(username === "" || email === "")
+    {
+        alert("Please enter Name and Email first.");
+        return;
+    }
 
-  video.currentTime = 0;
-  video.play();
-}
+    /* Save data so interaction.js can use it */
+    localStorage.setItem("username", username);
+    localStorage.setItem("email", email);
 
-function closeVideo() {
-  const modal = document.getElementById("videoModal");
-  const video = document.getElementById("projectVideo");
-
-  video.pause();              // ✅ stops audio
-  video.currentTime = 0;      // ✅ resets video
-
-  modal.classList.add("hidden");
+    /* Open portfolio */
+    window.location.href = "portfolio.html";
 }
 </script>
-
-<!-- Script -->
-
-
-
-
-
-
-
-      
-      <!-- Project 4 (Duplicate of Project 1) -->
-      <!-- Project (eLearning QA Checklist) -->
-<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
-  <!-- Wrap both image and text in the same link -->
-  <a href="QA_Checklist/QA_checklist.html" target="_blank" class="block group">
-    <!-- Image -->
-    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
-      <img 
-        src="QA_Checklist/3.png"
-        alt="QA checklist"
-        class="w-full h-auto object-cover"
-      />
-    </div>
-
-    <!-- Text content -->
-    <div class="p-6">
-      <!-- Title left aligned -->
-      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
-        eLearning Quality Assurance Checklist
-      </h5>
-      
-      <!-- Audience section -->
-      <div class="mb-4">
-        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Faculty and Administrators
-        </p>
-      </div>
-
-      <!-- Tools section -->
-      <div>
-        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          HTML, CSS, JavaScript
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
-
-
-      <!-- Project 5 (Duplicate of Project 2) -->
-     <!-- Project 5 (Learning Needs Analysis) -->
-<!-- Project 5 (Learning Needs Analysis) -->
-<div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
-  <!-- Wrap both image and text in the same link -->
-  <a href="LNA/lna.html" target="_blank" class="block group">
-    <!-- Image -->
-    <div class="w-full h-40 bg-white flex items-center justify-center text-gray-500 text-sm project-img">
-      <img 
-        src="LNA/screen1.png"
-        alt="LNA_template"
-        class="w-full h-auto object-cover"
-      />
-    </div>
-
-    <!-- Text content -->
-    <div class="p-6">
-      <!-- Title left aligned -->
-      <h5 class="text-base font-semibold mb-4 text-left group-hover:text-blue-700 transition">
-        Learning Needs Analysis Template
-      </h5>
-      
-      <!-- Audience section -->
-      <div class="mb-4">
-        <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Instructional Designers, L&D Consultants, Academic Designers, QA and Strategy Teams
-        </p>
-      </div>
-
-      <!-- Tools section -->
-      <div>
-        <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-        <p class="text-sm text-gray-600 group-hover:text-gray-800 transition">
-          Adobe InDesign, UX Writing Principles, Performance Consulting Frameworks
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
-
-
-    
-    
-    
-
-
-
-
-</section>
-
-  <!-- ========== CONTACT SECTION ========== -->
-<section id="contact" class="max-w-6xl mx-auto px-4 py-16 text-center">
-  <h2 class="text-3xl font-bold mb-8 text-gray-900">Contact Me</h2>
-
-  <div class="flex justify-center items-center space-x-6">
-    <!-- Email -->
-    <a href="mailto:bohranitinkumar@gmail.com" class="transform transition-transform duration-300 hover:scale-125 inline-block">
-     <img src="email.png" alt="Email Icon" class="w-[30px] h-[32px]" />
-    </a>
-    
-
-    <!-- Phone -->
-    <a href="tel:+91960371015" class="transform transition-transform duration-300 hover:scale-125">
-      <img src="phone.png" alt="Phone Icon" class="w-[25px] h-[35px]" />
-    </a>
-    <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/in/dr-bohra-nitin-kumar-id" target="_blank" class="transform transition-transform duration-300 hover:scale-125">
-      <img src="linkedin.png" alt="Phone Icon" class="w-[28px] h-[28px]" />
-    </a>
-
-    <!-- Instagram -->
-    <a href="https://instagram.com/yourprofile" target="_blank" class="transform transition-transform duration-300 hover:scale-125">
-      <img src="insta.png" alt="Phone Icon" class="w-[30px] h-[30px]" />
-    </a>
-  </div>
-</section>
-
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="bg-white border-t py-6 text-center text-sm text-gray-600">
-    © 2025 Bohra Nitin Kumar. All rights reserved.
-  </footer>
 
 </body>
 </html>
-
-
-
-
-
