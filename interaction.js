@@ -1,7 +1,7 @@
 // Variables
 let userName = "";
 let emailAddress = "";
-let objectID = "https://yourdomain.com/portfolio";
+let objectID = "https://bohra-nitin.github.io/Portfolio";
 
 /* Get data from form page */
 window.onload = function () {
