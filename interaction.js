@@ -105,5 +105,16 @@ function sendStatement(verbID, verb, objName, objDesc) {
     };
 
     // Send silently
-    ADL.XAPIWrapper.sendStatement(statementInfo);
+   ADL.XAPIWrapper.sendStatement(statementInfo, function (response, obj) {
+
+        console.log("SCORM Response:", response);
+
+        if (response.status == 200 || response.status == 204) {
+            alert("Success! Information sent to SCORM Cloud.");
+        } else {
+            alert("Failed to send information.");
+            console.log(response.responseText);
+        }
+
+    });
 }
