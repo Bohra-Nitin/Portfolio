@@ -1,30 +1,47 @@
 // interaction.js
 
-// Variables
+/* ---------------------------------
+   SCORM Cloud xAPI Configuration
+   Replace with your real details
+---------------------------------- */
+ADL.XAPIWrapper.changeConfig({
+    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
+    auth: "Basic YOUR_BASE64_CREDENTIALS"
+});
+
+
+/* ---------------------------------
+   Variables
+---------------------------------- */
 let userName = "";
 let emailAddress = "";
 let objectID = "https://yourusername.github.io/portfolio/";
 
-/* When portfolio.html opens */
+
+/* ---------------------------------
+   When portfolio.html loads
+---------------------------------- */
 window.onload = function () {
 
-    // Get saved data from index.html
+    // Read values saved from index.html
     userName = localStorage.getItem("username");
     emailAddress = localStorage.getItem("email");
 
-    // If opened directly without entering details
+    // If user opens portfolio directly
     if (!userName || !emailAddress) {
         alert("Please enter Name and Email first.");
         window.location.href = "index.html";
         return;
     }
 
-    // Auto send xAPI statement
+    // Auto send statement
     sendVisited();
 };
 
 
-/* Portfolio Visit Statement */
+/* ---------------------------------
+   Send Portfolio Visit Statement
+---------------------------------- */
 function sendVisited() {
 
     sendStatement(
@@ -36,7 +53,9 @@ function sendVisited() {
 }
 
 
-/* Generic Statement Function */
+/* ---------------------------------
+   Generic xAPI Statement Function
+---------------------------------- */
 function sendStatement(verbID, verb, objName, objDesc) {
 
     let statementInfo = {
@@ -67,7 +86,7 @@ function sendStatement(verbID, verb, objName, objDesc) {
         }
     };
 
-    /* Send to SCORM Cloud */
+    /* Send statement to SCORM Cloud */
     ADL.XAPIWrapper.sendStatement(statementInfo, function (response, obj) {
 
         console.log("SCORM Response:", response);
@@ -75,7 +94,8 @@ function sendStatement(verbID, verb, objName, objDesc) {
         if (response.status == 200 || response.status == 204) {
             alert("Success! Information sent to SCORM Cloud.");
         } else {
-            alert("Failed to send information to SCORM Cloud.");
+            alert("Failed to send information.");
+            console.log(response.responseText);
         }
 
     });
