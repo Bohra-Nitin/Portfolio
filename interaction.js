@@ -42,3 +42,13 @@ window.addEventListener("load", function () {
     });
 
 });
+ADL.XAPIWrapper.sendStatement(statement, function(err, res) {
+    
+    if (err) {
+        console.log("Error sending statement:", err);
+    } else {
+        console.log("Statement sent successfully:", res);
+        console.log("Statement Data:", statement);
+    }
+
+});
