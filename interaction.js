@@ -1,36 +1,23 @@
 // interaction.js
-// Simple working version
+// SIMPLE DEBUG VERSION
 
-/* Configure SCORM Cloud */
+alert("interaction.js loaded");
+
+/* SCORM Cloud Config */
 ADL.XAPIWrapper.changeConfig({
     endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
     auth: "Basic YOUR_REAL_BASE64_TOKEN"
 });
 
-/* Variables */
-let userName = "";
-let emailAddress = "";
-let objectID = "https://bohra-nitin.github.io/Portfolio/";
-
-/* When portfolio page opens */
+/* Run when portfolio.html opens */
 window.addEventListener("load", function () {
 
-    userName = localStorage.getItem("username");
-    emailAddress = localStorage.getItem("email");
-
-    if (userName && emailAddress) {
-        sendVisited();
-    }
-});
-
-
-/* Send visit statement */
-function sendVisited() {
+    alert("portfolio page loaded");
 
     let statementInfo = {
         actor: {
-            mbox: "mailto:" + emailAddress,
-            name: userName,
+            mbox: "mailto:test@example.com",
+            name: "Test User",
             objectType: "Agent"
         },
 
@@ -42,18 +29,16 @@ function sendVisited() {
         },
 
         object: {
-            id: objectID,
-            objectType: "Activity",
-            definition: {
-                name: {
-                    "en-US": "Portfolio"
-                },
-                description: {
-                    "en-US": "User visited the portfolio page."
-                }
-            }
+            id: "https://example.com/test",
+            objectType: "Activity"
         }
     };
 
-    ADL.XAPIWrapper.sendStatement(statementInfo);
-}
+    ADL.XAPIWrapper.sendStatement(statementInfo, function(resp){
+
+        console.log(resp);
+        alert("Status: " + resp.status);
+
+    });
+
+});
