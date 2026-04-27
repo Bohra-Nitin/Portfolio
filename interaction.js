@@ -2,7 +2,7 @@
 alert("interaction.js loaded");
 console.log("interaction.js loaded");
 ADL.XAPIWrapper.changeConfig({
-    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
+    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/statements",
     auth: "Basic YOUR_BASE64_CREDENTIALS"
 });
 
