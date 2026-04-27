@@ -5,7 +5,7 @@ alert("interaction.js loaded");
 
 /* SCORM Cloud Config */
 ADL.XAPIWrapper.changeConfig({
-    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
+    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/statements",
     auth: "Basic YOUR_REAL_BASE64_TOKEN"
 });
 
