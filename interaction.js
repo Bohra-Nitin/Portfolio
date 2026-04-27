@@ -16,7 +16,7 @@ console.log("interaction.js loaded");
 -------------------------------- */
 ADL.XAPIWrapper.changeConfig({
     endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
-    auth: "Basic YOUR_REAL_BASE64_TOKEN"
+    auth: "Basic BASE64(EabYF_0wHSQ3yCZSWuo:uHFb-IIZ9DIFvlfxYaI)"
 });
 
 
