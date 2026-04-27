@@ -1,22 +1,23 @@
 // interaction.js
+
 alert("interaction.js loaded");
 console.log("interaction.js loaded");
+
 ADL.XAPIWrapper.changeConfig({
     endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
-    auth: "Basic YOUR_BASE64_CREDENTIALS"
+    auth: "Basic REAL_BASE64_HERE"
 });
 
 let userName = "";
 let emailAddress = "";
 let objectID = "https://bohra-nitin.github.io/Portfolio/";
-
 let startTime = 0;
 
 
-/* -------------------------
-   Page Load
-------------------------- */
-window.onload = function () {
+/* PAGE LOAD */
+window.addEventListener("load", function () {
+
+    console.log("portfolio loaded");
 
     userName = localStorage.getItem("username");
     emailAddress = localStorage.getItem("email");
@@ -25,47 +26,33 @@ window.onload = function () {
     console.log("Email:", emailAddress);
 
     if (userName && emailAddress) {
-
-        startTime = new Date().getTime();
-
+        startTime = Date.now();
         sendVisited();
     }
-};
+});
 
 
-/* -------------------------
-   When User Leaves Page
-------------------------- */
+/* PAGE EXIT */
 window.addEventListener("beforeunload", function () {
-alert("portfolio page loaded");
+
     if (startTime > 0) {
-
-        let endTime = new Date().getTime();
-
-        let secondsSpent = Math.round((endTime - startTime) / 1000);
-
+        let secondsSpent = Math.round((Date.now() - startTime) / 1000);
         sendTimeSpent(secondsSpent);
     }
 });
 
 
-/* -------------------------
-   Visit Statement
-------------------------- */
 function sendVisited() {
 
     sendStatement(
         "http://adlnet.gov/expapi/verbs/experienced",
-        "visited",
+        "experienced",
         "Portfolio",
         "User opened portfolio page."
     );
 }
 
 
-/* -------------------------
-   Time Spent Statement
-------------------------- */
 function sendTimeSpent(seconds) {
 
     let statementInfo = {
@@ -77,9 +64,7 @@ function sendTimeSpent(seconds) {
 
         verb: {
             id: "http://adlnet.gov/expapi/verbs/exited",
-            display: {
-                "en-US": "exited"
-            }
+            display: {"en-US":"exited"}
         },
 
         object: {
@@ -92,13 +77,13 @@ function sendTimeSpent(seconds) {
         }
     };
 
-    ADL.XAPIWrapper.sendStatement(statementInfo);
+    ADL.XAPIWrapper.sendStatement(statementInfo, function(resp){
+        console.log("EXIT STATUS:", resp.status);
+        console.log(resp.responseText);
+    });
 }
 
 
-/* -------------------------
-   Generic Statement
-------------------------- */
 function sendStatement(verbID, verb, objName, objDesc) {
 
     let statementInfo = {
@@ -110,29 +95,24 @@ function sendStatement(verbID, verb, objName, objDesc) {
 
         verb: {
             id: verbID,
-            display: {
-                "en-US": verb
-            }
+            display: {"en-US": verb}
         },
 
         object: {
             id: objectID,
             definition: {
-                name: {
-                    "en-US": objName
-                },
-                description: {
-                    "en-US": objDesc
-                }
+                name: {"en-US": objName},
+                description: {"en-US": objDesc}
             },
             objectType: "Activity"
         }
     };
 
-   ADL.XAPIWrapper.sendStatement(statementInfo, function(resp){
-    console.log("STATUS:", resp.status);
-    console.log("TEXT:", resp.responseText);
-    alert("Status: " + resp.status);
-});
-    
+    console.log(JSON.stringify(statementInfo, null, 2));
+
+    ADL.XAPIWrapper.sendStatement(statementInfo, function(resp){
+        console.log("VISIT STATUS:", resp.status);
+        console.log(resp.responseText);
+        alert("Status: " + resp.status);
+    });
 }
