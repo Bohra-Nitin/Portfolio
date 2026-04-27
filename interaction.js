@@ -7,7 +7,7 @@ ADL.XAPIWrapper.changeConfig({
 
 let userName = "";
 let emailAddress = "";
-let objectID = "https://yourusername.github.io/portfolio/";
+let objectID = "https://bohra-nitin.github.io/Portfolio/";
 
 let startTime = 0;
 
