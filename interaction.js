@@ -1,47 +1,36 @@
 // interaction.js
-// GOLD STANDARD TEST DEBUG VERSION
-// Purpose: verify SCORM Cloud connection first
-// No timers, no localStorage dependency complexity
+// Simple working version
 
-/* -------------------------------
-   FILE LOADED CHECK
--------------------------------- */
-alert("interaction.js loaded");
-console.log("interaction.js loaded");
-
-
-/* -------------------------------
-   CONFIGURATION
-   Replace YOUR_REAL_BASE64_TOKEN
--------------------------------- */
+/* Configure SCORM Cloud */
 ADL.XAPIWrapper.changeConfig({
     endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
-    auth: "Basic BASE64(EabYF_0wHSQ3yCZSWuo:uHFb-IIZ9DIFvlfxYaI)"
+    auth: "Basic YOUR_REAL_BASE64_TOKEN"
 });
 
+/* Variables */
+let userName = "";
+let emailAddress = "";
+let objectID = "https://bohra-nitin.github.io/Portfolio/";
 
-/* -------------------------------
-   PAGE LOAD TEST
--------------------------------- */
+/* When portfolio page opens */
 window.addEventListener("load", function () {
 
-    alert("portfolio page loaded");
-    console.log("portfolio page loaded");
+    userName = localStorage.getItem("username");
+    emailAddress = localStorage.getItem("email");
 
-    runDebugTest();
+    if (userName && emailAddress) {
+        sendVisited();
+    }
 });
 
 
-/* -------------------------------
-   MAIN TEST FUNCTION
--------------------------------- */
-function runDebugTest() {
+/* Send visit statement */
+function sendVisited() {
 
     let statementInfo = {
-
         actor: {
-            mbox: "mailto:test@example.com",
-            name: "Test User",
+            mbox: "mailto:" + emailAddress,
+            name: userName,
             objectType: "Agent"
         },
 
@@ -53,37 +42,18 @@ function runDebugTest() {
         },
 
         object: {
-            id: "https://example.com/test-portfolio",
+            id: objectID,
             objectType: "Activity",
             definition: {
                 name: {
-                    "en-US": "Portfolio Debug Test"
+                    "en-US": "Portfolio"
                 },
                 description: {
-                    "en-US": "Testing xAPI connection to SCORM Cloud"
+                    "en-US": "User visited the portfolio page."
                 }
             }
         }
     };
 
-    console.log("TEST STATEMENT:");
-    console.log(JSON.stringify(statementInfo, null, 2));
-
-    alert("Sending test statement now...");
-
-    ADL.XAPIWrapper.sendStatement(
-        statementInfo,
-        function (resp) {
-
-            console.log("FULL RESPONSE:", resp);
-            console.log("STATUS:", resp.status);
-            console.log("TEXT:", resp.responseText);
-
-            alert("HTTP Status: " + resp.status);
-
-            if (resp.responseText) {
-                alert(resp.responseText);
-            }
-        }
-    );
+    ADL.XAPIWrapper.sendStatement(statementInfo);
 }
