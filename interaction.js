@@ -2,7 +2,7 @@
 alert("interaction.js loaded");
 console.log("interaction.js loaded");
 ADL.XAPIWrapper.changeConfig({
-    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/statements",
+    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
     auth: "Basic YOUR_BASE64_CREDENTIALS"
 });
 
@@ -20,6 +20,9 @@ window.onload = function () {
 
     userName = localStorage.getItem("username");
     emailAddress = localStorage.getItem("email");
+
+    console.log("Name:", userName);
+    console.log("Email:", emailAddress);
 
     if (userName && emailAddress) {
 
@@ -127,6 +130,5 @@ function sendStatement(verbID, verb, objName, objDesc) {
     };
 
     ADL.XAPIWrapper.sendStatement(statementInfo);
-    console.log("Name:", userName);
-console.log("Email:", emailAddress);
+    
 }
