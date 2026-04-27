@@ -34,7 +34,7 @@ window.onload = function () {
    When User Leaves Page
 ------------------------- */
 window.addEventListener("beforeunload", function () {
-
+alert("portfolio page loaded");
     if (startTime > 0) {
 
         let endTime = new Date().getTime();
