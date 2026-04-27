@@ -15,7 +15,7 @@ console.log("interaction.js loaded");
    Replace YOUR_REAL_BASE64_TOKEN
 -------------------------------- */
 ADL.XAPIWrapper.changeConfig({
-    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/statements",
+    endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
     auth: "Basic YOUR_REAL_BASE64_TOKEN"
 });
 
