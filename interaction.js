@@ -1,80 +1,100 @@
-
 // interaction.js
 
-/* ---------------------------------
-   SCORM Cloud xAPI Configuration
-   Replace with your real details
----------------------------------- */
 ADL.XAPIWrapper.changeConfig({
     endpoint: "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
     auth: "Basic YOUR_BASE64_CREDENTIALS"
 });
 
-
-/* ---------------------------------
-   Variables
----------------------------------- */
 let userName = "";
 let emailAddress = "";
 let objectID = "https://yourusername.github.io/portfolio/";
 
+let startTime = 0;
 
-/* ---------------------------------
-   Auto send only when portfolio.html loads
-   and valid details already exist
----------------------------------- */
+
+/* -------------------------
+   Page Load
+------------------------- */
 window.onload = function () {
 
     userName = localStorage.getItem("username");
     emailAddress = localStorage.getItem("email");
 
-    // If details exist, send statement silently
     if (userName && emailAddress) {
+
+        startTime = new Date().getTime();
+
         sendVisited();
     }
 };
 
 
-/* ---------------------------------
-   Called from index.html button click
----------------------------------- */
-function goPortfolio() {
+/* -------------------------
+   When User Leaves Page
+------------------------- */
+window.addEventListener("beforeunload", function () {
 
-    let enteredName = document.getElementById("username").value.trim();
-    let enteredEmail = document.getElementById("email").value.trim();
+    if (startTime > 0) {
 
-    // Show message only when button clicked
-    if (enteredName === "" || enteredEmail === "") {
-        alert("Please enter Name and Email first.");
-        return;
+        let endTime = new Date().getTime();
+
+        let secondsSpent = Math.round((endTime - startTime) / 1000);
+
+        sendTimeSpent(secondsSpent);
     }
-
-    // Save data
-    localStorage.setItem("username", enteredName);
-    localStorage.setItem("email", enteredEmail);
-
-    // Open portfolio
-    window.location.href = "portfolio.html";
-}
+});
 
 
-/* ---------------------------------
-   Send Portfolio Visit Statement
----------------------------------- */
+/* -------------------------
+   Visit Statement
+------------------------- */
 function sendVisited() {
 
     sendStatement(
         "http://adlnet.gov/expapi/verbs/experienced",
         "visited",
-        "Personal Portfolio",
-        "User visited the portfolio website."
+        "Portfolio",
+        "User opened portfolio page."
     );
 }
 
 
-/* ---------------------------------
-   Generic xAPI Statement
----------------------------------- */
+/* -------------------------
+   Time Spent Statement
+------------------------- */
+function sendTimeSpent(seconds) {
+
+    let statementInfo = {
+        actor: {
+            mbox: "mailto:" + emailAddress,
+            name: userName,
+            objectType: "Agent"
+        },
+
+        verb: {
+            id: "http://adlnet.gov/expapi/verbs/exited",
+            display: {
+                "en-US": "exited"
+            }
+        },
+
+        object: {
+            id: objectID,
+            objectType: "Activity"
+        },
+
+        result: {
+            duration: "PT" + seconds + "S"
+        }
+    };
+
+    ADL.XAPIWrapper.sendStatement(statementInfo);
+}
+
+
+/* -------------------------
+   Generic Statement
+------------------------- */
 function sendStatement(verbID, verb, objName, objDesc) {
 
     let statementInfo = {
@@ -105,6 +125,5 @@ function sendStatement(verbID, verb, objName, objDesc) {
         }
     };
 
-    // Send silently
     ADL.XAPIWrapper.sendStatement(statementInfo);
 }
