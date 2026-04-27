@@ -127,4 +127,6 @@ function sendStatement(verbID, verb, objName, objDesc) {
     };
 
     ADL.XAPIWrapper.sendStatement(statementInfo);
+    console.log("Name:", userName);
+console.log("Email:", emailAddress);
 }
