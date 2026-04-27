@@ -129,6 +129,10 @@ function sendStatement(verbID, verb, objName, objDesc) {
         }
     };
 
-    ADL.XAPIWrapper.sendStatement(statementInfo);
+   ADL.XAPIWrapper.sendStatement(statementInfo, function(resp){
+    console.log("STATUS:", resp.status);
+    console.log("TEXT:", resp.responseText);
+    alert("Status: " + resp.status);
+});
     
 }
