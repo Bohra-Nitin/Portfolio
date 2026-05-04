@@ -105,10 +105,10 @@ function isDate(date) {
      */
     var Config = function()
     {
-        var key = "cb083adb-b978-4d9f-8e6c-c2e58d5ec5f9";
-        var secret = "5cac9732-4993-4f06-acc9-07d2cd70a520";
+        var key = "682ae191-a129-4b69-b46b-17bdb367589d";
+        var secret = "96c01269-e413-4224-ad80-8e7379713917";
         var conf = {
-            "endpoint" : "https://sample-lrs-orjoate.lrs.io/xapi/",
+            "endpoint" : "https://portfolio-visitor-data.lrs.io/xapi/",
             "auth" : "Basic " + toBase64(key + ':' + secret),
         };
 
