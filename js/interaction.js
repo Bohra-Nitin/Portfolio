@@ -1,83 +1,74 @@
 // ============================================================
-// interaction.js (FINAL COMPLETE VERSION)
-// Tracks:
-// ✅ User from form (name/email)
-// ✅ "experienced" on every page
-// ✅ Total session time (multi-page)
-// ✅ Page-wise time
-// ✅ Active vs Idle time
-// ✅ Works for tab close + browser close
+// interaction.js (FINAL RELIABLE VERSION)
+// - Uses ADL wrapper for ALL statements
+// - Fixes LRS auth issue (no sendBeacon)
+// - Uses visibilitychange for better reliability
 // ============================================================
 
 
 
 // ============================================================
-// CONFIG
-// ============================================================
-const IDLE_LIMIT = 15000; // 15 seconds idle
-
-
-
-// ============================================================
-// FORM PAGE (index.html)
+// INDEX PAGE (Form Submit)
 // ============================================================
 function submitForm() {
 
     let userName = document.getElementById("nameEntered").value.trim();
     let userEmail = document.getElementById("userEmail").value.trim();
 
+    // Basic validation
     if (userName === "" || userEmail === "") {
         alert("Please enter name and email");
         return;
     }
 
     if (!userEmail.includes("@")) {
-        alert("Enter valid email");
+        alert("Please enter a valid email");
         return;
     }
 
+    // Store user data
     localStorage.setItem("visitorName", userName);
     localStorage.setItem("visitorEmail", userEmail);
 
+    // Redirect to portfolio
     window.location.href = "portfolio.html";
 }
 
 
 
+
+
 // ============================================================
-// INITIALIZE TRACKING (CALL ON EVERY PAGE LOAD)
-// <body onload="initTracking()">
+// VARIABLES
 // ============================================================
-function initTracking() {
+let startTime = 0;
+let statementSent = false;
 
-    // Start session only once
-    if (!localStorage.getItem("sessionStartTime")) {
-        localStorage.setItem("sessionStartTime", Date.now());
-        localStorage.setItem("totalActiveTime", 0);
-        localStorage.setItem("pagesVisited", JSON.stringify([]));
-        localStorage.setItem("sessionEnded", "false");
-    }
 
-    // Send experienced statement
-    sendExperiencedStatement();
-
-    startPageTracking();
-    setupActivityTracking();
-}
 
 
 
 // ============================================================
-// EXPERIENCED STATEMENT (EVERY PAGE)
+// WHEN PORTFOLIO LOADS
+// Statement 1 = experienced
 // ============================================================
-function sendExperiencedStatement() {
+function startPortfolioTracking() {
+
+    startTime = Date.now();
 
     let userName = localStorage.getItem("visitorName");
     let userEmail = localStorage.getItem("visitorEmail");
 
+    // Safety fallback
     if (!userName || !userEmail) return;
 
-    let statement = {
+    // Show welcome message
+    if (document.getElementById("welcomeUser")) {
+        document.getElementById("welcomeUser").innerHTML =
+            "Welcome, " + userName;
+    }
+
+    let statement1 = {
         actor: {
             name: userName,
             mbox: "mailto:" + userEmail
@@ -91,95 +82,39 @@ function sendExperiencedStatement() {
         object: {
             id: window.location.href,
             definition: {
-                name: { "en-US": document.title }
+                name: { "en-US": "Portfolio Page" }
             }
         }
     };
 
-    ADL.XAPIWrapper.sendStatement(statement);
+    // Send "experienced" statement
+    ADL.XAPIWrapper.sendStatement(statement1);
 }
 
 
 
-// ============================================================
-// PAGE TRACKING
-// ============================================================
-function startPageTracking() {
-
-    let pages = JSON.parse(localStorage.getItem("pagesVisited"));
-
-    let currentPage = document.title;
-
-    pages.push({
-        page: currentPage,
-        start: Date.now()
-    });
-
-    localStorage.setItem("pagesVisited", JSON.stringify(pages));
-}
-
 
 
 // ============================================================
-// ACTIVE / IDLE TRACKING
+// SEND TIME SPENT
+// Statement 2 = completed
 // ============================================================
-let lastActivityTime = Date.now();
+function sendTimeSpent() {
 
-function setupActivityTracking() {
+    if (statementSent) return;
 
-    function markActivity() {
-        lastActivityTime = Date.now();
-    }
+    statementSent = true;
 
-    ["mousemove", "click", "keydown", "scroll"].forEach(event => {
-        document.addEventListener(event, markActivity);
-    });
-
-    // Track active time every second
-    setInterval(() => {
-
-        let now = Date.now();
-
-        let totalActive = parseInt(localStorage.getItem("totalActiveTime"));
-
-        if (now - lastActivityTime < IDLE_LIMIT) {
-            totalActive += 1;
-        }
-
-        localStorage.setItem("totalActiveTime", totalActive);
-
-    }, 1000);
-}
-
-
-
-// ============================================================
-// FINAL STATEMENT (ON EXIT)
-// ============================================================
-function sendFinalStatement() {
-
-    if (localStorage.getItem("sessionEnded") === "true") return;
-
-    localStorage.setItem("sessionEnded", "true");
+    let endTime = Date.now();
+    let totalSeconds = Math.round((endTime - startTime) / 1000);
 
     let userName = localStorage.getItem("visitorName");
     let userEmail = localStorage.getItem("visitorEmail");
 
+    // Safety fallback
     if (!userName || !userEmail) return;
 
-    let sessionStart = parseInt(localStorage.getItem("sessionStartTime"));
-    let totalTime = Math.round((Date.now() - sessionStart) / 1000);
-
-    let activeTime = parseInt(localStorage.getItem("totalActiveTime"));
-
-    let pages = JSON.parse(localStorage.getItem("pagesVisited"));
-
-
-
-    // ============================================================
-    // MAIN SESSION STATEMENT
-    // ============================================================
-    let statement = {
+    let statement2 = {
         actor: {
             name: userName,
             mbox: "mailto:" + userEmail
@@ -191,86 +126,43 @@ function sendFinalStatement() {
         },
 
         object: {
-            id: "portfolio-session",
+            id: window.location.href + "/time-tracking",
             definition: {
-                name: { "en-US": "Portfolio Session" }
+                name: {
+                    "en-US":
+                        userName +
+                        " spent " +
+                        totalSeconds +
+                        " seconds on Portfolio"
+                }
             }
         },
 
         result: {
-            duration: "PT" + totalTime + "S"
-        },
-
-        context: {
-            extensions: {
-                "https://portfolio/activeTime": activeTime,
-                "https://portfolio/pagesVisited": pages
-            }
+            duration: "PT" + totalSeconds + "S"
         }
     };
 
-    ADL.XAPIWrapper.sendStatement(statement);
-
-
-
-    // ============================================================
-    // OPTIONAL: PAGE-WISE STATEMENTS
-    // ============================================================
-    pages.forEach(p => {
-
-        let duration = Math.round((Date.now() - p.start) / 1000);
-
-        let pageStatement = {
-            actor: {
-                name: userName,
-                mbox: "mailto:" + userEmail
-            },
-
-            verb: {
-                id: "http://adlnet.gov/expapi/verbs/interacted",
-                display: { "en-US": "interacted" }
-            },
-
-            object: {
-                id: window.location.origin + "/" + p.page,
-                definition: {
-                    name: { "en-US": p.page }
-                }
-            },
-
-            result: {
-                duration: "PT" + duration + "S"
-            }
-        };
-
-        ADL.XAPIWrapper.sendStatement(pageStatement);
-    });
-
-
-
-    // ============================================================
-    // CLEANUP (SAFE)
-    // ============================================================
-    localStorage.removeItem("sessionStartTime");
-    localStorage.removeItem("totalActiveTime");
-    localStorage.removeItem("pagesVisited");
-    localStorage.removeItem("sessionEnded");
+    // Send "completed" statement
+    ADL.XAPIWrapper.sendStatement(statement2);
 }
 
 
 
+
+
 // ============================================================
-// EXIT EVENTS (CRITICAL)
+// PAGE EXIT HANDLING (MOST RELIABLE)
 // ============================================================
 
-// Best trigger (tab switch, close, minimize)
+// Fires when tab becomes hidden (best modern method)
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        sendFinalStatement();
+        sendTimeSpent();
     }
 });
 
-// Fallback
+// Fallback (older browsers)
 window.addEventListener("beforeunload", function () {
-    sendFinalStatement();
+    sendTimeSpent();
 });
