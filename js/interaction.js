@@ -1,29 +1,36 @@
 // ============================================================
-// interaction.js
-// RELIABLE VERSION
-// Uses normal wrapper for open statement
-// Uses navigator.sendBeacon() for close statement
-// This solves page-close statement loss on LRS
+// interaction.js (FINAL RELIABLE VERSION)
+// - Uses ADL wrapper for ALL statements
+// - Fixes LRS auth issue (no sendBeacon)
+// - Uses visibilitychange for better reliability
 // ============================================================
 
 
 
 // ============================================================
-// INDEX PAGE
+// INDEX PAGE (Form Submit)
 // ============================================================
 function submitForm() {
 
     let userName = document.getElementById("nameEntered").value.trim();
     let userEmail = document.getElementById("userEmail").value.trim();
 
+    // Basic validation
     if (userName === "" || userEmail === "") {
         alert("Please enter name and email");
         return;
     }
 
+    if (!userEmail.includes("@")) {
+        alert("Please enter a valid email");
+        return;
+    }
+
+    // Store user data
     localStorage.setItem("visitorName", userName);
     localStorage.setItem("visitorEmail", userEmail);
 
+    // Redirect to portfolio
     window.location.href = "portfolio.html";
 }
 
@@ -52,6 +59,10 @@ function startPortfolioTracking() {
     let userName = localStorage.getItem("visitorName");
     let userEmail = localStorage.getItem("visitorEmail");
 
+    // Safety fallback
+    if (!userName || !userEmail) return;
+
+    // Show welcome message
     if (document.getElementById("welcomeUser")) {
         document.getElementById("welcomeUser").innerHTML =
             "Welcome, " + userName;
@@ -69,13 +80,14 @@ function startPortfolioTracking() {
         },
 
         object: {
-            id: "https://yourportfolio.com/portfolio.html",
+            id: window.location.href,
             definition: {
                 name: { "en-US": "Portfolio Page" }
             }
         }
     };
 
+    // Send "experienced" statement
     ADL.XAPIWrapper.sendStatement(statement1);
 }
 
@@ -84,7 +96,8 @@ function startPortfolioTracking() {
 
 
 // ============================================================
-// SEND TIME SPENT USING sendBeacon()
+// SEND TIME SPENT
+// Statement 2 = completed
 // ============================================================
 function sendTimeSpent() {
 
@@ -93,11 +106,13 @@ function sendTimeSpent() {
     statementSent = true;
 
     let endTime = Date.now();
-    let totalSeconds =
-        Math.round((endTime - startTime) / 1000);
+    let totalSeconds = Math.round((endTime - startTime) / 1000);
 
     let userName = localStorage.getItem("visitorName");
     let userEmail = localStorage.getItem("visitorEmail");
+
+    // Safety fallback
+    if (!userName || !userEmail) return;
 
     let statement2 = {
         actor: {
@@ -111,14 +126,14 @@ function sendTimeSpent() {
         },
 
         object: {
-            id: "https://yourportfolio.com/portfolio-time",
+            id: window.location.href + "/time-tracking",
             definition: {
                 name: {
                     "en-US":
                         userName +
                         " spent " +
                         totalSeconds +
-                        " seconds in Portfolio"
+                        " seconds on Portfolio"
                 }
             }
         },
@@ -128,26 +143,8 @@ function sendTimeSpent() {
         }
     };
 
-
-
-    // =====================================================
-    // Get endpoint/auth from xapiwrapper config
-    // =====================================================
-    let endpoint = ADL.XAPIWrapper.lrs.endpoint + "statements";
-
-    let auth = ADL.XAPIWrapper.lrs.auth;
-
-
-
-    // =====================================================
-    // sendBeacon payload
-    // =====================================================
-    let blob = new Blob(
-        [JSON.stringify(statement2)],
-        { type: "application/json" }
-    );
-
-    navigator.sendBeacon(endpoint, blob);
+    // Send "completed" statement
+    ADL.XAPIWrapper.sendStatement(statement2);
 }
 
 
@@ -155,12 +152,17 @@ function sendTimeSpent() {
 
 
 // ============================================================
-// PAGE CLOSE EVENTS
+// PAGE EXIT HANDLING (MOST RELIABLE)
 // ============================================================
-window.addEventListener("pagehide", function () {
-    sendTimeSpent();
+
+// Fires when tab becomes hidden (best modern method)
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        sendTimeSpent();
+    }
 });
 
+// Fallback (older browsers)
 window.addEventListener("beforeunload", function () {
     sendTimeSpent();
 });
