@@ -131,9 +131,9 @@ function sendTimeSpent() {
                 name: {
                     "en-US":
                         userName +
-                        " spent " +
+                        "has spent " +
                         totalSeconds +
-                        " seconds on Portfolio"
+                        " seconds on the Portfolio page"
                 }
             }
         },
