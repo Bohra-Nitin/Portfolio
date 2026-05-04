@@ -1,9 +1,12 @@
 // ============================================================
-// ADVANCED interaction.js
+// interaction.js (FINAL COMPLETE VERSION)
 // Tracks:
+// ✅ User from form (name/email)
+// ✅ "experienced" on every page
 // ✅ Total session time (multi-page)
 // ✅ Page-wise time
 // ✅ Active vs Idle time
+// ✅ Works for tab close + browser close
 // ============================================================
 
 
@@ -11,12 +14,39 @@
 // ============================================================
 // CONFIG
 // ============================================================
-const IDLE_LIMIT = 15000; // 15 sec idle
+const IDLE_LIMIT = 15000; // 15 seconds idle
 
 
 
 // ============================================================
-// SESSION INIT (runs on EVERY page)
+// FORM PAGE (index.html)
+// ============================================================
+function submitForm() {
+
+    let userName = document.getElementById("nameEntered").value.trim();
+    let userEmail = document.getElementById("userEmail").value.trim();
+
+    if (userName === "" || userEmail === "") {
+        alert("Please enter name and email");
+        return;
+    }
+
+    if (!userEmail.includes("@")) {
+        alert("Enter valid email");
+        return;
+    }
+
+    localStorage.setItem("visitorName", userName);
+    localStorage.setItem("visitorEmail", userEmail);
+
+    window.location.href = "portfolio.html";
+}
+
+
+
+// ============================================================
+// INITIALIZE TRACKING (CALL ON EVERY PAGE LOAD)
+// <body onload="initTracking()">
 // ============================================================
 function initTracking() {
 
@@ -28,6 +58,9 @@ function initTracking() {
         localStorage.setItem("sessionEnded", "false");
     }
 
+    // Send experienced statement
+    sendExperiencedStatement();
+
     startPageTracking();
     setupActivityTracking();
 }
@@ -35,15 +68,47 @@ function initTracking() {
 
 
 // ============================================================
+// EXPERIENCED STATEMENT (EVERY PAGE)
+// ============================================================
+function sendExperiencedStatement() {
+
+    let userName = localStorage.getItem("visitorName");
+    let userEmail = localStorage.getItem("visitorEmail");
+
+    if (!userName || !userEmail) return;
+
+    let statement = {
+        actor: {
+            name: userName,
+            mbox: "mailto:" + userEmail
+        },
+
+        verb: {
+            id: "http://adlnet.gov/expapi/verbs/experienced",
+            display: { "en-US": "experienced" }
+        },
+
+        object: {
+            id: window.location.href,
+            definition: {
+                name: { "en-US": document.title }
+            }
+        }
+    };
+
+    ADL.XAPIWrapper.sendStatement(statement);
+}
+
+
+
+// ============================================================
 // PAGE TRACKING
 // ============================================================
-let pageStartTime = Date.now();
-
 function startPageTracking() {
 
     let pages = JSON.parse(localStorage.getItem("pagesVisited"));
 
-    let currentPage = window.location.pathname;
+    let currentPage = document.title;
 
     pages.push({
         page: currentPage,
@@ -59,7 +124,6 @@ function startPageTracking() {
 // ACTIVE / IDLE TRACKING
 // ============================================================
 let lastActivityTime = Date.now();
-let activeTime = 0;
 
 function setupActivityTracking() {
 
@@ -71,18 +135,18 @@ function setupActivityTracking() {
         document.addEventListener(event, markActivity);
     });
 
-    // track active time every second
+    // Track active time every second
     setInterval(() => {
 
         let now = Date.now();
 
+        let totalActive = parseInt(localStorage.getItem("totalActiveTime"));
+
         if (now - lastActivityTime < IDLE_LIMIT) {
-            activeTime += 1;
+            totalActive += 1;
         }
 
-        localStorage.setItem("totalActiveTime",
-            parseInt(localStorage.getItem("totalActiveTime")) + 1
-        );
+        localStorage.setItem("totalActiveTime", totalActive);
 
     }, 1000);
 }
@@ -90,7 +154,7 @@ function setupActivityTracking() {
 
 
 // ============================================================
-// SEND FINAL DATA
+// FINAL STATEMENT (ON EXIT)
 // ============================================================
 function sendFinalStatement() {
 
@@ -100,6 +164,8 @@ function sendFinalStatement() {
 
     let userName = localStorage.getItem("visitorName");
     let userEmail = localStorage.getItem("visitorEmail");
+
+    if (!userName || !userEmail) return;
 
     let sessionStart = parseInt(localStorage.getItem("sessionStartTime"));
     let totalTime = Math.round((Date.now() - sessionStart) / 1000);
@@ -111,7 +177,7 @@ function sendFinalStatement() {
 
 
     // ============================================================
-    // MAIN STATEMENT (TOTAL SESSION)
+    // MAIN SESSION STATEMENT
     // ============================================================
     let statement = {
         actor: {
@@ -127,9 +193,7 @@ function sendFinalStatement() {
         object: {
             id: "portfolio-session",
             definition: {
-                name: {
-                    "en-US": "Portfolio Session Tracking"
-                }
+                name: { "en-US": "Portfolio Session" }
             }
         },
 
@@ -168,7 +232,7 @@ function sendFinalStatement() {
             },
 
             object: {
-                id: window.location.origin + p.page,
+                id: window.location.origin + "/" + p.page,
                 definition: {
                     name: { "en-US": p.page }
                 }
@@ -184,8 +248,13 @@ function sendFinalStatement() {
 
 
 
-    // cleanup
-    localStorage.clear();
+    // ============================================================
+    // CLEANUP (SAFE)
+    // ============================================================
+    localStorage.removeItem("sessionStartTime");
+    localStorage.removeItem("totalActiveTime");
+    localStorage.removeItem("pagesVisited");
+    localStorage.removeItem("sessionEnded");
 }
 
 
@@ -193,12 +262,15 @@ function sendFinalStatement() {
 // ============================================================
 // EXIT EVENTS (CRITICAL)
 // ============================================================
+
+// Best trigger (tab switch, close, minimize)
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
         sendFinalStatement();
     }
 });
 
+// Fallback
 window.addEventListener("beforeunload", function () {
     sendFinalStatement();
 });
