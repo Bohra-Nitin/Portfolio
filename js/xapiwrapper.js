@@ -105,10 +105,10 @@ function isDate(date) {
      */
     var Config = function()
     {
-        var key = "Und3DPc7s6xtv08o6ts";
-        var secret = "ypfFlitipg9rQwPc9y8";
+        var key = "cb083adb-b978-4d9f-8e6c-c2e58d5ec5f9";
+        var secret = "5cac9732-4993-4f06-acc9-07d2cd70a520";
         var conf = {
-            "endpoint" : "https://cloud.scorm.com/lrs/KWZLKQZD7M/sandbox/",
+            "endpoint" : "https://sample-lrs-orjoate.lrs.io/xapi/",
             "auth" : "Basic " + toBase64(key + ':' + secret),
         };
 
