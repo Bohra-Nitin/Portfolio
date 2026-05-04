@@ -1,120 +1,119 @@
 // ============================================================
-// interaction.js (FINAL RELIABLE VERSION)
-// - Uses ADL wrapper for ALL statements
-// - Fixes LRS auth issue (no sendBeacon)
-// - Uses visibilitychange for better reliability
+// ADVANCED interaction.js
+// Tracks:
+// ✅ Total session time (multi-page)
+// ✅ Page-wise time
+// ✅ Active vs Idle time
 // ============================================================
 
 
 
 // ============================================================
-// INDEX PAGE (Form Submit)
+// CONFIG
 // ============================================================
-function submitForm() {
+const IDLE_LIMIT = 15000; // 15 sec idle
 
-    let userName = document.getElementById("nameEntered").value.trim();
-    let userEmail = document.getElementById("userEmail").value.trim();
 
-    // Basic validation
-    if (userName === "" || userEmail === "") {
-        alert("Please enter name and email");
-        return;
+
+// ============================================================
+// SESSION INIT (runs on EVERY page)
+// ============================================================
+function initTracking() {
+
+    // Start session only once
+    if (!localStorage.getItem("sessionStartTime")) {
+        localStorage.setItem("sessionStartTime", Date.now());
+        localStorage.setItem("totalActiveTime", 0);
+        localStorage.setItem("pagesVisited", JSON.stringify([]));
+        localStorage.setItem("sessionEnded", "false");
     }
 
-    if (!userEmail.includes("@")) {
-        alert("Please enter a valid email");
-        return;
-    }
-
-    // Store user data
-    localStorage.setItem("visitorName", userName);
-    localStorage.setItem("visitorEmail", userEmail);
-
-    // Redirect to portfolio
-    window.location.href = "portfolio.html";
+    startPageTracking();
+    setupActivityTracking();
 }
 
 
 
+// ============================================================
+// PAGE TRACKING
+// ============================================================
+let pageStartTime = Date.now();
+
+function startPageTracking() {
+
+    let pages = JSON.parse(localStorage.getItem("pagesVisited"));
+
+    let currentPage = window.location.pathname;
+
+    pages.push({
+        page: currentPage,
+        start: Date.now()
+    });
+
+    localStorage.setItem("pagesVisited", JSON.stringify(pages));
+}
+
 
 
 // ============================================================
-// VARIABLES
+// ACTIVE / IDLE TRACKING
 // ============================================================
-let startTime = 0;
-let statementSent = false;
+let lastActivityTime = Date.now();
+let activeTime = 0;
 
+function setupActivityTracking() {
 
-
-
-
-// ============================================================
-// WHEN PORTFOLIO LOADS
-// Statement 1 = experienced
-// ============================================================
-function startPortfolioTracking() {
-
-    startTime = Date.now();
-
-    let userName = localStorage.getItem("visitorName");
-    let userEmail = localStorage.getItem("visitorEmail");
-
-    // Safety fallback
-    if (!userName || !userEmail) return;
-
-    // Show welcome message
-    if (document.getElementById("welcomeUser")) {
-        document.getElementById("welcomeUser").innerHTML =
-            "Welcome, " + userName;
+    function markActivity() {
+        lastActivityTime = Date.now();
     }
 
-    let statement1 = {
-        actor: {
-            name: userName,
-            mbox: "mailto:" + userEmail
-        },
+    ["mousemove", "click", "keydown", "scroll"].forEach(event => {
+        document.addEventListener(event, markActivity);
+    });
 
-        verb: {
-            id: "http://adlnet.gov/expapi/verbs/experienced",
-            display: { "en-US": "experienced" }
-        },
+    // track active time every second
+    setInterval(() => {
 
-        object: {
-            id: window.location.href,
-            definition: {
-                name: { "en-US": "Portfolio Page" }
-            }
+        let now = Date.now();
+
+        if (now - lastActivityTime < IDLE_LIMIT) {
+            activeTime += 1;
         }
-    };
 
-    // Send "experienced" statement
-    ADL.XAPIWrapper.sendStatement(statement1);
+        localStorage.setItem("totalActiveTime",
+            parseInt(localStorage.getItem("totalActiveTime")) + 1
+        );
+
+    }, 1000);
 }
 
 
 
-
-
 // ============================================================
-// SEND TIME SPENT
-// Statement 2 = completed
+// SEND FINAL DATA
 // ============================================================
-function sendTimeSpent() {
+function sendFinalStatement() {
 
-    if (statementSent) return;
+    if (localStorage.getItem("sessionEnded") === "true") return;
 
-    statementSent = true;
-
-    let endTime = Date.now();
-    let totalSeconds = Math.round((endTime - startTime) / 1000);
+    localStorage.setItem("sessionEnded", "true");
 
     let userName = localStorage.getItem("visitorName");
     let userEmail = localStorage.getItem("visitorEmail");
 
-    // Safety fallback
-    if (!userName || !userEmail) return;
+    let sessionStart = parseInt(localStorage.getItem("sessionStartTime"));
+    let totalTime = Math.round((Date.now() - sessionStart) / 1000);
 
-    let statement2 = {
+    let activeTime = parseInt(localStorage.getItem("totalActiveTime"));
+
+    let pages = JSON.parse(localStorage.getItem("pagesVisited"));
+
+
+
+    // ============================================================
+    // MAIN STATEMENT (TOTAL SESSION)
+    // ============================================================
+    let statement = {
         actor: {
             name: userName,
             mbox: "mailto:" + userEmail
@@ -126,43 +125,80 @@ function sendTimeSpent() {
         },
 
         object: {
-            id: window.location.href + "/time-tracking",
+            id: "portfolio-session",
             definition: {
                 name: {
-                    "en-US":
-                        userName +
-                        "has spent " +
-                        totalSeconds +
-                        " seconds on the Portfolio page"
+                    "en-US": "Portfolio Session Tracking"
                 }
             }
         },
 
         result: {
-            duration: "PT" + totalSeconds + "S"
+            duration: "PT" + totalTime + "S"
+        },
+
+        context: {
+            extensions: {
+                "https://portfolio/activeTime": activeTime,
+                "https://portfolio/pagesVisited": pages
+            }
         }
     };
 
-    // Send "completed" statement
-    ADL.XAPIWrapper.sendStatement(statement2);
+    ADL.XAPIWrapper.sendStatement(statement);
+
+
+
+    // ============================================================
+    // OPTIONAL: PAGE-WISE STATEMENTS
+    // ============================================================
+    pages.forEach(p => {
+
+        let duration = Math.round((Date.now() - p.start) / 1000);
+
+        let pageStatement = {
+            actor: {
+                name: userName,
+                mbox: "mailto:" + userEmail
+            },
+
+            verb: {
+                id: "http://adlnet.gov/expapi/verbs/interacted",
+                display: { "en-US": "interacted" }
+            },
+
+            object: {
+                id: window.location.origin + p.page,
+                definition: {
+                    name: { "en-US": p.page }
+                }
+            },
+
+            result: {
+                duration: "PT" + duration + "S"
+            }
+        };
+
+        ADL.XAPIWrapper.sendStatement(pageStatement);
+    });
+
+
+
+    // cleanup
+    localStorage.clear();
 }
 
 
 
-
-
 // ============================================================
-// PAGE EXIT HANDLING (MOST RELIABLE)
+// EXIT EVENTS (CRITICAL)
 // ============================================================
-
-// Fires when tab becomes hidden (best modern method)
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        sendTimeSpent();
+        sendFinalStatement();
     }
 });
 
-// Fallback (older browsers)
 window.addEventListener("beforeunload", function () {
-    sendTimeSpent();
+    sendFinalStatement();
 });
