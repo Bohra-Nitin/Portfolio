@@ -133,7 +133,7 @@ function sendTimeSpent() {
                         userName +
                         "has spent " +
                         totalSeconds +
-                        " seconds on the Portfolio webpage"
+                        " seconds on the Portfolio page"
                 }
             }
         },
