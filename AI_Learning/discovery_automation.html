@@ -52,7 +52,7 @@
 
           <li><a href="#design-decisions" class="hover:underline">Design Decisions</a></li>
 
-          <li><a href="#outputs" class="hover:underline">Sample Outputs</a></li>
+          <li><a href="#outputs" class="hover:underline">Generated Report</a></li>
 
           <li><a href="#impact" class="hover:underline">Impact</a></li>
 
@@ -86,17 +86,10 @@
 
       <div class="mt-10 flex flex-wrap justify-center gap-4">
 
-        <a href="workflow_demo.html" target="_blank"
+        <a href="generated_report.pdf" target="_blank"
           class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-700 transition">
 
-          View Workflow Demo
-
-        </a>
-
-        <a href="generated_report.html" target="_blank"
-          class="inline-block border border-emerald-600 text-emerald-700 px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-50 transition">
-
-          View Sample AI Report
+          View Generated Report
 
         </a>
 
@@ -331,65 +324,62 @@
 
   </section>
 
-  <!-- ================= SAMPLE OUTPUTS ================= -->
+  <!-- ================= GENERATED REPORT ================= -->
 
   <section id="outputs" class="bg-gray-50 py-20">
 
     <div class="max-w-6xl mx-auto px-4">
 
       <h2 class="text-3xl font-bold mb-10 text-emerald-700">
-        Sample Outputs
+        Generated AI Discovery Report
       </h2>
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <p class="text-lg text-gray-700 max-w-4xl mb-10 leading-relaxed">
 
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        The automation generates a structured consultant-style discovery and needs analysis report directly in Google
+        Docs. The report includes business impact analysis, skill gap identification, learner personas, intervention
+        recommendations, and learning strategy guidance derived from stakeholder meeting notes and optional learner
+        survey inputs.
 
-          <img src="workflow_architecture.png"
-            alt="Workflow Architecture Diagram"
-            class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
+      </p>
 
-          <div class="p-4">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
 
-            <h4 class="font-semibold text-emerald-700">
-              Workflow Architecture Diagram
-            </h4>
+        <div class="bg-emerald-600 px-6 py-4 flex items-center justify-between">
 
-          </div>
+          <div class="flex items-center space-x-3">
 
-        </div>
+            <img src="google_docs_icon.png"
+              alt="Google Docs Icon"
+              class="w-8 h-8" />
 
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div>
 
-          <img src="generated_report.png"
-            alt="Generated Discovery Report"
-            class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
+              <h3 class="text-white font-semibold text-lg">
+                Discovery & Needs Analysis Report
+              </h3>
 
-          <div class="p-4">
+              <p class="text-emerald-100 text-sm">
+                AI-Generated Consultant Report
+              </p>
 
-            <h4 class="font-semibold text-emerald-700">
-              Generated Discovery Report
-            </h4>
-
-          </div>
-
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-
-          <img src="skill_gap_analysis.png"
-            alt="AI Skill Gap Analysis"
-            class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
-
-          <div class="p-4">
-
-            <h4 class="font-semibold text-emerald-700">
-              AI Skill Gap & Intervention Analysis
-            </h4>
+            </div>
 
           </div>
 
+          <a href="generated_report.pdf"
+            target="_blank"
+            class="bg-white text-emerald-700 px-5 py-2 rounded-full text-sm font-semibold hover:bg-emerald-50 transition">
+
+            Open Full Report
+
+          </a>
+
         </div>
+
+        <img src="generated_report.png"
+          alt="Generated AI Discovery Report"
+          class="w-full object-cover hover:scale-[1.01] transition duration-300" />
 
       </div>
 
