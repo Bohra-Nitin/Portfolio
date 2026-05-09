@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI-Powered Discovery & Needs Analysis Automation</title>
+
+  <link rel="icon" href="ai_icon.png" type="image/x-icon" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-image: radial-gradient(circle, #d1fae5 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-900 bg-white">
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="bg-white shadow-md sticky top-0 z-50">
+
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+
+      <h1 class="text-xl font-bold flex items-center space-x-3">
+
+        <img src="ai_icon.png" alt="AI Automation Icon" class="w-6 h-6" />
+
+        <span>Dr. Bohra Nitin Kumar</span>
+
+      </h1>
+
+      <nav>
+        <ul class="flex flex-wrap gap-4 text-emerald-700 text-sm md:text-base">
+
+          <li><a href="#overview" class="hover:underline">Overview</a></li>
+
+          <li><a href="#problem" class="hover:underline">Business Problem</a></li>
+
+          <li><a href="#architecture" class="hover:underline">Workflow Architecture</a></li>
+
+          <li><a href="#analysis" class="hover:underline">AI Analysis Engine</a></li>
+
+          <li><a href="#design-decisions" class="hover:underline">Design Decisions</a></li>
+
+          <li><a href="#outputs" class="hover:underline">Sample Outputs</a></li>
+
+          <li><a href="#impact" class="hover:underline">Impact</a></li>
+
+        </ul>
+      </nav>
+
+    </div>
+
+  </header>
+
+  <!-- ================= HERO ================= -->
+
+  <section class="py-24 bg-gradient-to-r from-emerald-50 via-cyan-50 to-white">
+
+    <div class="max-w-6xl mx-auto px-4 text-center">
+
+      <h1
+        class="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-cyan-600">
+
+        AI-Powered Discovery & Needs Analysis Automation
+
+      </h1>
+
+      <p class="mt-8 text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+
+        An AI-powered instructional design automation workflow that transforms stakeholder meeting notes and learner
+        insights into structured discovery reports, skill gap analysis, learner personas, intervention
+        recommendations, and learning strategy outputs using n8n, Google Workspace, and Agentic AI workflows.
+
+      </p>
+
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+
+        <a href="workflow_demo.html" target="_blank"
+          class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-700 transition">
+
+          View Workflow Demo
+
+        </a>
+
+        <a href="generated_report.html" target="_blank"
+          class="inline-block border border-emerald-600 text-emerald-700 px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-50 transition">
+
+          View Sample AI Report
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= OVERVIEW ================= -->
+
+  <section id="overview" class="max-w-6xl mx-auto px-4 py-20">
+
+    <h2 class="text-3xl font-bold mb-6 text-emerald-700">
+      Automation Overview
+    </h2>
+
+    <p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
+
+      This project automates the discovery and needs analysis phase of instructional design using n8n, Google Drive,
+      Google Docs, and free LLMs. The workflow analyzes stakeholder meeting notes and optional survey reports to
+      generate structured business-aligned learning insights, intervention recommendations, learner personas, and
+      strategic learning outputs.
+
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-8 mt-10">
+
+      <div class="bg-white shadow-lg rounded-xl p-6">
+
+        <h4 class="text-xl font-semibold text-emerald-600 mb-3">
+          Primary Users
+        </h4>
+
+        <p class="text-gray-700">
+          Instructional Designers, Corporate L&D Teams, Learning Experience Designers, Training Consultants
+        </p>
+
+      </div>
+
+      <div class="bg-white shadow-lg rounded-xl p-6">
+
+        <h4 class="text-xl font-semibold text-emerald-600 mb-3">
+          Core Technologies
+        </h4>
+
+        <p class="text-gray-700">
+          n8n, Google Drive API, Google Docs API, OpenRouter LLMs, Agentic AI Workflows, HTML5, Tailwind CSS
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= BUSINESS PROBLEM ================= -->
+
+  <section id="problem" class="bg-gray-50 py-20">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+      <h2 class="text-3xl font-bold mb-6 text-emerald-700">
+        Business Problem
+      </h2>
+
+      <p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
+
+        Organizations often spend significant time manually analyzing stakeholder discussions, extracting performance
+        gaps, identifying training priorities, and determining appropriate learning interventions. This process is
+        inconsistent, time-consuming, and highly dependent on expert instructional designers.
+
+      </p>
+
+      <ul class="mt-8 list-disc pl-6 text-gray-700 space-y-4 text-lg max-w-5xl">
+
+        <li>Meeting notes are unstructured and difficult to synthesize.</li>
+
+        <li>Training requests are often symptoms rather than root causes.</li>
+
+        <li>Stakeholder expectations and learner realities frequently differ.</li>
+
+        <li>Manual discovery analysis slows learning project initiation.</li>
+
+        <li>Organizations struggle to identify whether training is even the correct intervention.</li>
+
+      </ul>
+
+    </div>
+
+  </section>
+
+  <!-- ================= WORKFLOW ARCHITECTURE ================= -->
+
+  <section id="architecture" class="py-20">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+      <h2 class="text-3xl font-bold mb-6 text-emerald-700">
+        Workflow Architecture
+      </h2>
+
+      <ul class="list-disc pl-6 text-lg text-gray-700 space-y-4 max-w-5xl">
+
+        <li>
+          <strong>Google Drive Trigger:</strong>
+          Automatically detects new meeting notes uploaded to a designated folder.
+        </li>
+
+        <li>
+          <strong>Google Docs Processing:</strong>
+          Extracts and cleans stakeholder meeting notes dynamically.
+        </li>
+
+        <li>
+          <strong>Optional Survey Integration:</strong>
+          Incorporates learner feedback data when available.
+        </li>
+
+        <li>
+          <strong>Agentic AI Analysis:</strong>
+          Generates structured discovery and needs analysis outputs using LLMs.
+        </li>
+
+        <li>
+          <strong>Automated Report Generation:</strong>
+          Creates structured Google Docs reports automatically.
+        </li>
+
+        <li>
+          <strong>Human-in-the-Loop Validation:</strong>
+          Supports review and iterative refinement before finalization.
+        </li>
+
+      </ul>
+
+      <div class="mt-12">
+
+        <img src="workflow_architecture.png"
+          alt="AI Workflow Architecture"
+          class="rounded-2xl shadow-xl border border-gray-200 hover:scale-[1.01] transition duration-300" />
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= AI ANALYSIS ENGINE ================= -->
+
+  <section id="analysis" class="bg-emerald-50 py-20">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+      <h2 class="text-3xl font-bold mb-10 text-emerald-700">
+        AI Analysis Engine
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+
+          <h4 class="text-lg font-semibold text-emerald-600 mb-3">
+            Discovery Analysis
+          </h4>
+
+          <p class="text-gray-700">
+            Generates problem statements, business impact analysis, learning objectives, and skill gap analysis from
+            stakeholder discussions.
+          </p>
+
+        </div>
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+
+          <h4 class="text-lg font-semibold text-emerald-600 mb-3">
+            Learning Strategy Recommendation
+          </h4>
+
+          <p class="text-gray-700">
+            Identifies whether eLearning, blended learning, workshops, job aids, coaching, or non-training
+            interventions are most appropriate.
+          </p>
+
+        </div>
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+
+          <h4 class="text-lg font-semibold text-emerald-600 mb-3">
+            Persona & Intervention Mapping
+          </h4>
+
+          <p class="text-gray-700">
+            Automatically creates learner personas, intervention strategies, and content distribution recommendations.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= DESIGN DECISIONS ================= -->
+
+  <section id="design-decisions" class="py-20">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+      <h2 class="text-3xl font-bold mb-6 text-emerald-700">
+        Key Design Decisions
+      </h2>
+
+      <ul class="list-disc pl-6 text-lg text-gray-700 space-y-4 max-w-5xl">
+
+        <li>Workflow designed to function even when survey data is unavailable.</li>
+
+        <li>Structured prompts enforce consultant-level analytical outputs.</li>
+
+        <li>Google Drive trigger architecture minimizes manual workflow initiation.</li>
+
+        <li>Outputs optimized for business stakeholders and instructional designers.</li>
+
+        <li>Human validation layer included to prevent over-automation risks.</li>
+
+        <li>Workflow separates training problems from non-training performance issues.</li>
+
+      </ul>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SAMPLE OUTPUTS ================= -->
+
+  <section id="outputs" class="bg-gray-50 py-20">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+      <h2 class="text-3xl font-bold mb-10 text-emerald-700">
+        Sample Outputs
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+          <img src="workflow_architecture.png"
+            alt="Workflow Architecture Diagram"
+            class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
+
+          <div class="p-4">
+
+            <h4 class="font-semibold text-emerald-700">
+              Workflow Architecture Diagram
+            </h4>
+
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+          <img src="generated_report.png"
+            alt="Generated Discovery Report"
+            class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
+
+          <div class="p-4">
+
+            <h4 class="font-semibold text-emerald-700">
+              Generated Discovery Report
+            </h4>
+
+          </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+          <img src="skill_gap_analysis.png"
+            alt="AI Skill Gap Analysis"
+            class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
+
+          <div class="p-4">
+
+            <h4 class="font-semibold text-emerald-700">
+              AI Skill Gap & Intervention Analysis
+            </h4>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= IMPACT ================= -->
+
+  <section id="impact" class="py-20">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+      <h2 class="text-3xl font-bold mb-6 text-emerald-700">
+        Business & Learning Impact
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8 mt-10">
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+
+          <h4 class="text-xl font-semibold text-emerald-600 mb-3">
+            Faster Discovery
+          </h4>
+
+          <p class="text-gray-700">
+            Reduced manual discovery analysis effort by automating synthesis and reporting workflows.
+          </p>
+
+        </div>
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+
+          <h4 class="text-xl font-semibold text-emerald-600 mb-3">
+            Better Intervention Decisions
+          </h4>
+
+          <p class="text-gray-700">
+            Enabled structured differentiation between training and non-training performance issues.
+          </p>
+
+        </div>
+
+        <div class="bg-white shadow-lg rounded-xl p-6">
+
+          <h4 class="text-xl font-semibold text-emerald-600 mb-3">
+            Scalable Learning Consulting
+          </h4>
+
+          <p class="text-gray-700">
+            Created reusable AI-assisted workflows applicable across multiple learning projects and business domains.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="bg-white shadow-inner py-8 mt-10">
+
+    <div class="max-w-6xl mx-auto px-4 text-center text-gray-600">
+
+      <p>
+        &copy; 2026 Dr. Bohra Nitin Kumar | AI-Powered Learning Experience & Instructional Design Automation
+      </p>
+
+    </div>
+
+  </footer>
+
+</body>
+
+</html>
