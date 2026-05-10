@@ -1,21 +1,17 @@
 // ============================================================
-// interaction.js (FINAL RELIABLE VERSION)
-// - Uses ADL wrapper for ALL statements
-// - Fixes LRS auth issue (no sendBeacon)
-// - Uses visibilitychange for better reliability
+// interaction.js
 // ============================================================
 
 
-
 // ============================================================
-// INDEX PAGE (Form Submit)
+// INDEX PAGE (WITH TRACKING)
 // ============================================================
 function submitForm() {
 
     let userName = document.getElementById("nameEntered").value.trim();
     let userEmail = document.getElementById("userEmail").value.trim();
 
-    // Basic validation
+    // Validation
     if (userName === "" || userEmail === "") {
         alert("Please enter name and email");
         return;
@@ -30,7 +26,31 @@ function submitForm() {
     localStorage.setItem("visitorName", userName);
     localStorage.setItem("visitorEmail", userEmail);
 
-    // Redirect to portfolio
+    // Tracking enabled
+    localStorage.setItem("trackingEnabled", "true");
+
+    // Redirect
+    window.location.href = "portfolio.html";
+}
+
+
+
+
+
+// ============================================================
+// SKIP TRACKING
+// Uses dummy data
+// ============================================================
+function skipTracking() {
+
+    // Dummy anonymous user
+    localStorage.setItem("visitorName", "Anonymous Visitor");
+    localStorage.setItem("visitorEmail", "anonymous@example.com");
+
+    // Tracking disabled flag
+    localStorage.setItem("trackingEnabled", "false");
+
+    // Redirect
     window.location.href = "portfolio.html";
 }
 
@@ -49,26 +69,47 @@ let statementSent = false;
 
 
 // ============================================================
-// WHEN PORTFOLIO LOADS
-// Statement 1 = experienced
+// START TRACKING
 // ============================================================
 function startPortfolioTracking() {
 
     startTime = Date.now();
 
-    let userName = localStorage.getItem("visitorName");
-    let userEmail = localStorage.getItem("visitorEmail");
+    let trackingEnabled =
+        localStorage.getItem("trackingEnabled");
 
-    // Safety fallback
+    // Do not track if skipped
+    if (trackingEnabled !== "true") {
+
+        // Still show welcome text
+        let anonymousName =
+            localStorage.getItem("visitorName");
+
+        if (document.getElementById("welcomeUser")) {
+            document.getElementById("welcomeUser").innerHTML =
+                "Welcome, " + anonymousName;
+        }
+
+        return;
+    }
+
+    let userName =
+        localStorage.getItem("visitorName");
+
+    let userEmail =
+        localStorage.getItem("visitorEmail");
+
     if (!userName || !userEmail) return;
 
-    // Show welcome message
+    // Welcome message
     if (document.getElementById("welcomeUser")) {
         document.getElementById("welcomeUser").innerHTML =
             "Welcome, " + userName;
     }
 
+    // xAPI Statement 1
     let statement1 = {
+
         actor: {
             name: userName,
             mbox: "mailto:" + userEmail
@@ -76,18 +117,21 @@ function startPortfolioTracking() {
 
         verb: {
             id: "http://adlnet.gov/expapi/verbs/experienced",
-            display: { "en-US": "experienced" }
+            display: {
+                "en-US": "experienced"
+            }
         },
 
         object: {
             id: window.location.href,
             definition: {
-                name: { "en-US": "Portfolio Page" }
+                name: {
+                    "en-US": "Portfolio Page"
+                }
             }
         }
     };
 
-    // Send "experienced" statement
     ADL.XAPIWrapper.sendStatement(statement1);
 }
 
@@ -97,7 +141,6 @@ function startPortfolioTracking() {
 
 // ============================================================
 // SEND TIME SPENT
-// Statement 2 = completed
 // ============================================================
 function sendTimeSpent() {
 
@@ -105,16 +148,28 @@ function sendTimeSpent() {
 
     statementSent = true;
 
+    let trackingEnabled =
+        localStorage.getItem("trackingEnabled");
+
+    // Skip tracking
+    if (trackingEnabled !== "true") return;
+
     let endTime = Date.now();
-    let totalSeconds = Math.round((endTime - startTime) / 1000);
 
-    let userName = localStorage.getItem("visitorName");
-    let userEmail = localStorage.getItem("visitorEmail");
+    let totalSeconds =
+        Math.round((endTime - startTime) / 1000);
 
-    // Safety fallback
+    let userName =
+        localStorage.getItem("visitorName");
+
+    let userEmail =
+        localStorage.getItem("visitorEmail");
+
     if (!userName || !userEmail) return;
 
+    // xAPI Statement 2
     let statement2 = {
+
         actor: {
             name: userName,
             mbox: "mailto:" + userEmail
@@ -122,18 +177,21 @@ function sendTimeSpent() {
 
         verb: {
             id: "http://adlnet.gov/expapi/verbs/completed",
-            display: { "en-US": "completed" }
+            display: {
+                "en-US": "completed"
+            }
         },
 
         object: {
             id: window.location.href + "/time-tracking",
+
             definition: {
                 name: {
                     "en-US":
                         userName +
-                        "has spent " +
+                        " spent " +
                         totalSeconds +
-                        " seconds on the Portfolio page"
+                        " seconds on the portfolio"
                 }
             }
         },
@@ -143,7 +201,6 @@ function sendTimeSpent() {
         }
     };
 
-    // Send "completed" statement
     ADL.XAPIWrapper.sendStatement(statement2);
 }
 
@@ -152,17 +209,21 @@ function sendTimeSpent() {
 
 
 // ============================================================
-// PAGE EXIT HANDLING (MOST RELIABLE)
+// PAGE EXIT HANDLING
 // ============================================================
 
-// Fires when tab becomes hidden (best modern method)
+// Modern reliable method
 document.addEventListener("visibilitychange", function () {
+
     if (document.visibilityState === "hidden") {
         sendTimeSpent();
     }
+
 });
 
-// Fallback (older browsers)
+// Older browser fallback
 window.addEventListener("beforeunload", function () {
+
     sendTimeSpent();
+
 });
