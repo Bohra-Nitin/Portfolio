@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>xAPI Portfolio Analytics System</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background-image: radial-gradient(circle, #dbeafe 1px, transparent 1px);
+  background-size:26px 26px;
+}
+
+.glass-card{
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(8px);
+}
+
+</style>
+
+</head>
+
+<body class="font-sans text-gray-800">
+
+
+
+
+<!-- ===================================================== -->
+<!-- HEADER -->
+<!-- ===================================================== -->
+<header class="bg-white/90 shadow-md sticky top-0 z-50 backdrop-blur">
+
+  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+
+    <h1 class="text-xl font-bold flex items-center space-x-3">
+
+      <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+        xA
+      </div>
+
+      <span>xAPI Portfolio Analytics System</span>
+
+    </h1>
+
+  </div>
+
+</header>
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- HERO -->
+<!-- ===================================================== -->
+<section class="py-24 bg-gradient-to-r from-blue-50 via-indigo-50 to-white">
+
+  <div class="max-w-6xl mx-auto px-4 text-center">
+
+    <div class="inline-flex items-center bg-blue-100 text-blue-700 px-5 py-2 rounded-full text-sm font-semibold mb-6">
+      xAPI • SCORM Cloud • Learning Analytics • Portfolio Tracking
+    </div>
+
+    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600">
+      xAPI Portfolio Analytics System
+    </h1>
+
+    <p class="mt-8 text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+
+      A recruiter-focused portfolio analytics system demonstrating real-time xAPI tracking,
+      engagement analytics, and SCORM Cloud Learning Record Store integration.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- OVERVIEW -->
+<!-- ===================================================== -->
+<section class="max-w-6xl mx-auto px-4 py-24">
+
+  <h2 class="text-4xl font-bold text-blue-700 mb-10">
+    Project Overview
+  </h2>
+
+  <p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
+
+    This project demonstrates the implementation of xAPI-based behavioral analytics
+    inside a recruiter-facing portfolio experience.
+
+    The system tracks portfolio engagement events, calculates time spent,
+    and sends structured xAPI statements to SCORM Cloud Learning Record Store (LRS)
+    using JavaScript and xAPIWrapper.
+
+  </p>
+
+  <div class="grid md:grid-cols-3 gap-8 mt-14">
+
+    <div class="glass-card rounded-2xl shadow-xl p-8 border border-blue-100">
+
+      <div class="text-4xl mb-4">📊</div>
+
+      <h3 class="text-xl font-semibold text-blue-700 mb-3">
+        Real-Time Tracking
+      </h3>
+
+      <p class="text-gray-700 leading-relaxed">
+        Tracks portfolio access events and engagement duration.
+      </p>
+
+    </div>
+
+    <div class="glass-card rounded-2xl shadow-xl p-8 border border-blue-100">
+
+      <div class="text-4xl mb-4">☁️</div>
+
+      <h3 class="text-xl font-semibold text-blue-700 mb-3">
+        SCORM Cloud Integration
+      </h3>
+
+      <p class="text-gray-700 leading-relaxed">
+        Sends xAPI statements directly to SCORM Cloud LRS.
+      </p>
+
+    </div>
+
+    <div class="glass-card rounded-2xl shadow-xl p-8 border border-blue-100">
+
+      <div class="text-4xl mb-4">🧠</div>
+
+      <h3 class="text-xl font-semibold text-blue-700 mb-3">
+        Learning Analytics
+      </h3>
+
+      <p class="text-gray-700 leading-relaxed">
+        Applies learning analytics concepts beyond traditional LMS environments.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- WHAT IS TRACKED -->
+<!-- ===================================================== -->
+<section class="bg-slate-50 py-24">
+
+  <div class="max-w-6xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-blue-700 mb-10">
+      What Is Tracked
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <h3 class="text-2xl font-semibold text-blue-700 mb-6">
+          xAPI Events Captured
+        </h3>
+
+        <ul class="space-y-4 text-gray-700 text-lg">
+
+          <li>✔ Portfolio Experienced Event</li>
+          <li>✔ Portfolio Visit Duration</li>
+          <li>✔ Session Engagement Tracking</li>
+          <li>✔ Portfolio Exit Event</li>
+          <li>✔ xAPI Statement Generation</li>
+
+        </ul>
+
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-8 text-white">
+
+        <h3 class="text-2xl font-semibold mb-6">
+          Sample xAPI Statements
+        </h3>
+
+        <div class="space-y-4 text-sm leading-relaxed">
+
+          <div class="bg-white/10 rounded-lg p-4">
+            Recruiter Visitor experienced 'Portfolio Page'
+          </div>
+
+          <div class="bg-white/10 rounded-lg p-4">
+            Recruiter Visitor completed 'Portfolio Visit - 42 seconds'
+          </div>
+
+          <div class="bg-white/10 rounded-lg p-4">
+            Duration Sent: PT42S
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- HOW IT WORKS -->
+<!-- ===================================================== -->
+<section class="py-24">
+
+  <div class="max-w-6xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-blue-700 mb-10">
+      How the System Works
+    </h2>
+
+    <div class="grid md:grid-cols-4 gap-8">
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+
+        <div class="text-5xl mb-4">1️⃣</div>
+
+        <h3 class="text-xl font-semibold text-blue-700 mb-3">
+          Portfolio Opens
+        </h3>
+
+        <p class="text-gray-700">
+          JavaScript begins session tracking.
+        </p>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+
+        <div class="text-5xl mb-4">2️⃣</div>
+
+        <h3 class="text-xl font-semibold text-blue-700 mb-3">
+          xAPI Statement Created
+        </h3>
+
+        <p class="text-gray-700">
+          Experience event generated using xAPI verbs.
+        </p>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+
+        <div class="text-5xl mb-4">3️⃣</div>
+
+        <h3 class="text-xl font-semibold text-blue-700 mb-3">
+          Engagement Measured
+        </h3>
+
+        <p class="text-gray-700">
+          Time spent inside portfolio is calculated.
+        </p>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+
+        <div class="text-5xl mb-4">4️⃣</div>
+
+        <h3 class="text-xl font-semibold text-blue-700 mb-3">
+          Data Sent to LRS
+        </h3>
+
+        <p class="text-gray-700">
+          Statements stored inside SCORM Cloud.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- ARCHITECTURE -->
+<!-- ===================================================== -->
+<section class="bg-blue-50 py-24">
+
+  <div class="max-w-6xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-blue-700 mb-10">
+      System Architecture
+    </h2>
+
+    <div class="bg-white rounded-3xl shadow-2xl p-10 border border-blue-100">
+
+      <div class="grid md:grid-cols-5 gap-6 items-center text-center">
+
+        <div class="bg-blue-50 rounded-2xl p-6">
+
+          <h4 class="font-bold text-blue-700 mb-3">
+            Recruiter
+          </h4>
+
+          <p class="text-sm text-gray-700">
+            Opens portfolio page
+          </p>
+
+        </div>
+
+        <div class="text-4xl text-blue-400">
+          →
+        </div>
+
+        <div class="bg-indigo-50 rounded-2xl p-6">
+
+          <h4 class="font-bold text-indigo-700 mb-3">
+            JavaScript Tracking
+          </h4>
+
+          <p class="text-sm text-gray-700">
+            Generates xAPI statements
+          </p>
+
+        </div>
+
+        <div class="text-4xl text-blue-400">
+          →
+        </div>
+
+        <div class="bg-cyan-50 rounded-2xl p-6">
+
+          <h4 class="font-bold text-cyan-700 mb-3">
+            SCORM Cloud LRS
+          </h4>
+
+          <p class="text-sm text-gray-700">
+            Stores analytics statements
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- SCREENSHOTS -->
+<!-- ===================================================== -->
+<section class="py-24">
+
+  <div class="max-w-6xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-blue-700 mb-10">
+      SCORM Cloud Statement Screenshots
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <img src="images/xapi_statement1.png"
+             alt="Experienced Statement"
+             class="w-full h-64 object-cover hover:scale-105 transition duration-300">
+
+        <div class="p-5">
+
+          <h4 class="font-semibold text-blue-700 mb-2">
+            Experienced Statement
+          </h4>
+
+          <p class="text-gray-700 text-sm">
+            Portfolio access tracked using xAPI experienced verb.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <img src="images/xapi_statement2.png"
+             alt="Time Tracking Statement"
+             class="w-full h-64 object-cover hover:scale-105 transition duration-300">
+
+        <div class="p-5">
+
+          <h4 class="font-semibold text-blue-700 mb-2">
+            Time Spent Tracking
+          </h4>
+
+          <p class="text-gray-700 text-sm">
+            Duration analytics captured and stored inside SCORM Cloud.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <img src="images/xapi_statement3.png"
+             alt="Learning Analytics Screenshot"
+             class="w-full h-64 object-cover hover:scale-105 transition duration-300">
+
+        <div class="p-5">
+
+          <h4 class="font-semibold text-blue-700 mb-2">
+            Learning Analytics Data
+          </h4>
+
+          <p class="text-gray-700 text-sm">
+            Structured xAPI statements available for reporting and analytics.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- SKILLS -->
+<!-- ===================================================== -->
+<section class="bg-slate-50 py-24">
+
+  <div class="max-w-6xl mx-auto px-4">
+
+    <h2 class="text-4xl font-bold text-blue-700 mb-10">
+      Skills Demonstrated
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <ul class="space-y-4 text-lg text-gray-700">
+
+          <li>✔ xAPI Statement Design</li>
+          <li>✔ SCORM Cloud Integration</li>
+          <li>✔ JavaScript Event Tracking</li>
+          <li>✔ Front-End Development</li>
+
+        </ul>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <ul class="space-y-4 text-lg text-gray-700">
+
+          <li>✔ Learning Analytics Thinking</li>
+          <li>✔ Instructional Technology Integration</li>
+          <li>✔ User Interaction Tracking</li>
+          <li>✔ Recruiter Experience Design</li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
+<footer class="bg-slate-900 text-white py-12">
+
+  <div class="max-w-6xl mx-auto px-4 text-center">
+
+    <h3 class="text-2xl font-semibold mb-4">
+      xAPI Portfolio Analytics System
+    </h3>
+
+    <p class="text-slate-300 max-w-3xl mx-auto leading-relaxed">
+
+      Demonstrating the integration of instructional design,
+      learning analytics, xAPI implementation,
+      and recruiter-focused portfolio experiences.
+
+    </p>
+
+    <p class="mt-6 text-slate-400 text-sm">
+      © 2026 Dr. Bohra Nitin Kumar
+    </p>
+
+  </div>
+
+</footer>
+
+</body>
+</html>
