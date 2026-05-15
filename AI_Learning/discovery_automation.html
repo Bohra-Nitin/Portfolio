@@ -12,6 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+
     body {
       background-image: radial-gradient(circle, #d1fae5 1px, transparent 1px);
       background-size: 26px 26px;
@@ -20,7 +21,9 @@
     html {
       scroll-behavior: smooth;
     }
+
   </style>
+
 </head>
 
 <body class="font-sans text-gray-900 bg-white">
@@ -33,20 +36,21 @@
 
       <h1 class="text-xl font-bold flex items-center space-x-3">
 
-        <img src="ai_icon.png" alt="AI Automation Icon" class="w-6 h-6" />
+        <img src="ai_icon.png"
+             alt="AI Automation Icon"
+             class="w-6 h-6" />
 
         <span>Dr. Bohra Nitin Kumar</span>
 
       </h1>
 
       <nav>
+
         <ul class="flex flex-wrap gap-4 text-emerald-700 text-sm md:text-base">
 
           <li><a href="#overview" class="hover:underline">Overview</a></li>
 
           <li><a href="#problem" class="hover:underline">Business Problem</a></li>
-
-          <li><a href="#architecture" class="hover:underline">Workflow Architecture</a></li>
 
           <li><a href="#analysis" class="hover:underline">AI Analysis Engine</a></li>
 
@@ -57,6 +61,7 @@
           <li><a href="#impact" class="hover:underline">Impact</a></li>
 
         </ul>
+
       </nav>
 
     </div>
@@ -86,12 +91,12 @@
 
       <div class="mt-10 flex flex-wrap justify-center gap-4">
 
-        <a href="generated_report.pdf" target="_blank"
+        <button onclick="openWorkflowModal()"
           class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-700 transition">
 
-          View Generated Report
+          View Workflow Architecture
 
-        </a>
+        </button>
 
       </div>
 
@@ -182,62 +187,6 @@
 
   </section>
 
-  <!-- ================= WORKFLOW ARCHITECTURE ================= -->
-
-  <section id="architecture" class="py-20">
-
-    <div class="max-w-6xl mx-auto px-4">
-
-      <h2 class="text-3xl font-bold mb-6 text-emerald-700">
-        Workflow Architecture
-      </h2>
-
-      <ul class="list-disc pl-6 text-lg text-gray-700 space-y-4 max-w-5xl">
-
-        <li>
-          <strong>Google Drive Trigger:</strong>
-          Automatically detects new meeting notes uploaded to a designated folder.
-        </li>
-
-        <li>
-          <strong>Google Docs Processing:</strong>
-          Extracts and cleans stakeholder meeting notes dynamically.
-        </li>
-
-        <li>
-          <strong>Optional Survey Integration:</strong>
-          Incorporates learner feedback data when available.
-        </li>
-
-        <li>
-          <strong>Agentic AI Analysis:</strong>
-          Generates structured discovery and needs analysis outputs using LLMs.
-        </li>
-
-        <li>
-          <strong>Automated Report Generation:</strong>
-          Creates structured Google Docs reports automatically.
-        </li>
-
-        <li>
-          <strong>Human-in-the-Loop Validation:</strong>
-          Supports review and iterative refinement before finalization.
-        </li>
-
-      </ul>
-
-      <div class="mt-12">
-
-        <img src="workflow_architecture.png"
-          alt="AI Workflow Architecture"
-          class="rounded-2xl shadow-xl border border-gray-200 hover:scale-[1.01] transition duration-300" />
-
-      </div>
-
-    </div>
-
-  </section>
-
   <!-- ================= AI ANALYSIS ENGINE ================= -->
 
   <section id="analysis" class="bg-emerald-50 py-20">
@@ -314,8 +263,6 @@
 
         <li>Outputs optimized for business stakeholders and instructional designers.</li>
 
-        <li>Human validation layer included to prevent over-automation risks.</li>
-
         <li>Workflow separates training problems from non-training performance issues.</li>
 
       </ul>
@@ -350,8 +297,8 @@
           <div class="flex items-center space-x-3">
 
             <img src="google_docs_icon.png"
-              alt="Google Docs Icon"
-              class="w-8 h-8" />
+                 alt="Google Docs Icon"
+                 class="w-8 h-8" />
 
             <div>
 
@@ -368,8 +315,8 @@
           </div>
 
           <a href="generated_report.pdf"
-            target="_blank"
-            class="bg-white text-emerald-700 px-5 py-2 rounded-full text-sm font-semibold hover:bg-emerald-50 transition">
+             target="_blank"
+             class="bg-white text-emerald-700 px-5 py-2 rounded-full text-sm font-semibold hover:bg-emerald-50 transition">
 
             Open Full Report
 
@@ -378,8 +325,8 @@
         </div>
 
         <img src="generated_report.png"
-          alt="Generated AI Discovery Report"
-          class="w-full object-cover hover:scale-[1.01] transition duration-300" />
+             alt="Generated AI Discovery Report"
+             class="w-full object-cover hover:scale-[1.01] transition duration-300" />
 
       </div>
 
@@ -441,6 +388,74 @@
 
   </section>
 
+  <!-- ================= WORKFLOW MODAL ================= -->
+
+  <div id="workflowModal"
+       class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center px-4">
+
+    <div class="bg-white rounded-2xl shadow-2xl max-w-6xl w-full relative overflow-hidden">
+
+      <!-- Close Button -->
+
+      <button onclick="closeWorkflowModal()"
+        class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full text-xl font-bold transition z-50">
+
+        ×
+
+      </button>
+
+      <!-- Header -->
+
+      <div class="bg-gradient-to-r from-emerald-600 to-cyan-600 px-8 py-6">
+
+        <h2 class="text-3xl font-bold text-white">
+          AI Workflow Architecture
+        </h2>
+
+        <p class="text-emerald-100 mt-2">
+          End-to-end automation pipeline for AI-powered discovery and needs analysis
+        </p>
+
+      </div>
+
+      <!-- Workflow Content -->
+
+      <div class="p-6 overflow-y-auto max-h-[85vh]">
+
+        <div class="mb-8">
+
+          <h3 class="text-2xl font-bold text-emerald-700 mb-4">
+            Workflow Overview
+          </h3>
+
+          <ul class="list-disc pl-6 text-gray-700 space-y-3 text-lg">
+
+            <li>Google Drive automatically detects newly uploaded meeting notes.</li>
+
+            <li>Google Docs content is dynamically extracted and cleaned.</li>
+
+            <li>Optional learner survey reports are merged for enhanced analysis.</li>
+
+            <li>Agentic AI workflows generate structured learning strategy recommendations.</li>
+
+            <li>AI-generated consultant-style reports are automatically created in Google Docs.</li>
+
+          </ul>
+
+        </div>
+
+        <!-- Workflow Image -->
+
+        <img src="workflow_architecture.png"
+             alt="Workflow Architecture"
+             class="w-full rounded-2xl shadow-xl border border-gray-200">
+
+      </div>
+
+    </div>
+
+  </div>
+
   <!-- ================= FOOTER ================= -->
 
   <footer class="bg-white shadow-inner py-8 mt-10">
@@ -454,6 +469,22 @@
     </div>
 
   </footer>
+
+  <!-- ================= MODAL SCRIPT ================= -->
+
+  <script>
+
+    function openWorkflowModal() {
+      document.getElementById('workflowModal').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeWorkflowModal() {
+      document.getElementById('workflowModal').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+  </script>
 
 </body>
 
