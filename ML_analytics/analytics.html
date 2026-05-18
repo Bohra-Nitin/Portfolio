@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Predictive Workforce Learning Analytics</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+
+    body {
+      background-image: radial-gradient(circle, #dbeafe 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+  </style>
+
+</head>
+
+<body class="font-sans text-gray-900 bg-white">
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="bg-white shadow-md sticky top-0 z-50">
+
+```
+<div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+
+  <h1 class="text-xl font-bold flex items-center space-x-3">
+
+    <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+      AI
+    </div>
+
+    <span>Dr. Bohra Nitin Kumar</span>
+
+  </h1>
+
+  <nav>
+
+    <ul class="flex flex-wrap gap-4 text-blue-700 text-sm md:text-base">
+
+      <li><a href="#overview" class="hover:underline">Overview</a></li>
+
+      <li><a href="#problem" class="hover:underline">Business Problem</a></li>
+
+      <li><a href="#analytics" class="hover:underline">Learning Analytics</a></li>
+
+      <li><a href="#ai" class="hover:underline">ML Workflow</a></li>
+
+      <li><a href="#visuals" class="hover:underline">Visual Analytics</a></li>
+
+      <li><a href="#impact" class="hover:underline">Business Impact</a></li>
+
+    </ul>
+
+  </nav>
+
+</div>
+```
+
+  </header>
+
+  <!-- ================= HERO ================= -->
+
+  <section class="py-24 bg-gradient-to-r from-blue-50 via-sky-50 to-white">
+
+```
+<div class="max-w-6xl mx-auto px-4 text-center">
+
+  <h1
+    class="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600 leading-tight">
+
+    Predictive Workforce Learning Analytics
+
+  </h1>
+
+  <p class="mt-8 text-lg text-gray-700 max-w-5xl mx-auto leading-relaxed">
+
+    A workforce learning analytics and machine learning prediction system developed using Orange Data Mining to analyze employee
+    engagement, learning effectiveness, certification readiness, and productivity improvement trends from
+    corporate training data. The project demonstrates visual machine learning workflows, predictive analytics,
+    learner segmentation, and enterprise learning intelligence concepts used in modern corporate L&D environments.
+
+  </p>
+
+  <div class="mt-10 flex flex-wrap justify-center gap-4">
+
+    <button onclick="openWorkflowModal()"
+      class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition">
+
+      View Workflow Architecture
+
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= OVERVIEW ================= -->
+
+  <section id="overview" class="max-w-6xl mx-auto px-4 py-20">
+
+```
+<h2 class="text-3xl font-bold mb-6 text-blue-700">
+  Project Overview
+</h2>
+
+<p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
+
+  This project simulates a real-world corporate learning analytics environment where workforce training data is
+  analyzed using machine learning and visual analytics workflows. The system evaluates employee engagement patterns, learning
+  consistency, assessment performance, course completion behavior, and productivity improvement to support
+  evidence-based workforce learning decisions.
+
+</p>
+
+<div class="grid md:grid-cols-2 gap-8 mt-10">
+
+  <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+    <h4 class="text-xl font-semibold text-blue-600 mb-3">
+      Primary Users
+    </h4>
+
+    <p class="text-gray-700 leading-relaxed">
+      Corporate L&D Teams, Workforce Analytics Specialists, Learning Experience Designers, HR Analytics Teams,
+      Organizational Development Consultants
+    </p>
+
+  </div>
+
+  <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+    <h4 class="text-xl font-semibold text-blue-600 mb-3">
+      Core Technologies
+    </h4>
+
+    <p class="text-gray-700 leading-relaxed">
+      Orange Data Mining, Machine Learning, Workforce Learning Analytics, Predictive Analytics, Data
+      Visualization, CSV Datasets, Machine Learning Classification & Regression Models
+    </p>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= BUSINESS PROBLEM ================= -->
+
+  <section id="problem" class="bg-gray-50 py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-6 text-blue-700">
+    Business Problem
+  </h2>
+
+  <p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
+
+    Modern organizations invest heavily in workforce upskilling, AI readiness, compliance training, leadership
+    development, and digital transformation initiatives. However, corporate learning teams often struggle to
+    determine whether employee training programs are actually improving workforce performance and business outcomes.
+
+  </p>
+
+  <ul class="mt-8 list-disc pl-6 text-gray-700 space-y-4 text-lg max-w-5xl leading-relaxed">
+
+    <li>Organizations lack visibility into employee learning engagement patterns.</li>
+
+    <li>Corporate training effectiveness is difficult to measure consistently.</li>
+
+    <li>Learning teams struggle to identify disengaged or at-risk employees.</li>
+
+    <li>Business stakeholders increasingly demand measurable workforce performance impact.</li>
+
+    <li>Learning data often remains underutilized despite being available in LMS platforms.</li>
+
+  </ul>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= LEARNING ANALYTICS ================= -->
+
+  <section id="analytics" class="bg-blue-50 py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-10 text-blue-700">
+    Workforce Learning Analytics Engine
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-lg font-semibold text-blue-600 mb-3">
+        Employee Engagement Analytics
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Analyzed LMS login frequency, learning consistency, course completion behavior, and peer interaction
+        patterns to identify highly engaged and disengaged workforce learner groups.
+      </p>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-lg font-semibold text-blue-600 mb-3">
+        Learning Effectiveness Analysis
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Evaluated assessment performance, learning progression, productivity improvement, and workforce capability
+        indicators to measure corporate training effectiveness.
+      </p>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-lg font-semibold text-blue-600 mb-3">
+        Workforce Segmentation
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Used clustering workflows to segment employees into learner personas such as highly engaged learners,
+        moderate performers, and at-risk workforce groups.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= AI WORKFLOW ================= -->
+
+  <section id="ai" class="py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-6 text-blue-700">
+    Machine Learning Workflow
+  </h2>
+
+  <p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
+
+    Multiple machine learning models were developed and compared using workforce learning analytics data to predict employee
+    certification outcomes and productivity improvement trends. The project demonstrates both classification and
+    regression-based machine learning workflows using visual machine learning pipelines in Orange Data Mining.
+
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-8 mt-10">
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Classification Models
+      </h4>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-3 leading-relaxed">
+        <li>Logistic Regression</li>
+        <li>Decision Tree</li>
+        <li>Random Forest</li>
+        <li>Certification Success Prediction</li>
+        <li>Employee Risk Identification</li>
+      </ul>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Regression Models
+      </h4>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-3 leading-relaxed">
+        <li>Linear Regression</li>
+        <li>Regression Tree</li>
+        <li>Random Forest Regression</li>
+        <li>Productivity Improvement Prediction</li>
+        <li>Training Impact Analysis</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= VISUAL ANALYTICS ================= -->
+
+  <section id="visuals" class="bg-gray-50 py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-10 text-blue-700">
+    Visual Analytics & AI Evaluation
+  </h2>
+
+  <p class="text-lg text-gray-700 max-w-5xl mb-10 leading-relaxed">
+
+    Interactive visual analytics workflows were developed to explore workforce learning behavior, identify learner
+    engagement trends, evaluate machine learning prediction quality, and analyze workforce capability patterns using enterprise
+    training data.
+
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-8">
+
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
+
+      <h3 class="text-2xl font-bold text-blue-700 mb-4">
+        Learning Analytics Visualizations
+      </h3>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-4 text-lg leading-relaxed">
+        <li>Scatter Plot Analysis</li>
+        <li>Heat Map Workforce Patterns</li>
+        <li>Department Performance Box Plots</li>
+        <li>Employee Clustering Visualizations</li>
+        <li>Engagement vs Productivity Trends</li>
+      </ul>
+
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
+
+      <h3 class="text-2xl font-bold text-blue-700 mb-4">
+        Machine Learning Evaluation Metrics
+      </h3>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-4 text-lg leading-relaxed">
+        <li>Accuracy & F1 Score</li>
+        <li>Confusion Matrix Analysis</li>
+        <li>ROC Curve Evaluation</li>
+        <li>RMSE & R² Metrics</li>
+        <li>Model Comparison Workflows</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= KEY DATA FEATURES ================= -->
+
+  <section class="py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-10 text-blue-700">
+    Workforce Learning Dataset Features
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Engagement Metrics
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        LMS Login Frequency, Learning Consistency, Course Progress Percentage, Peer Interaction Score
+      </p>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Learning Performance
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Assessment Scores, Certification Outcomes, Skill Level, Training Hours, Learning Path Analysis
+      </p>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Workforce Impact
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Productivity Improvement, Post-Training Performance, Workforce Capability Analytics
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= BUSINESS IMPACT ================= -->
+
+  <section id="impact" class="bg-blue-50 py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-6 text-blue-700">
+    Business & Learning Impact
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8 mt-10">
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Predictive Workforce Insights
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Enabled machine learning-driven prediction of employee certification outcomes and productivity improvement trends using
+        workforce learning behavior analytics.
+      </p>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Employee Engagement Visibility
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Identified workforce engagement patterns, learner consistency trends, and at-risk employee segments through
+        visual learning analytics workflows.
+      </p>
+
+    </div>
+
+    <div class="bg-white shadow-lg rounded-xl p-6 border border-blue-100">
+
+      <h4 class="text-xl font-semibold text-blue-600 mb-3">
+        Data-Driven L&D Decisions
+      </h4>
+
+      <p class="text-gray-700 leading-relaxed">
+        Demonstrated how corporate learning data can support evidence-based workforce development and training
+        optimization strategies.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= SKILLS DEMONSTRATED ================= -->
+
+  <section class="py-20">
+
+```
+<div class="max-w-6xl mx-auto px-4">
+
+  <h2 class="text-3xl font-bold mb-10 text-blue-700">
+    Skills Demonstrated
+  </h2>
+
+  <div class="flex flex-wrap gap-4">
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Learning Analytics</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Machine Learning in Corporate Learning</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Machine Learning</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Orange Data Mining</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Predictive Analytics</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Workforce Analytics</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Employee Segmentation</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Data Visualization</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Regression Modeling</span>
+
+    <span class="bg-blue-100 text-blue-700 px-5 py-3 rounded-full font-medium">Classification Modeling</span>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- ================= WORKFLOW MODAL ================= -->
+
+  <div id="workflowModal"
+       class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center px-4">
+
+```
+<div class="bg-white rounded-2xl shadow-2xl max-w-6xl w-full relative overflow-hidden">
+
+  <button onclick="closeWorkflowModal()"
+    class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full text-xl font-bold transition z-50">
+
+    ×
+
+  </button>
+
+  <div class="bg-gradient-to-r from-blue-700 to-cyan-600 px-8 py-6">
+
+    <h2 class="text-3xl font-bold text-white">
+      Machine Learning Workflow Architecture
+    </h2>
+
+    <p class="text-blue-100 mt-2">
+      Workforce learning analytics and machine learning prediction workflow in Orange Data Mining
+    </p>
+
+  </div>
+
+  <div class="p-6 overflow-y-auto max-h-[85vh]">
+
+    <div class="mb-8">
+
+      <h3 class="text-2xl font-bold text-blue-700 mb-4">
+        Workflow Overview
+      </h3>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-3 text-lg leading-relaxed">
+
+        <li>Corporate workforce learning dataset imported into Orange Data Mining.</li>
+
+        <li>Employee engagement and learning metrics configured for predictive analytics.</li>
+
+        <li>Visual learning analytics workflows used to identify workforce patterns.</li>
+
+        <li>Classification models developed for certification prediction.</li>
+
+        <li>Regression models developed for productivity improvement prediction.</li>
+
+        <li>K-Means clustering used for workforce learner segmentation.</li>
+
+        <li>machine learning models evaluated using Test & Score, Confusion Matrix, ROC Analysis, RMSE, and R² metrics.</li>
+
+      </ul>
+
+    </div>
+
+    <div class="bg-blue-50 border border-blue-100 rounded-2xl p-10 text-center">
+
+      <h3 class="text-2xl font-bold text-blue-700 mb-4">
+        Workflow Architecture Placeholder
+      </h3>
+
+      <p class="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto">
+        Replace this section with screenshots of your Orange workflow canvas showing File, Select Columns,
+        Scatter Plot, Heat Map, Logistic Regression, Random Forest, Test & Score, K-Means, and Predictions
+        widgets connected together.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="bg-white shadow-inner py-8 mt-10">
+
+```
+<div class="max-w-6xl mx-auto px-4 text-center text-gray-600">
+
+  <p>
+    &copy; 2026 Dr. Bohra Nitin Kumar | Predictive Workforce Learning Analytics Portfolio Project
+  </p>
+
+</div>
+```
+
+  </footer>
+
+  <!-- ================= MODAL SCRIPT ================= -->
+
+  <script>
+
+    function openWorkflowModal() {
+      document.getElementById('workflowModal').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeWorkflowModal() {
+      document.getElementById('workflowModal').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+  </script>
+
+</body>
+
+</html>
