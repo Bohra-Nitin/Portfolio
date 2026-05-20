@@ -68,7 +68,7 @@ body{
   <div class="max-w-6xl mx-auto px-4 text-center">
 
     <div class="inline-flex items-center bg-blue-100 text-blue-700 px-5 py-2 rounded-full text-sm font-semibold mb-6">
-      xAPI • SCORM Cloud • Learning Analytics • Portfolio Tracking
+      xAPI • Veracity LRS • Learning Analytics • Portfolio Tracking
     </div>
 
     <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600">
@@ -77,10 +77,23 @@ body{
 
     <p class="mt-8 text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
 
-      A recruiter-focused portfolio analytics system demonstrating real-time xAPI tracking,
-      engagement analytics, and SCORM Cloud Learning Record Store integration.
+      A recruiter-facing analytics-enabled portfolio demonstrating real-time xAPI tracking,
+      engagement analytics, and Veracity Learning Record Store (LRS) integration.
 
     </p>
+
+    <!-- Launch Demo Button -->
+    <div class="mt-10 flex justify-center">
+
+      <button onclick="openDemoVideo()"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition duration-300 flex items-center space-x-3">
+
+          <span>▶</span>
+          <span>Launch xAPI Demo</span>
+
+      </button>
+
+    </div>
 
   </div>
 
@@ -105,10 +118,10 @@ body{
   <p class="text-lg text-gray-700 leading-relaxed max-w-5xl">
 
     This project demonstrates the implementation of xAPI-based behavioral analytics
-    inside a recruiter-facing portfolio experience.
+    inside a recruiter-facing analytics-enabled portfolio.
 
     The system tracks portfolio engagement events, calculates time spent,
-    and sends structured xAPI statements to SCORM Cloud Learning Record Store (LRS)
+    and sends structured xAPI statements to Veracity Learning Record Store (LRS)
     using JavaScript and xAPIWrapper.
 
   </p>
@@ -134,11 +147,11 @@ body{
       <div class="text-4xl mb-4">☁️</div>
 
       <h3 class="text-xl font-semibold text-blue-700 mb-3">
-        SCORM Cloud Integration
+        Veracity LRS Integration
       </h3>
 
       <p class="text-gray-700 leading-relaxed">
-        Sends xAPI statements directly to SCORM Cloud LRS.
+        Sends xAPI statements directly to Veracity LRS.
       </p>
 
     </div>
@@ -152,7 +165,7 @@ body{
       </h3>
 
       <p class="text-gray-700 leading-relaxed">
-        Applies learning analytics concepts beyond traditional LMS environments.
+        Applies learning analytics implementation beyond traditional LMS environments.
       </p>
 
     </div>
@@ -300,7 +313,7 @@ body{
         </h3>
 
         <p class="text-gray-700">
-          Statements stored inside SCORM Cloud.
+          Statements stored inside Veracity LRS.
         </p>
 
       </div>
@@ -368,97 +381,11 @@ body{
         <div class="bg-cyan-50 rounded-2xl p-6">
 
           <h4 class="font-bold text-cyan-700 mb-3">
-            SCORM Cloud LRS
+            Veracity LRS
           </h4>
 
           <p class="text-sm text-gray-700">
             Stores analytics statements
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-
-
-
-
-
-<!-- ===================================================== -->
-<!-- SCREENSHOTS -->
-<!-- ===================================================== -->
-<section class="py-24">
-
-  <div class="max-w-6xl mx-auto px-4">
-
-    <h2 class="text-4xl font-bold text-blue-700 mb-10">
-      SCORM Cloud Statement Screenshots
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-8">
-
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-
-        <img src="images/xapi_statement1.png"
-             alt="Experienced Statement"
-             class="w-full h-64 object-cover hover:scale-105 transition duration-300">
-
-        <div class="p-5">
-
-          <h4 class="font-semibold text-blue-700 mb-2">
-            Experienced Statement
-          </h4>
-
-          <p class="text-gray-700 text-sm">
-            Portfolio access tracked using xAPI experienced verb.
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-
-        <img src="images/xapi_statement2.png"
-             alt="Time Tracking Statement"
-             class="w-full h-64 object-cover hover:scale-105 transition duration-300">
-
-        <div class="p-5">
-
-          <h4 class="font-semibold text-blue-700 mb-2">
-            Time Spent Tracking
-          </h4>
-
-          <p class="text-gray-700 text-sm">
-            Duration analytics captured and stored inside SCORM Cloud.
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-
-        <img src="images/xapi_statement3.png"
-             alt="Learning Analytics Screenshot"
-             class="w-full h-64 object-cover hover:scale-105 transition duration-300">
-
-        <div class="p-5">
-
-          <h4 class="font-semibold text-blue-700 mb-2">
-            Learning Analytics Data
-          </h4>
-
-          <p class="text-gray-700 text-sm">
-            Structured xAPI statements available for reporting and analytics.
           </p>
 
         </div>
@@ -496,7 +423,7 @@ body{
         <ul class="space-y-4 text-lg text-gray-700">
 
           <li>✔ xAPI Statement Design</li>
-          <li>✔ SCORM Cloud Integration</li>
+          <li>✔ Veracity LRS Integration</li>
           <li>✔ JavaScript Event Tracking</li>
           <li>✔ Front-End Development</li>
 
@@ -544,7 +471,7 @@ body{
     <p class="text-slate-300 max-w-3xl mx-auto leading-relaxed">
 
       Demonstrating the integration of instructional design,
-      learning analytics, xAPI implementation,
+      learning analytics, streamlined xAPI implementation,
       and recruiter-focused portfolio experiences.
 
     </p>
@@ -556,6 +483,80 @@ body{
   </div>
 
 </footer>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- DEMO VIDEO MODAL -->
+<!-- ===================================================== -->
+<div id="videoModal"
+     class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4">
+
+  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-5xl w-full relative">
+
+    <!-- Close Button -->
+    <button onclick="closeDemoVideo()"
+            class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full text-xl font-bold z-10">
+      ×
+    </button>
+
+    <!-- Video -->
+    <div class="aspect-video w-full">
+
+      <iframe id="demoVideo"
+              class="w-full h-full"
+              src=""
+              title="xAPI Demo Video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+      </iframe>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ===================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ===================================================== -->
+<script>
+
+function openDemoVideo(){
+
+  document.getElementById("videoModal").classList.remove("hidden");
+  document.getElementById("videoModal").classList.add("flex");
+
+  // Replace with your actual YouTube embed link
+  document.getElementById("demoVideo").src =
+  "https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1";
+
+}
+
+function closeDemoVideo(){
+
+  document.getElementById("videoModal").classList.add("hidden");
+  document.getElementById("videoModal").classList.remove("flex");
+
+  // Stop video playback when closed
+  document.getElementById("demoVideo").src = "";
+
+}
+
+</script>
 
 </body>
 </html>
