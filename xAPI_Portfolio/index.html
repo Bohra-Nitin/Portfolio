@@ -89,7 +89,7 @@ body{
     <!-- ===================================================== -->
     <div class="mt-10 flex justify-center">
 
-      <button onclick="openDemoGif()"
+      <button onclick="openDemoVideo()"
               class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition duration-300 flex items-center space-x-3">
 
           <span>▶</span>
@@ -496,27 +496,32 @@ body{
 
 
 <!-- ===================================================== -->
-<!-- DEMO GIF MODAL -->
+<!-- DEMO VIDEO MODAL -->
 <!-- ===================================================== -->
-<div id="gifModal"
+<div id="videoModal"
      class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4">
 
   <div class="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-5xl w-full relative">
 
     <!-- Close Button -->
-    <button onclick="closeDemoGif()"
+    <button onclick="closeDemoVideo()"
             class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full text-xl font-bold z-10">
       ×
     </button>
 
-    <!-- GIF -->
-    <div class="w-full bg-black flex items-center justify-center">
+    <!-- MP4 Video -->
+    <div class="w-full bg-black">
 
-      <!-- Replace demo.gif with your actual GIF filename -->
-      <img id="demoGif"
-           src="xapi_portfolio.gif"
-           alt="xAPI Demo"
-           class="w-full h-auto object-contain">
+      <!-- Replace demo.mp4 with your actual video filename -->
+      <video id="demoVideo"
+             class="w-full h-auto"
+             controls>
+
+        <source src="aws.mp4" type="video/mp4">
+
+        Your browser does not support the video tag.
+
+      </video>
 
     </div>
 
@@ -536,17 +541,24 @@ body{
 <!-- ===================================================== -->
 <script>
 
-function openDemoGif(){
+function openDemoVideo(){
 
-  document.getElementById("gifModal").classList.remove("hidden");
-  document.getElementById("gifModal").classList.add("flex");
+  document.getElementById("videoModal").classList.remove("hidden");
+  document.getElementById("videoModal").classList.add("flex");
+
+  document.getElementById("demoVideo").play();
 
 }
 
-function closeDemoGif(){
+function closeDemoVideo(){
 
-  document.getElementById("gifModal").classList.add("hidden");
-  document.getElementById("gifModal").classList.remove("flex");
+  document.getElementById("videoModal").classList.add("hidden");
+  document.getElementById("videoModal").classList.remove("flex");
+
+  const video = document.getElementById("demoVideo");
+
+  video.pause();
+  video.currentTime = 0;
 
 }
 
