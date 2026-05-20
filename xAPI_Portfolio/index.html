@@ -82,10 +82,14 @@ body{
 
     </p>
 
-    <!-- Launch Demo Button -->
+
+
+    <!-- ===================================================== -->
+    <!-- LAUNCH DEMO BUTTON -->
+    <!-- ===================================================== -->
     <div class="mt-10 flex justify-center">
 
-      <button onclick="openDemoVideo()"
+      <button onclick="openDemoGif()"
               class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition duration-300 flex items-center space-x-3">
 
           <span>▶</span>
@@ -492,30 +496,27 @@ body{
 
 
 <!-- ===================================================== -->
-<!-- DEMO VIDEO MODAL -->
+<!-- DEMO GIF MODAL -->
 <!-- ===================================================== -->
-<div id="videoModal"
+<div id="gifModal"
      class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4">
 
   <div class="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-5xl w-full relative">
 
     <!-- Close Button -->
-    <button onclick="closeDemoVideo()"
+    <button onclick="closeDemoGif()"
             class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-10 h-10 rounded-full text-xl font-bold z-10">
       ×
     </button>
 
-    <!-- Video -->
-    <div class="aspect-video w-full">
+    <!-- GIF -->
+    <div class="w-full bg-black flex items-center justify-center">
 
-      <iframe id="demoVideo"
-              class="w-full h-full"
-              src="xapi_portfolio.gif"
-              title="xAPI Demo Video"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-      </iframe>
+      <!-- Replace demo.gif with your actual GIF filename -->
+      <img id="demoGif"
+           src="images/demo.gif"
+           alt="xAPI Demo"
+           class="w-full h-auto object-contain">
 
     </div>
 
@@ -535,24 +536,17 @@ body{
 <!-- ===================================================== -->
 <script>
 
-function openDemoVideo(){
+function openDemoGif(){
 
-  document.getElementById("videoModal").classList.remove("hidden");
-  document.getElementById("videoModal").classList.add("flex");
-
-  // Replace with your actual YouTube embed link
-  document.getElementById("demoVideo").src =
-  "https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1";
+  document.getElementById("gifModal").classList.remove("hidden");
+  document.getElementById("gifModal").classList.add("flex");
 
 }
 
-function closeDemoVideo(){
+function closeDemoGif(){
 
-  document.getElementById("videoModal").classList.add("hidden");
-  document.getElementById("videoModal").classList.remove("flex");
-
-  // Stop video playback when closed
-  document.getElementById("demoVideo").src = "";
+  document.getElementById("gifModal").classList.add("hidden");
+  document.getElementById("gifModal").classList.remove("flex");
 
 }
 
