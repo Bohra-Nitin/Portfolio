@@ -1,580 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Predictive Workforce Learning Analytics</title>
-
+<title>Customer Training Completion Prediction Using Machine Learning</title>
 <script src="https://cdn.tailwindcss.com"></script>
-
 <style>
-
 body{
-background-image: radial-gradient(circle,#dbeafe 1px,transparent 1px);
-background-size:25px 25px;
+  background-image: radial-gradient(circle,#dbeafe 1px,transparent 1px);
+  background-size:25px 25px;
 }
-
-html{
-scroll-behavior:smooth;
-}
-
+html{ scroll-behavior:smooth; }
 </style>
-
 </head>
 
 <body class="font-sans bg-white text-gray-800">
 
 <!-- HEADER -->
-
 <header class="bg-white shadow sticky top-0 z-50">
-
-<div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-
-<h1 class="font-bold text-xl text-blue-700">
-
-Predictive Workforce Learning Analytics
-
-</h1>
-
-<div class="space-x-5 text-blue-600">
-
-<a href="#overview">Overview</a>
-<a href="#results">Results</a>
-<a href="#visuals">Visuals</a>
-<a href="#impact">Impact</a>
-
-</div>
-
-</div>
-
+  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <h1 class="font-bold text-xl text-blue-700">
+      Customer Training Completion Prediction
+    </h1>
+    <div class="space-x-5 text-blue-600">
+      <a href="#overview">Overview</a>
+      <a href="#results">Results</a>
+      <a href="#visuals">Visuals</a>
+      <a href="#impact">Impact</a>
+    </div>
+  </div>
 </header>
 
-
 <!-- HERO -->
-
 <section class="py-24 bg-gradient-to-r from-blue-50 to-cyan-50">
-
-<div class="max-w-6xl mx-auto text-center px-4">
-
-<h1 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600">
-
-Predictive Workforce Learning Analytics Using Orange Data Mining
-
+  <div class="max-w-6xl mx-auto text-center px-4">
+   <h1 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600">
+  Customer Training Completion Prediction Using Machine Learning
 </h1>
-
 <p class="mt-8 text-lg max-w-4xl mx-auto leading-relaxed">
-
-Machine learning-based workforce learning analytics system developed using Orange Data Mining to analyze employee engagement, learning effectiveness, certification outcomes, and productivity improvement trends using corporate training data.
-
+  Machine learning-based analytics system developed to predict SaaS customer training completion, identify dropout risks, and recommend targeted interventions for improved product adoption and retention.
 </p>
 
-<button
-onclick="openWorkflowModal()"
-class="mt-8 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700">
-
-View Workflow Architecture
-
-</button>
-
-</div>
-
+    <button onclick="openWorkflowModal()" class="mt-8 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700">
+      View Workflow Architecture
+    </button>
+  </div>
 </section>
-
 
 <!-- OVERVIEW -->
-
 <section id="overview" class="max-w-6xl mx-auto py-20 px-4">
-
-<h2 class="text-3xl font-bold text-blue-700 mb-8">
-
-Project Overview
-
-</h2>
-
-<div class="grid md:grid-cols-2 gap-10">
-
-<div class="bg-white shadow-xl rounded-xl p-6">
-
-<h3 class="font-bold text-xl text-blue-600 mb-4">
-
-Business Problem
-
-</h3>
-
-<ul class="list-disc pl-6 space-y-3">
-
-<li>Organizations struggle to measure training effectiveness.</li>
-
-<li>Employee engagement patterns remain hidden.</li>
-
-<li>LMS learning data is underutilized.</li>
-
-<li>Training impact on productivity is difficult to predict.</li>
-
-</ul>
-
-</div>
-
-
-<div class="bg-white shadow-xl rounded-xl p-6">
-
-<h3 class="font-bold text-xl text-blue-600 mb-4">
-
-Machine Learning Models Used
-
-</h3>
-
-<table class="w-full">
-
-<tr class="font-bold border-b">
-
-<td>Model</td>
-<td>Purpose</td>
-
-</tr>
-
-<tr class="border-b">
-<td>Logistic Regression</td>
-<td>Certification Prediction</td>
-</tr>
-
-<tr class="border-b">
-<td>Random Forest</td>
-<td>Productivity Prediction</td>
-</tr>
-
-<tr class="border-b">
-<td>Decision Tree</td>
-<td>Pattern Discovery</td>
-</tr>
-
-<tr>
-<td>K-Means</td>
-<td>Employee Segmentation</td>
-</tr>
-
-</table>
-
-</div>
-
-</div>
-
+  <h2 class="text-3xl font-bold text-blue-700 mb-8">Project Overview</h2>
+  <div class="grid md:grid-cols-2 gap-10">
+    <div class="bg-white shadow-xl rounded-xl p-6">
+      <h3 class="font-bold text-xl text-blue-600 mb-4">Business Problem</h3>
+      <ul class="list-disc pl-6 space-y-3">
+        <li>SaaS customers often drop out of onboarding training.</li>
+        <li>Low training completion leads to poor adoption and churn.</li>
+        <li>Customer success teams lack predictive signals.</li>
+        <li>Need for early warning system to prevent dropouts.</li>
+      </ul>
+    </div>
+    <div class="bg-white shadow-xl rounded-xl p-6">
+      <h3 class="font-bold text-xl text-blue-600 mb-4">Machine Learning Models Used</h3>
+      <table class="w-full">
+        <tr class="font-bold border-b"><td>Model</td><td>Purpose</td></tr>
+        <tr class="border-b"><td>Logistic Regression</td><td>Baseline probability of completion</td></tr>
+        <tr class="border-b"><td>Random Forest</td><td>Mixed feature prediction</td></tr>
+        <tr><td>Gradient Boosted Trees</td><td>High accuracy dropout risk prediction</td></tr>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- VISUALS -->
-
-<section
-id="visuals"
-class="bg-gray-50 py-20">
-
-<div class="max-w-6xl mx-auto px-4">
-
-<h2 class="text-3xl font-bold text-blue-700 mb-10">
-
-Learning Analytics Visualizations
-
-</h2>
-
-
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-<img src="workflow.png">
-
-<div class="p-5">
-
-<h4 class="font-bold">
-
-Orange Workflow
-
-</h4>
-
-</div>
-
-</div>
-
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-<img src="dataset.png">
-
-<div class="p-5">
-
-<h4 class="font-bold">
-
-Dataset Preview
-
-</h4>
-
-</div>
-
-</div>
-
-
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-<img src="heatmap.png">
-
-<div class="p-5">
-
-<h4 class="font-bold">
-
-Heat Map Analysis
-
-</h4>
-
-</div>
-
-</div>
-
-
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-<img src="scatterplot.png">
-
-<div class="p-5">
-
-<h4 class="font-bold">
-
-Engagement vs Productivity
-
-</h4>
-
-</div>
-
-</div>
-
-
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-<img src="clustering.png">
-
-<div class="p-5">
-
-<h4 class="font-bold">
-
-Employee Clustering
-
-</h4>
-
-</div>
-
-</div>
-
-
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-<img src="testscore.png">
-
-<div class="p-5">
-
-<h4 class="font-bold">
-
-Model Evaluation
-
-</h4>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
+<section id="visuals" class="bg-gray-50 py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 mb-10">Analytics Visualizations</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <img src="workflow.png"><div class="p-5"><h4 class="font-bold">Orange Workflow</h4></div>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <img src="dataset.png"><div class="p-5"><h4 class="font-bold">Customer Dataset Preview</h4></div>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <img src="predictions.png"><div class="p-5"><h4 class="font-bold">Predictions Table</h4></div>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <img src="feature_contributions.png"><div class="p-5"><h4 class="font-bold">Feature Contributions</h4></div>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <img src="scatterplot.png"><div class="p-5"><h4 class="font-bold">Engagement vs Completion</h4></div>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-hidden">
+        <img src="testscore.png"><div class="p-5"><h4 class="font-bold">Model Evaluation</h4></div>
+      </div>
+    </div>
+  </div>
 </section>
-
 
 <!-- RESULTS -->
-
-<section id="results"
-class="py-20">
-
-<div class="max-w-6xl mx-auto px-4">
-
-<h2 class="text-3xl font-bold text-blue-700 mb-10">
-
-Prediction Results
-
-</h2>
-
-
-<div class="bg-white shadow-xl rounded-xl p-8 overflow-x-auto">
-
-<table class="w-full">
-
-<tr class="bg-blue-100">
-
-<th class="p-4">Employee</th>
-<th>Actual Productivity</th>
-<th>Predicted Productivity</th>
-<th>Category</th>
-
-</tr>
-
-<tr class="border-b">
-
-<td class="p-4">E1001</td>
-<td>16%</td>
-<td>17.2%</td>
-<td>High Impact</td>
-
-</tr>
-
-<tr class="border-b">
-
-<td class="p-4">E1002</td>
-<td>9%</td>
-<td>8.5%</td>
-<td>Moderate</td>
-
-</tr>
-
-<tr>
-
-<td class="p-4">E1003</td>
-<td>-1%</td>
-<td>0.3%</td>
-<td>At Risk</td>
-
-</tr>
-
-</table>
-
-</div>
-
-
-<h2 class="text-3xl font-bold text-blue-700 mt-20 mb-10">
-
-Key Insights Generated
-
-</h2>
-
-
-<div class="bg-white shadow-xl rounded-xl p-8 overflow-x-auto">
-
-<table class="w-full">
-
-<tr class="bg-blue-100">
-
-<th class="p-4">
-
-Learning Analytics Insight
-
-</th>
-
-<th>
-
-Observation
-
-</th>
-
-</tr>
-
-
-<tr class="border-b">
-
-<td class="p-4">
-
-LMS Activity
-
-</td>
-
-<td>
-
-Employees with frequent LMS access showed higher productivity improvement.
-
-</td>
-
-</tr>
-
-
-<tr class="border-b">
-
-<td class="p-4">
-
-Learning Consistency
-
-</td>
-
-<td>
-
-Consistent learners demonstrated stronger post-training outcomes.
-
-</td>
-
-</tr>
-
-
-<tr>
-
-<td class="p-4">
-
-Peer Interaction
-
-</td>
-
-<td>
-
-Employees with stronger collaboration behavior performed better.
-
-</td>
-
-</tr>
-
-</table>
-
-</div>
-
-</div>
-
+<section id="results" class="py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 mb-10">Prediction Results</h2>
+    <div class="bg-white shadow-xl rounded-xl p-8 overflow-x-auto">
+      <table class="w-full">
+        <tr class="bg-blue-100">
+          <th class="p-4">Customer</th><th>Actual Completion</th><th>Predicted Completion</th><th>Risk Category</th>
+        </tr>
+        <tr class="border-b"><td class="p-4">CUST051</td><td>No</td><td>No (0.81)</td><td>High Risk</td></tr>
+        <tr class="border-b"><td class="p-4">CUST072</td><td>Yes</td><td>Yes (0.88)</td><td>Safe</td></tr>
+        <tr><td class="p-4">CUST087</td><td>Yes</td><td>No (0.55)</td><td>Borderline</td></tr>
+      </table>
+    </div>
+    <h2 class="text-3xl font-bold text-blue-700 mt-20 mb-10">Key Insights Generated</h2>
+    <div class="bg-white shadow-xl rounded-xl p-8 overflow-x-auto">
+      <table class="w-full">
+        <tr class="bg-blue-100"><th class="p-4">Insight</th><th>Observation</th></tr>
+        <tr class="border-b"><td class="p-4">LMS Logins</td><td>Customers with <5 logins had 70% dropout risk.</td></tr>
+        <tr class="border-b"><td class="p-4">Support Tickets</td><td>Customers raising >2 tickets were 3× more likely to drop out.</td></tr>
+        <tr><td class="p-4">Success Calls</td><td>At least 1 success call increased completion by 40%.</td></tr>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- IMPACT -->
+<section id="impact" class="bg-blue-50 py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-blue-700 mb-8">Business Impact</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="font-bold text-blue-600">Customer Retention</h3>
+        <p class="mt-3">Early dropout prediction reduced churn risk.</p>
+      </div>
+            <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="font-bold text-blue-600">Customer Retention</h3>
+        <p class="mt-3">
+          Early dropout prediction reduced churn risk and improved renewal rates.
+        </p>
+      </div>
 
-<section
-id="impact"
-class="bg-blue-50 py-20">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="font-bold text-blue-600">Predictive Learning Analytics</h3>
+        <p class="mt-3">
+          Machine learning models identified high-risk customers and explained feature-level drivers of dropout.
+        </p>
+      </div>
 
-<div class="max-w-6xl mx-auto px-4">
-
-<h2 class="text-3xl font-bold text-blue-700 mb-8">
-
-Business Impact
-
-</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-
-<div class="bg-white p-6 rounded-xl shadow">
-
-<h3 class="font-bold text-blue-600">
-
-Workforce Insights
-
-</h3>
-
-<p class="mt-3">
-
-Identified engagement patterns and workforce learning behavior trends.
-
-</p>
-
-</div>
-
-
-<div class="bg-white p-6 rounded-xl shadow">
-
-<h3 class="font-bold text-blue-600">
-
-Predictive Learning Analytics
-
-</h3>
-
-<p class="mt-3">
-
-Predicted productivity improvement using machine learning models.
-
-</p>
-
-</div>
-
-
-<div class="bg-white p-6 rounded-xl shadow">
-
-<h3 class="font-bold text-blue-600">
-
-Data Driven Decisions
-
-</h3>
-
-<p class="mt-3">
-
-Demonstrated evidence-based workforce learning recommendations.
-
-</p>
-
-</div>
-
-
-</div>
-
-</div>
-
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h3 class="font-bold text-blue-600">Data-Driven Interventions</h3>
+        <p class="mt-3">
+          Customer success teams used insights to trigger proactive calls, gamified nudges, and support interventions.
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-
 <!-- WORKFLOW POPUP -->
-
-
 <div id="workflowModal"
-
-class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center">
-
-<div class="bg-white p-8 rounded-xl max-w-5xl w-full relative">
-
-<button
-onclick="closeWorkflowModal()"
-
-class="absolute right-5 top-5 bg-red-500 text-white rounded-full w-10 h-10">
-
-X
-
-</button>
-
-<h2 class="text-3xl font-bold text-blue-700 mb-6">
-
-Orange Workflow Architecture
-
-</h2>
-
-<img src="workflow.png">
-
+  class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center">
+  <div class="bg-white p-8 rounded-xl max-w-5xl w-full relative">
+    <button onclick="closeWorkflowModal()"
+      class="absolute right-5 top-5 bg-red-500 text-white rounded-full w-10 h-10">
+      X
+    </button>
+    <h2 class="text-3xl font-bold text-blue-700 mb-6">
+      Orange Workflow Architecture
+    </h2>
+    <img src="workflow.png">
+  </div>
 </div>
-
-</div>
-
 
 <footer class="py-10 text-center text-gray-600">
-
-© 2026 Dr. Bohra Nitin Kumar
-
+  © 2026 Dr. Bohra Nitin Kumar
 </footer>
 
-
 <script>
-
 function openWorkflowModal(){
-
-document.getElementById(
-"workflowModal"
-).classList.remove("hidden");
-
+  document.getElementById("workflowModal").classList.remove("hidden");
 }
-
 function closeWorkflowModal(){
-
-document.getElementById(
-"workflowModal"
-).classList.add("hidden");
-
+  document.getElementById("workflowModal").classList.add("hidden");
 }
-
 </script>
-
 
 </body>
 </html>
+
