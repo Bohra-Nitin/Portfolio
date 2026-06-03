@@ -161,6 +161,7 @@ html{ scroll-behavior:smooth; }
 </section>
 
 <!-- WORKFLOW POPUP -->
+<!-- WORKFLOW POPUP -->
 <div id="workflowModal"
   class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center">
   <div class="bg-white p-8 rounded-xl max-w-5xl w-full relative">
@@ -169,11 +170,23 @@ html{ scroll-behavior:smooth; }
       X
     </button>
     <h2 class="text-3xl font-bold text-blue-700 mb-6">
-      Orange Workflow Architecture
+      Workflow Architecture
     </h2>
-    <img src="workflow.png">
+    <img src="workflow.png" alt="Workflow Architecture Diagram">
+
+    <!-- Added bullet points -->
+    <div class="mt-6">
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Data Import:</strong> Customer training dataset loaded for analysis.</li>
+        <li><strong>Preprocessing:</strong> Normalization and one‑hot encoding applied.</li>
+        <li><strong>Model Training:</strong> Logistic Regression, Random Forest, Gradient Boosted Trees.</li>
+        <li><strong>Evaluation:</strong> Cross‑validation with accuracy, precision, recall, and AUC metrics.</li>
+        <li><strong>Predictions:</strong> Risk categories assigned to each customer.</li>
+      </ul>
+    </div>
   </div>
 </div>
+
 
 <footer class="py-10 text-center text-gray-600">
   © 2026 Dr. Bohra Nitin Kumar
