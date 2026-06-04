@@ -82,9 +82,9 @@ html{ scroll-behavior:smooth; }
 
       <!-- Dataset Preview -->
       <div class="bg-white rounded-xl shadow overflow-hidden">
-        <div class="p-4">
+        <div class="flex items-center justify-center bg-gray-100 h-64 p-4">
           <img src="dataset.gif" alt="Customer Dataset Preview"
-               class="w-full h-64 object-cover rounded-lg">
+               class="max-h-full max-w-full object-contain">
         </div>
         <div class="p-5">
           <h4 class="font-bold text-blue-600">Customer Dataset Preview</h4>
@@ -96,9 +96,9 @@ html{ scroll-behavior:smooth; }
 
       <!-- Predictions Table -->
       <div class="bg-white rounded-xl shadow overflow-hidden">
-        <div class="p-4">
+        <div class="flex items-center justify-center bg-gray-100 h-64 p-4">
           <img src="predictions.png" alt="Predictions Table"
-               class="w-full h-64 object-cover rounded-lg">
+               class="max-h-full max-w-full object-contain">
         </div>
         <div class="p-5">
           <h4 class="font-bold text-blue-600">Predictions Table</h4>
@@ -110,9 +110,9 @@ html{ scroll-behavior:smooth; }
 
       <!-- Model Evaluation -->
       <div class="bg-white rounded-xl shadow overflow-hidden">
-        <div class="p-4">
+        <div class="flex items-center justify-center bg-gray-100 h-64 p-4">
           <img src="testscore.png" alt="Model Evaluation Metrics"
-               class="w-full h-64 object-cover rounded-lg">
+               class="max-h-full max-w-full object-contain">
         </div>
         <div class="p-5">
           <h4 class="font-bold text-blue-600">Model Evaluation</h4>
@@ -125,6 +125,7 @@ html{ scroll-behavior:smooth; }
     </div>
   </div>
 </section>
+
 <section>
     <h2 class="text-3xl font-bold text-blue-700 mt-20 mb-10">Key Insights Generated</h2>
     <div class="bg-white shadow-xl rounded-xl p-8 overflow-x-auto">
