@@ -501,41 +501,106 @@ body{
 
         <!-- PROJECT 4 -->
 
-        <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition">
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
+     onclick="openVideo()">
+  
+  <!-- Thumbnail -->
+  <!-- Thumbnail -->
+<div class="w-full h-40 bg-white flex items-center justify-center project-img overflow-hidden relative group">
+  
+  <!-- GIF -->
+  <img 
+    src="Exceltoclcikup/cover.gif"
+    alt="ClickUp Excel Import Tutorial"
+    class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+  />
 
-          <a href="#" class="block group">
+  <!-- Play Icon (Fixed) -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80 group-hover:opacity-100 transition">
+    <div class="bg-black/50 rounded-full p-3 flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="h-6 w-6 text-white" 
+           fill="currentColor" 
+           viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+  </div>
 
-            <div class="project-img">
-              <img src="Exceltoclcikup/cover.gif"
-                   alt="Excel to Clickup"
-                   class="group-hover:scale-105 transition duration-300">
-            </div>
+</div>
+  <!-- Content -->
+  <div class="p-6 space-y-4">
+    <h5 class="text-base font-semibold hover:text-indigo-700 transition">
+      Excel to ClickUp – Project Plan Import Tutorial
+    </h5>
 
-            <div class="p-6">
+    <div>
+      <h4 class="text-sm font-semibold">Audience:</h4>
+      <p class="text-sm text-gray-600">
+        Instructional Designers, Project Managers, eLearning Developers
+      </p>
+    </div>
 
-              <h5 class="text-base font-semibold mb-4 text-left group-hover:text-indigo-700 transition">
-                Excel to ClickUp – Project Plan Import Tutorial
-              </h5>
+    <div>
+      <h4 class="text-sm font-semibold">Tools:</h4>
+      <p class="text-sm text-gray-600">
+        Camtasia, Audiate, ClickUp, Excel
+      </p>
+    </div>
+  </div>
+</div>
 
-              <div class="mb-4">
-                <h4 class="text-sm font-semibold mb-1 text-left">Audience:</h4>
-                <p class="text-sm text-gray-600">
-                  Instructional Designers, Project Managers
-                </p>
-              </div>
 
-              <div>
-                <h4 class="text-sm font-semibold mb-1 text-left">Tools:</h4>
-                <p class="text-sm text-gray-600">
-                  Camtasia, ClickUp, Excel, HTML5
-                </p>
-              </div>
+<!-- Video Modal -->
+<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
 
-            </div>
+  <div class="bg-white rounded-lg overflow-hidden w-11/12 md:w-3/4 lg:w-1/2 relative">
 
-          </a>
+    <!-- Video -->
+    <video 
+      id="projectVideo"
+      class="w-full"
+      controls
+      controlsList="nodownload"
+      oncontextmenu="return false;"
+    >
+      <source src="Exceltoclcikup/final22.mp4" type="video/mp4">
+    </video>
 
-        </div>
+    <!-- Close Button -->
+    <button onclick="closeVideo()" 
+            class="absolute top-2 right-2 bg-black bg-opacity-60 text-white px-3 py-1 rounded">
+      ✕
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- Script -->
+<script>
+function openVideo() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("projectVideo");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  video.currentTime = 0;
+  video.play();
+}
+
+function closeVideo() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("projectVideo");
+
+  video.pause();              // ✅ stops audio
+  video.currentTime = 0;      // ✅ resets video
+
+  modal.classList.add("hidden");
+}
+</script>
 
         <!-- PROJECT 5 -->
 
