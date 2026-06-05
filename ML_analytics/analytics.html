@@ -23,13 +23,24 @@ html{ scroll-behavior:smooth; }
      <img src="favicon.ico" alt="Logo" class="w-6 h-6" />
       <span>Customer Training Analytics (ML)</span>
     </h1>
-    <div class="space-x-5 text-blue-600">
-      <a href="#overview">Overview</a>
-      <a href="#results">Results</a>
-      <a href="#visuals">Visuals</a>
-      <a href="#impact">Impact</a>
-    </div>
-  </div>
+     <nav>
+
+        <ul class="flex flex-wrap gap-4 text-blue-600 text-sm md:text-base">
+
+          <li><a href="#overview" class="hover:underline">Overview</a></li>
+
+          <li><a href="#Data & Outcomes" class="hover:underline">Data & Outcomes</a></li>
+
+          <li><a href="#insights" class="hover:underline">Insights</a></li>
+
+          <li><a href="#impact" class="hover:underline">Impact</a></li>
+
+        
+        </ul>
+
+      </nav>
+
+     </div>
 </header>
 
 <!-- HERO -->
@@ -76,7 +87,7 @@ html{ scroll-behavior:smooth; }
 <!-- VISUALS -->
 <!-- VISUALS -->
 <!-- VISUALS -->
-<section id="visuals" class="bg-gray-50 py-20">
+<section id="Data & Outcomes" class="bg-gray-50 py-20">
   <div class="max-w-6xl mx-auto px-4">
     <h2 class="text-3xl font-bold text-blue-700 mb-10">Training Data & Model Outcomes  </h2>
     <div class="grid md:grid-cols-3 gap-8">
@@ -127,7 +138,7 @@ html{ scroll-behavior:smooth; }
   </div>
 </section>
 
-<section class="max-w-6xl mx-auto px-4">
+<section id="insights" class="max-w-6xl mx-auto px-4">
   <h2 class="text-3xl font-bold text-blue-700 mt-20 mb-10">Key Insights Generated</h2>
   <div class="bg-white shadow-xl rounded-xl p-8 overflow-x-auto">
     <table class="w-full">
