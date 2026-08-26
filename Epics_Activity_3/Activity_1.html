@@ -1,0 +1,108 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Prototype to Learn</title><style>
+:root{--bg:#07111f;--panel:#101d31;--panel2:#172944;--text:#f6f8fb;--muted:#aeb9c9;--cyan:#40d6e8;--green:#74df93;--red:#f2747c;--orange:#ffc25b;--line:#2c4263}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#18375e 0,#07111f 58%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+.wrap{max-width:980px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.brand{font-weight:800}.brand b{color:var(--cyan)}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.progress{height:9px;background:#0c1829;border-radius:99px;overflow:hidden;margin:14px 0 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .25s}
+.screen{display:none}.screen.active{display:block}h1{font-size:52px;line-height:1.02}h2{font-size:31px}.sub{color:var(--muted);line-height:1.5;font-size:17px}.hero{text-align:center;padding:42px 12px}.tag{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:13px}
+.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:19px;margin:15px 0}.scenario strong{color:var(--orange)}
+.options{display:grid;gap:10px;margin:16px 0}.opt{padding:14px;border-radius:13px;text-align:left;background:#0c1829;border:1px solid var(--line);color:var(--text);font-size:16px;cursor:pointer}.opt:hover{border-color:var(--cyan)}.opt:disabled{cursor:default}.good{border-color:var(--green)!important;background:rgba(116,223,147,.12)!important}.bad{border-color:var(--red)!important;background:rgba(242,116,124,.10)!important}
+.feedback{display:none;margin-top:12px;background:#0d192b;border-left:5px solid var(--cyan);padding:14px;border-radius:11px;line-height:1.5}.feedback.show{display:block}.feedback.ok{border-left-color:var(--green)}.feedback.no{border-left-color:var(--red)}
+.btn{border:0;border-radius:13px;padding:13px 20px;font-weight:800;font-size:16px;cursor:pointer;background:var(--cyan);color:#041017}.btn.secondary{background:#243954;color:var(--text);border:1px solid var(--line)}.btn.next{display:none}.btn.next.show{display:inline-block}.row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:18px}.small{font-size:13px;color:var(--muted)}
+.dragbank{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0}.drag{padding:13px;background:#0c1829;border:1px solid var(--line);border-radius:13px;cursor:grab;touch-action:manipulation;user-select:none}.drag.selected{outline:2px solid var(--cyan);border-color:var(--cyan)}
+.dropgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.dropzone{min-height:135px;border:2px dashed #405574;border-radius:16px;padding:14px;background:rgba(12,24,41,.55);cursor:pointer}.dropzone .drag{margin:4px 0}
+.timeline{display:grid;grid-template-columns:150px repeat(6,1fr);gap:6px;margin:16px 0;align-items:center}.cell{min-height:42px;padding:8px;border:1px solid var(--line);background:#0c1829;border-radius:8px;text-align:center;font-size:12px}.taskname{text-align:left;font-weight:700}.activecell{background:rgba(64,214,232,.2);border-color:var(--cyan)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{padding:18px;text-align:center;background:#0c1829;border:1px solid var(--line);border-radius:14px}.step b{display:block;color:var(--orange);font-size:24px;margin-bottom:6px}
+@media(max-width:700px){h1{font-size:40px}.dropgrid,.steps{grid-template-columns:1fr}.timeline{grid-template-columns:100px repeat(6,1fr);font-size:10px}}
+</style></head><body><div class='wrap'><div class='top'><div class='brand'><b>EPICS</b> • Prototype to Learn</div><div class='pill'>⭐ Score: <span id='score'>0</span></div></div><div class='progress'><div class='bar' id='bar'></div></div><section class="screen active" id="s0"><div class="hero"><span class="tag">MODULE 3 • ~20 MINUTES</span><h1>Prototype to Learn</h1><p class="sub">Explore low-cost models, conceptual sketches and digital simulations as learning tools.</p><button class="btn" onclick="go(1)">START →</button></div></section><section class="screen" id="s1"><h2>Question 1</h2><p class="sub">What is a prototype in this module?</p><div class="options"><button class="opt" onclick="mc(1,this,false,'A prototype makes an idea tangible so the team can learn before committing to a final solution.','n1')">A. A final production product.</button><button class="opt" onclick="mc(1,this,true,'A prototype makes an idea tangible so the team can learn before committing to a final solution.','n1')">B. A representation used to learn about an idea.</button><button class="opt" onclick="mc(1,this,false,'A prototype makes an idea tangible so the team can learn before committing to a final solution.','n1')">C. A document describing the team.</button><button class="opt" onclick="mc(1,this,false,'A prototype makes an idea tangible so the team can learn before committing to a final solution.','n1')">D. A purchase list.</button></div><div id="f1" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div></section><section class="screen" id="s2"><h2>Question 2</h2><p class="sub">Why start with a low-cost model?</p><div class="options"><button class="opt" onclick="mc(2,this,true,'Low-cost models reduce the cost of learning when important assumptions are still uncertain.','n2')">A. It can answer early questions cheaply.</button><button class="opt" onclick="mc(2,this,false,'Low-cost models reduce the cost of learning when important assumptions are still uncertain.','n2')">B. It guarantees the final design.</button><button class="opt" onclick="mc(2,this,false,'Low-cost models reduce the cost of learning when important assumptions are still uncertain.','n2')">C. It avoids testing.</button><button class="opt" onclick="mc(2,this,false,'Low-cost models reduce the cost of learning when important assumptions are still uncertain.','n2')">D. It makes requirements unnecessary.</button></div><div id="f2" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div></section><section class="screen" id="s3"><h2>Question 3</h2><p class="sub">Which is a conceptual sketch?</p><div class="options"><button class="opt" onclick="mc(3,this,true,'A conceptual sketch communicates how a proposed design might work before detailed fabrication.','n3')">A. A drawing showing the proposed arrangement and key features.</button><button class="opt" onclick="mc(3,this,false,'A conceptual sketch communicates how a proposed design might work before detailed fabrication.','n3')">B. A final manufactured unit.</button><button class="opt" onclick="mc(3,this,false,'A conceptual sketch communicates how a proposed design might work before detailed fabrication.','n3')">C. A budget approval form.</button><button class="opt" onclick="mc(3,this,false,'A conceptual sketch communicates how a proposed design might work before detailed fabrication.','n3')">D. A meeting attendance sheet.</button></div><div id="f3" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div></section><section class="screen" id="s4"><h2>Question 4</h2><p class="sub">Which is a useful reason to use a digital simulation?</p><div class="options"><button class="opt" onclick="mc(4,this,true,'A simulation can be useful when it can answer a relevant design question before physical fabrication.','n4')">A. To explore behaviour before making a physical model when the question can be represented digitally.</button><button class="opt" onclick="mc(4,this,false,'A simulation can be useful when it can answer a relevant design question before physical fabrication.','n4')">B. To avoid all physical testing forever.</button><button class="opt" onclick="mc(4,this,false,'A simulation can be useful when it can answer a relevant design question before physical fabrication.','n4')">C. To impress the audience.</button><button class="opt" onclick="mc(4,this,false,'A simulation can be useful when it can answer a relevant design question before physical fabrication.','n4')">D. To remove the need for requirements.</button></div><div id="f4" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div></section><section class="screen" id="s5"><h2>Question 5</h2><p class="sub">What should determine prototype fidelity?</p><div class="options"><button class="opt" onclick="mc(5,this,false,'Choose fidelity based on what you need to learn, not on appearance.','n5')">A. How expensive the team wants the prototype to be.</button><button class="opt" onclick="mc(5,this,true,'Choose fidelity based on what you need to learn, not on appearance.','n5')">B. The uncertainty or question the team needs to learn about.</button><button class="opt" onclick="mc(5,this,false,'Choose fidelity based on what you need to learn, not on appearance.','n5')">C. How impressive the final presentation should look.</button><button class="opt" onclick="mc(5,this,false,'Choose fidelity based on what you need to learn, not on appearance.','n5')">D. How many components are available.</button></div><div id="f5" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div></section><section class="screen" id="s6"><h2>Question 6</h2><p class="sub">Which is the best first prototype for testing whether a layout is understandable?</p><div class="options"><button class="opt" onclick="mc(6,this,false,'A simple representation can test layout and interaction before the team invests in a full build.','n6')">A. A full production system.</button><button class="opt" onclick="mc(6,this,true,'A simple representation can test layout and interaction before the team invests in a full build.','n6')">B. A simple paper or cardboard layout.</button><button class="opt" onclick="mc(6,this,false,'A simple representation can test layout and interaction before the team invests in a full build.','n6')">C. A one-year field deployment.</button><button class="opt" onclick="mc(6,this,false,'A simple representation can test layout and interaction before the team invests in a full build.','n6')">D. A final marketing website.</button></div><div id="f6" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n6" class="btn next" onclick="go(7)">Next →</button></div></section><section class="screen" id="s7">
+<h2>Match the Prototype to the Question</h2>
+<p class="sub">The four prototype approaches are mixed. Drag each one to the question it can answer most efficiently. You can also click a card and then click its destination.</p>
+
+<div class="dragbank">
+  <div class="drag" draggable="true" data-v="simulation">Digital simulation</div>
+  <div class="drag" draggable="true" data-v="functional">Simple functional prototype</div>
+  <div class="drag" draggable="true" data-v="cardboard">Cardboard mock-up</div>
+  <div class="drag" draggable="true" data-v="sketch">Conceptual sketch</div>
+</div>
+
+<div class="dropgrid" style="grid-template-columns:repeat(2,1fr)">
+
+  <div class="dropzone" data-drop data-c="sketch" style="min-height:170px">
+    <h3>1. What might the design look like?</h3>
+    <small>Use this to communicate arrangement, form and basic features.</small>
+  </div>
+
+  <div class="dropzone" data-drop data-c="cardboard" style="min-height:170px">
+    <h3>2. Is the physical layout or interaction understandable?</h3>
+    <small>Use this to explore size, placement and basic interaction.</small>
+  </div>
+
+  <div class="dropzone" data-drop data-c="simulation" style="min-height:170px">
+    <h3>3. How might the design behave under modelled conditions?</h3>
+    <small>Use this when the question can be explored digitally before physical fabrication.</small>
+  </div>
+
+  <div class="dropzone" data-drop data-c="functional" style="min-height:170px">
+    <h3>4. Does the proposed mechanism actually perform the selected function?</h3>
+    <small>Use a simple working prototype when function is the uncertainty to test.</small>
+  </div>
+
+</div>
+
+<button class="btn" onclick="checkProto()">CHECK</button>
+<div id="sf" class="feedback"></div>
+
+<div class="row">
+  <span class="small">20 points</span>
+  <button id="nextInter" class="btn next" onclick="go(8)">Finish →</button>
+</div>
+</section>
+
+<section class="screen" id="s8"><div class="hero"><span class="tag">ACTIVITY COMPLETE</span><h2>Your Result</h2><div style="font-size:14px;color:var(--muted);letter-spacing:.8px">TOTAL SCORE</div><div id="finalScore" style="font-size:64px;font-weight:900;color:var(--cyan)">0 / 50</div><div id="finalBadge" style="font-size:18px;font-weight:800;margin:8px 0 18px"></div><div class="scenario" style="text-align:left;max-width:760px;margin:22px auto"><strong>KEY MESSAGE</strong><br><br>Prototype for learning, not for appearance. Choose the simplest representation that can answer the important question you have at that stage.</div><p id="finalMsg" class="sub"></p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap"><button class="btn" onclick="location.reload()">▶ Take Quiz Again</button><button class="btn secondary" onclick="location.reload()">↻ Play Again</button></div></div></section></div><script>
+let score=0,done=0,total=7,selectedDrag=null;
+function update(){document.getElementById('score').textContent=score;document.getElementById('bar').style.width=Math.min(100,done/total*100)+'%'}
+function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');if(n===8)finalResult();window.scrollTo({top:0,behavior:'smooth'});update()}
+function mc(id,btn,ok,msg,next){let box=btn.parentElement;if(box.dataset.done)return;box.dataset.done=1;box.querySelectorAll('.opt').forEach(b=>b.disabled=true);btn.classList.add(ok?'good':'bad');let f=document.getElementById('f'+id);f.className='feedback show '+(ok?'ok':'no');f.innerHTML=msg;if(ok)score+=5;done++;document.getElementById(next).classList.add('show');update()}
+function selectDrop(){
+ const cards=[...document.querySelectorAll('.drag')];
+ cards.forEach((d,i)=>{
+  d.dataset.cardId='card-'+i;
+  d.addEventListener('dragstart',e=>{selectedDrag=d;d.classList.add('selected');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',d.dataset.cardId)});
+  d.addEventListener('dragend',()=>{d.classList.remove('selected');selectedDrag=null});
+  d.addEventListener('click',e=>{e.stopPropagation();cards.forEach(c=>c.classList.remove('selected'));selectedDrag=(selectedDrag===d?null:d);if(selectedDrag)selectedDrag.classList.add('selected')});
+ });
+ document.querySelectorAll('[data-drop]').forEach(z=>{
+  z.addEventListener('dragover',e=>{e.preventDefault();z.style.borderColor='var(--cyan)'});
+  z.addEventListener('dragleave',()=>z.style.borderColor='');
+  z.addEventListener('drop',e=>{e.preventDefault();z.style.borderColor='';let id=e.dataTransfer.getData('text/plain');let d=document.querySelector('.drag[data-card-id="'+id+'"]');if(d){z.appendChild(d);d.classList.remove('selected');selectedDrag=null}});
+  z.addEventListener('click',()=>{if(selectedDrag){z.appendChild(selectedDrag);selectedDrag.classList.remove('selected');selectedDrag=null}});
+ });
+}
+function finalResult(){const max=50,pct=Math.round(score/max*100);let badge='Keep Practising',msg='Review the feedback and try the activity again.';if(pct>=90){badge='Excellent Work';msg='You are making strong planning and development decisions.'}else if(pct>=75){badge='Strong Understanding';msg='You have a solid grasp of the module concepts.'}else if(pct>=60){badge='Good Start';msg='You have the basics; another attempt will strengthen your reasoning.'}document.getElementById('finalScore').textContent=score+' / '+max;document.getElementById('finalBadge').textContent=badge+' • '+pct+'%';document.getElementById('finalMsg').textContent=msg;document.getElementById('bar').style.width='100%'}
+selectDrop();function checkProto(){
+  const f=document.getElementById('sf');
+  const all=document.querySelectorAll('.dropzone .drag');
+  if(all.length<4){
+    f.className='feedback show no';
+    f.innerHTML='Place all four prototype approaches before checking.';
+    return;
+  }
+  let ok=true;
+  document.querySelectorAll('.dropzone[data-c]').forEach(z=>{
+    z.querySelectorAll('.drag').forEach(d=>{
+      const good=d.dataset.v===z.dataset.c;
+      d.style.borderColor=good?'var(--green)':'var(--red)';
+      if(!good) ok=false;
+    });
+  });
+  if(ok){
+    score+=20; done++;
+    f.className='feedback show ok';
+    f.innerHTML='Prototype fidelity should match the question. Use the simplest representation that can provide useful learning.';
+    document.getElementById('nextInter').classList.add('show');
+    update();
+  }else{
+    f.className='feedback show no';
+    f.innerHTML='Move the misplaced card and check again. Ask what question each prototype type can answer most efficiently.';
+  }
+}update();
+</script></body></html>
