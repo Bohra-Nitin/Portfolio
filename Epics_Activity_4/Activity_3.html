@@ -1,0 +1,156 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Diagnose &amp; Refine</title><style>
+:root{--bg:#07111f;--panel:#101d31;--panel2:#172944;--text:#f6f8fb;--muted:#aeb9c9;--cyan:#40d6e8;--green:#74df93;--red:#f2747c;--orange:#ffc25b;--line:#2c4263}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#18375e 0,#07111f 58%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+.wrap{max-width:980px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.brand{font-weight:800}.brand b{color:var(--cyan)}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.progress{height:9px;background:#0c1829;border-radius:99px;overflow:hidden;margin:14px 0 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .25s}
+.screen{display:none}.screen.active{display:block}h1{font-size:52px;line-height:1.02}h2{font-size:31px}.sub{color:var(--muted);line-height:1.5;font-size:17px}.hero{text-align:center;padding:42px 12px}.tag{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:13px}
+.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:19px;margin:15px 0}.scenario strong{color:var(--orange)}
+.options{display:grid;gap:10px;margin:16px 0}.opt{padding:14px;border-radius:13px;text-align:left;background:#0c1829;border:1px solid var(--line);color:var(--text);font-size:16px;cursor:pointer}.opt:hover{border-color:var(--cyan)}.opt:disabled{cursor:default}.good{border-color:var(--green)!important;background:rgba(116,223,147,.12)!important}.bad{border-color:var(--red)!important;background:rgba(242,116,124,.10)!important}
+.feedback{display:none;margin-top:12px;background:#0d192b;border-left:5px solid var(--cyan);padding:14px;border-radius:11px;line-height:1.5}.feedback.show{display:block}.feedback.ok{border-left-color:var(--green)}.feedback.no{border-left-color:var(--red)}
+.btn{border:0;border-radius:13px;padding:13px 20px;font-weight:800;font-size:16px;cursor:pointer;background:var(--cyan);color:#041017}.btn.secondary{background:#243954;color:var(--text);border:1px solid var(--line)}.btn.next{display:none}.btn.next.show{display:inline-block}.row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:18px}.small{font-size:13px;color:var(--muted)}
+.dragbank{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0}.drag{padding:13px;background:#0c1829;border:1px solid var(--line);border-radius:13px;cursor:grab;touch-action:manipulation;user-select:none}.drag.selected{outline:2px solid var(--cyan);border-color:var(--cyan)}
+.dropgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.dropzone{min-height:135px;border:2px dashed #405574;border-radius:16px;padding:14px;background:rgba(12,24,41,.55);cursor:pointer}.dropzone .drag{margin:4px 0}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare .cardx{background:#0c1829;border:1px solid var(--line);padding:16px;border-radius:14px}
+@media(max-width:700px){h1{font-size:40px}.dropgrid,.compare{grid-template-columns:1fr}}
+</style></head><body><div class='wrap'><div class='top'><div class='brand'><b>EPICS</b> • Diagnose &amp; Refine</div><div class='pill'>⭐ Score: <span id='score'>0</span></div></div><div class='progress'><div class='bar' id='bar'></div></div><section class="screen active" id="s0"><div class="hero"><span class="tag">MODULE 4 • ~20 MINUTES</span><h1>Diagnose & Refine</h1><p class="sub">Turn failures and implementation challenges into evidence-based design changes.</p><button class="btn" onclick="go(1)">START →</button></div></section><section class="screen" id="s1"><h2>Question 1</h2><p class="sub">What is the difference between a symptom and a possible cause?</p><div class="options"><button class="opt" onclick="mc(1,this,true,'For example, low output is a symptom; insufficient input or connection loss may be possible causes.','n1')">A. A symptom is what is observed; a cause is an explanation that needs evidence.</button><button class="opt" onclick="mc(1,this,false,'For example, low output is a symptom; insufficient input or connection loss may be possible causes.','n1')">B. They are always the same.</button><button class="opt" onclick="mc(1,this,false,'For example, low output is a symptom; insufficient input or connection loss may be possible causes.','n1')">C. A cause is always known immediately.</button><button class="opt" onclick="mc(1,this,false,'For example, low output is a symptom; insufficient input or connection loss may be possible causes.','n1')">D. A symptom is the final solution.</button></div><div id="f1" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div></section><section class="screen" id="s2"><h2>Question 2</h2><p class="sub">Why document a Version 1 → Version 2 change?</p><div class="options"><button class="opt" onclick="mc(2,this,true,'Traceable changes help the team and reviewers understand design reasoning.','n2')">A. To explain what changed, why it changed and what evidence led to the change.</button><button class="opt" onclick="mc(2,this,false,'Traceable changes help the team and reviewers understand design reasoning.','n2')">B. To make the report longer.</button><button class="opt" onclick="mc(2,this,false,'Traceable changes help the team and reviewers understand design reasoning.','n2')">C. To hide the first version.</button><button class="opt" onclick="mc(2,this,false,'Traceable changes help the team and reviewers understand design reasoning.','n2')">D. To prove Version 1 was useless.</button></div><div id="f2" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div></section><section class="screen" id="s3"><h2>Question 3</h2><p class="sub">Which problem should normally be addressed first?</p><div class="options"><button class="opt" onclick="mc(3,this,true,'Safety and essential functional issues take priority over cosmetic improvements.','n3')">A. A safety-critical issue.</button><button class="opt" onclick="mc(3,this,false,'Safety and essential functional issues take priority over cosmetic improvements.','n3')">B. A cosmetic colour preference.</button><button class="opt" onclick="mc(3,this,false,'Safety and essential functional issues take priority over cosmetic improvements.','n3')">C. A minor font choice.</button><button class="opt" onclick="mc(3,this,false,'Safety and essential functional issues take priority over cosmetic improvements.','n3')">D. A small presentation animation.</button></div><div id="f3" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div></section><section class="screen" id="s4"><h2>Question 4</h2><p class="sub">A prototype works in the lab but not at the community site. What should the team do first?</p><div class="options"><button class="opt" onclick="mc(4,this,true,'The environment may have changed assumptions about loads, heat, dust, users or operating conditions.','n4')">A. Compare the operating conditions and identify which assumptions changed.</button><button class="opt" onclick="mc(4,this,false,'The environment may have changed assumptions about loads, heat, dust, users or operating conditions.','n4')">B. Declare the project a failure immediately.</button><button class="opt" onclick="mc(4,this,false,'The environment may have changed assumptions about loads, heat, dust, users or operating conditions.','n4')">C. Hide the field result.</button><button class="opt" onclick="mc(4,this,false,'The environment may have changed assumptions about loads, heat, dust, users or operating conditions.','n4')">D. Change several components at random.</button></div><div id="f4" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div></section><section class="screen" id="s5"><h2>Question 5</h2><p class="sub">Why use root-cause thinking?</p><div class="options"><button class="opt" onclick="mc(5,this,true,'Root-cause thinking helps distinguish observed problems from underlying causes.','n5')">A. To avoid repeatedly fixing symptoms without understanding what drives the failure.</button><button class="opt" onclick="mc(5,this,false,'Root-cause thinking helps distinguish observed problems from underlying causes.','n5')">B. To prove one person is responsible.</button><button class="opt" onclick="mc(5,this,false,'Root-cause thinking helps distinguish observed problems from underlying causes.','n5')">C. To avoid testing.</button><button class="opt" onclick="mc(5,this,false,'Root-cause thinking helps distinguish observed problems from underlying causes.','n5')">D. To make decisions faster without evidence.</button></div><div id="f5" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div></section><section class="screen" id="s6">
+<h2>Drag &amp; Drop — Failure → Evidence → Refinement</h2>
+<p class="sub">The cards are deliberately jumbled. Drag them, or click a card and then click a destination. Use the question in each box as your hint.</p>
+
+<div class="dragbank" id="refineBank">
+  <div class="drag" draggable="true" data-v="observe">Record and describe what happened.</div>
+  <div class="drag" draggable="true" data-v="causes">Identify plausible causes.</div>
+  <div class="drag" draggable="true" data-v="testcause">Design a test to distinguish the causes.</div>
+  <div class="drag" draggable="true" data-v="change">Implement an evidence-based change.</div>
+  <div class="drag" draggable="true" data-v="retest">Retest the important requirement.</div>
+</div>
+
+<div class="dropgrid" id="refineSlots" style="grid-template-columns:repeat(2,1fr)">
+  <div class="dropzone" data-drop data-c="observe">
+    <h3>1. What do we actually know?</h3>
+    <small>Start with the observed failure or unexpected behaviour.</small>
+  </div>
+  <div class="dropzone" data-drop data-c="causes">
+    <h3>2. Why might it have happened?</h3>
+    <small>List plausible causes without treating them as proven facts.</small>
+  </div>
+  <div class="dropzone" data-drop data-c="testcause">
+    <h3>3. How can we distinguish the causes?</h3>
+    <small>Choose evidence or a test that can separate the explanations.</small>
+  </div>
+  <div class="dropzone" data-drop data-c="change">
+    <h3>4. What should we change based on evidence?</h3>
+    <small>Make a targeted change rather than a random fix.</small>
+  </div>
+  <div class="dropzone" data-drop data-c="retest" style="grid-column:1 / -1">
+    <h3>5. Did the change improve the requirement?</h3>
+    <small>Retest the important requirement under a comparable condition.</small>
+  </div>
+</div>
+
+<button class="btn" id="checkRefineBtn" type="button">CHECK REFINEMENT LOOP</button>
+<div id="sf" class="feedback" aria-live="polite"></div>
+<div class="row"><span class="small">20 points</span><button id="nextInter" class="btn next" onclick="go(7)">Finish →</button></div>
+</section>
+
+<section class="screen" id="s7"><div class="hero"><span class="tag">ACTIVITY COMPLETE</span><h2>Your Result</h2><div style="font-size:14px;color:var(--muted);letter-spacing:.8px">TOTAL SCORE</div><div id="finalScore" style="font-size:64px;font-weight:900;color:var(--cyan)">0 / 45</div><div id="finalBadge" style="font-size:18px;font-weight:800;margin:8px 0 18px"></div><div class="scenario" style="text-align:left;max-width:760px;margin:22px auto"><strong>KEY MESSAGE</strong><br><br>Failure is useful when it becomes evidence. Observe, investigate causes, test the explanation, refine the design, and retest.</div><p id="finalMsg" class="sub"></p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap"><button class="btn" onclick="location.reload()">▶ Take Quiz Again</button><button class="btn secondary" onclick="location.reload()">↻ Play Again</button></div></div></section></div><script>
+let score=0,done=0,total=6,selectedDrag=null;
+function update(){document.getElementById('score').textContent=score;document.getElementById('bar').style.width=Math.min(100,done/total*100)+'%'}
+function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');if(n===7)finalResult();window.scrollTo({top:0,behavior:'smooth'});update()}
+function mc(id,btn,ok,msg,next){const box=btn.closest('.options');if(!box||box.dataset.done==='1')return;box.dataset.done='1';box.querySelectorAll('.opt').forEach(b=>b.disabled=true);btn.classList.add(ok?'good':'bad');const f=document.getElementById('f'+id);f.className='feedback show '+(ok?'ok':'no');f.innerHTML=msg;if(ok)score+=5;done++;document.getElementById(next).classList.add('show');update()}
+function finalResult(){
+  const max=45;
+  const pct=Math.round(score/max*100);
+  let badge='Keep Practising';
+  let msg='Review the feedback and try the activity again.';
+  if(pct>=90){badge='Excellent Work';msg='You are making strong evidence-based refinement decisions.'}
+  else if(pct>=75){badge='Strong Understanding';msg='You have a solid grasp of diagnosing and refining prototypes.'}
+  else if(pct>=60){badge='Good Start';msg='You have the basics; another attempt will strengthen your reasoning.'}
+  document.getElementById('finalScore').textContent=score+' / '+max;
+  document.getElementById('finalBadge').textContent=badge+' • '+pct+'%';
+  document.getElementById('finalMsg').textContent=msg;
+  document.getElementById('bar').style.width='100%';
+}
+function clearCardState(card){if(card){card.classList.remove('selected');card.style.outline='';}}
+function setupRefineDragDrop(){
+  const cards=[...document.querySelectorAll('#refineBank .drag')];
+  const zones=[...document.querySelectorAll('#refineSlots [data-drop]')];
+
+  cards.forEach((card,index)=>{
+    card.dataset.cardId='refine-card-'+index;
+    card.setAttribute('draggable','true');
+
+    card.addEventListener('dragstart',e=>{
+      selectedDrag=card;
+      card.classList.add('selected');
+      e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.setData('text/plain',card.dataset.cardId);
+    });
+    card.addEventListener('dragend',()=>{
+      clearCardState(card);
+      selectedDrag=null;
+    });
+    card.addEventListener('click',e=>{
+      e.stopPropagation();
+      cards.forEach(clearCardState);
+      selectedDrag=(selectedDrag===card?null:card);
+      if(selectedDrag)selectedDrag.classList.add('selected');
+    });
+  });
+
+  zones.forEach(zone=>{
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.borderColor='var(--cyan)';});
+    zone.addEventListener('dragleave',()=>zone.style.borderColor='');
+
+    zone.addEventListener('drop',e=>{
+      e.preventDefault();
+      zone.style.borderColor='';
+      const id=e.dataTransfer.getData('text/plain');
+      const card=document.querySelector('.drag[data-card-id="'+id+'"]');
+      placeRefineCard(card,zone);
+    });
+
+    zone.addEventListener('click',()=>{
+      if(selectedDrag)placeRefineCard(selectedDrag,zone);
+    });
+  });
+}
+function placeRefineCard(card,zone){
+  if(!card||!zone)return;
+  const existing=zone.querySelector('.drag');
+  if(existing&&existing!==card){
+    const source=card.parentElement;
+    if(source&&source.matches('[data-drop]'))source.appendChild(existing);
+    else document.getElementById('refineBank').appendChild(existing);
+  }
+  zone.appendChild(card);
+  clearCardState(card);
+  selectedDrag=null;
+}
+function checkRefineLoop(){
+  const expected=['observe','causes','testcause','change','retest'];
+  const actual=[...document.querySelectorAll('#refineSlots [data-drop]')].map(z=>z.querySelector('.drag')?.dataset.v);
+  const f=document.getElementById('sf');
+  f.className='feedback show';
+
+  if(actual.some(v=>!v)){
+    f.classList.add('no');
+    f.innerHTML='<strong>Keep arranging.</strong> Fill every numbered box before checking.';
+    return;
+  }
+
+  if(actual.every((v,i)=>v===expected[i])){
+    const btn=document.getElementById('checkRefineBtn');
+    if(!btn.dataset.awarded){score+=20;done++;btn.dataset.awarded='1';}
+    f.classList.add('ok');
+    f.innerHTML='<strong>Refinement loop accepted.</strong> Start with what was observed, examine plausible causes, test the explanation, make a targeted change, and retest the important requirement.';
+    document.getElementById('nextInter').classList.add('show');
+    update();
+  }else{
+    f.classList.add('no');
+    f.innerHTML='<strong>Rearrange and try again.</strong> Use the questions in the boxes: What happened? Why might it have happened? How can we distinguish the causes? What should change? Did it improve?';
+  }
+}
+document.getElementById('checkRefineBtn').addEventListener('click',checkRefineLoop);
+setupRefineDragDrop();
+update();
+</script></body></html>
