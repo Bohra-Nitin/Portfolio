@@ -1,0 +1,191 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Test for Evidence</title><style>
+:root{--bg:#07111f;--panel:#101d31;--panel2:#172944;--text:#f6f8fb;--muted:#aeb9c9;--cyan:#40d6e8;--green:#74df93;--red:#f2747c;--orange:#ffc25b;--line:#2c4263}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#18375e 0,#07111f 58%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+.wrap{max-width:980px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.brand{font-weight:800}.brand b{color:var(--cyan)}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.progress{height:9px;background:#0c1829;border-radius:99px;overflow:hidden;margin:14px 0 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .25s}
+.screen{display:none}.screen.active{display:block}h1{font-size:52px;line-height:1.02}h2{font-size:31px}.sub{color:var(--muted);line-height:1.5;font-size:17px}.hero{text-align:center;padding:42px 12px}.tag{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:13px}
+.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:19px;margin:15px 0}.scenario strong{color:var(--orange)}
+.options{display:grid;gap:10px;margin:16px 0}.opt{padding:14px;border-radius:13px;text-align:left;background:#0c1829;border:1px solid var(--line);color:var(--text);font-size:16px;cursor:pointer}.opt:hover{border-color:var(--cyan)}.opt:disabled{cursor:default}.good{border-color:var(--green)!important;background:rgba(116,223,147,.12)!important}.bad{border-color:var(--red)!important;background:rgba(242,116,124,.10)!important}
+.feedback{display:none;margin-top:12px;background:#0d192b;border-left:5px solid var(--cyan);padding:14px;border-radius:11px;line-height:1.5}.feedback.show{display:block}.feedback.ok{border-left-color:var(--green)}.feedback.no{border-left-color:var(--red)}
+.btn{border:0;border-radius:13px;padding:13px 20px;font-weight:800;font-size:16px;cursor:pointer;background:var(--cyan);color:#041017}.btn.secondary{background:#243954;color:var(--text);border:1px solid var(--line)}.btn.next{display:none}.btn.next.show{display:inline-block}.row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:18px}.small{font-size:13px;color:var(--muted)}
+.dragbank{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0}.drag{padding:13px;background:#0c1829;border:1px solid var(--line);border-radius:13px;cursor:grab;touch-action:manipulation;user-select:none}.drag.selected{outline:2px solid var(--cyan);border-color:var(--cyan)}
+.dropgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.dropzone{min-height:135px;border:2px dashed #405574;border-radius:16px;padding:14px;background:rgba(12,24,41,.55);cursor:pointer}.dropzone .drag{margin:4px 0}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare .cardx{background:#0c1829;border:1px solid var(--line);padding:16px;border-radius:14px}
+@media(max-width:700px){h1{font-size:40px}.dropgrid,.compare{grid-template-columns:1fr}}
+</style></head><body><div class='wrap'><div class='top'><div class='brand'><b>EPICS</b> • Test for Evidence</div><div class='pill'>⭐ Score: <span id='score'>0</span></div></div><div class='progress'><div class='bar' id='bar'></div></div><section class="screen active" id="s0"><div class="hero"><span class="tag">MODULE 4 • ~20 MINUTES</span><h1>Test for Evidence</h1><p class="sub">Practise requirement-linked testing, expected versus actual results, and acceptance criteria.</p><button class="btn" onclick="go(1)">START →</button></div></section><section class="screen" id="s1"><h2>Question 1</h2><p class="sub">What makes a test useful?</p><div class="options"><button class="opt" onclick="mc(1,this,true,'A useful test connects directly to what the design is supposed to achieve.','n1')">A. It is linked to a requirement and has a defined condition and criterion.</button><button class="opt" onclick="mc(1,this,false,'A useful test connects directly to what the design is supposed to achieve.','n1')">B. It gives the team a chance to say the prototype works.</button><button class="opt" onclick="mc(1,this,false,'A useful test connects directly to what the design is supposed to achieve.','n1')">C. It is performed only once.</button><button class="opt" onclick="mc(1,this,false,'A useful test connects directly to what the design is supposed to achieve.','n1')">D. It uses the largest amount of equipment available.</button></div><div id="f1" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div></section><section class="screen" id="s2"><h2>Question 2</h2><p class="sub">Why state the expected result before observing the result?</p><div class="options"><button class="opt" onclick="mc(2,this,true,'A predefined expectation makes the evaluation less dependent on hindsight.','n2')">A. It reduces the temptation to change the criterion after seeing the data.</button><button class="opt" onclick="mc(2,this,false,'A predefined expectation makes the evaluation less dependent on hindsight.','n2')">B. It guarantees a pass.</button><button class="opt" onclick="mc(2,this,false,'A predefined expectation makes the evaluation less dependent on hindsight.','n2')">C. It makes testing shorter.</button><button class="opt" onclick="mc(2,this,false,'A predefined expectation makes the evaluation less dependent on hindsight.','n2')">D. It avoids measurement.</button></div><div id="f2" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div></section><section class="screen" id="s3"><h2>Question 3</h2><p class="sub">Why repeat trials when appropriate?</p><div class="options"><button class="opt" onclick="mc(3,this,true,'Repeated trials help reveal variation and reliability under comparable conditions.','n3')">A. To observe variation and reduce the chance of relying on an unusual single result.</button><button class="opt" onclick="mc(3,this,false,'Repeated trials help reveal variation and reliability under comparable conditions.','n3')">B. To make the report longer.</button><button class="opt" onclick="mc(3,this,false,'Repeated trials help reveal variation and reliability under comparable conditions.','n3')">C. To guarantee identical results.</button><button class="opt" onclick="mc(3,this,false,'Repeated trials help reveal variation and reliability under comparable conditions.','n3')">D. To avoid recording failures.</button></div><div id="f3" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div></section><section class="screen" id="s4"><h2>Question 4</h2><p class="sub">Which is an acceptance criterion?</p><div class="options"><button class="opt" onclick="mc(4,this,false,'An acceptance criterion specifies what evidence will count as meeting the requirement.','n4')">A. The prototype should be &#x27;good&#x27;.</button><button class="opt" onclick="mc(4,this,true,'An acceptance criterion specifies what evidence will count as meeting the requirement.','n4')">B. Output remains within the defined acceptable range under the selected test condition.</button><button class="opt" onclick="mc(4,this,false,'An acceptance criterion specifies what evidence will count as meeting the requirement.','n4')">C. The team likes the design.</button><button class="opt" onclick="mc(4,this,false,'An acceptance criterion specifies what evidence will count as meeting the requirement.','n4')">D. The prototype uses three components.</button></div><div id="f4" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div></section><section class="screen" id="s5"><h2>Question 5</h2><p class="sub">What should an actual result contain?</p><div class="options"><button class="opt" onclick="mc(5,this,true,'Actual results are observations or measurements from the test.','n5')">A. What was measured or observed under the defined test condition.</button><button class="opt" onclick="mc(5,this,false,'Actual results are observations or measurements from the test.','n5')">B. What the team hoped would happen.</button><button class="opt" onclick="mc(5,this,false,'Actual results are observations or measurements from the test.','n5')">C. A redesigned value.</button><button class="opt" onclick="mc(5,this,false,'Actual results are observations or measurements from the test.','n5')">D. Only the word &#x27;pass&#x27;.</button></div><div id="f5" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div></section><section class="screen" id="s6"><h2>Question 6</h2><p class="sub">If a test fails, what is the most useful first response?</p><div class="options"><button class="opt" onclick="mc(6,this,true,'Failure is useful evidence when it is recorded and investigated.','n6')">A. Record the evidence and investigate the possible cause.</button><button class="opt" onclick="mc(6,this,false,'Failure is useful evidence when it is recorded and investigated.','n6')">B. Hide the failed trial.</button><button class="opt" onclick="mc(6,this,false,'Failure is useful evidence when it is recorded and investigated.','n6')">C. Change the result to the expected value.</button><button class="opt" onclick="mc(6,this,false,'Failure is useful evidence when it is recorded and investigated.','n6')">D. Immediately blame the person who built it.</button></div><div id="f6" class="feedback"></div><div class="row"><span class="small">5 points</span><button id="n6" class="btn next" onclick="go(7)">Next →</button></div></section><section class="screen" id="s7">
+<h2>Drag &amp; Drop — Build a Test Record</h2>
+<p class="sub">Arrange the record from what must be achieved to what was actually observed. The cards are deliberately jumbled. You can drag a card, or click a card and then click its numbered destination.</p>
+
+<div class="dragbank" id="testBank">
+  <div class="drag" draggable="true" data-v="actual">Actual: measured value from Trial 2.</div>
+  <div class="drag" draggable="true" data-v="criterion">Acceptance criterion: result must stay within the defined acceptable band.</div>
+  <div class="drag" draggable="true" data-v="condition">Test condition: selected operating/load condition.</div>
+  <div class="drag" draggable="true" data-v="requirement">Requirement: stable usable output under the defined condition.</div>
+  <div class="drag" draggable="true" data-v="expected">Expected: output should remain within the defined acceptable band.</div>
+</div>
+
+<div class="dropgrid" id="testSlots">
+  <div class="dropzone" data-drop data-c="requirement"><h3>1</h3><small>What must be achieved?</small></div>
+  <div class="dropzone" data-drop data-c="condition"><h3>2</h3><small>Under what conditions?</small></div>
+  <div class="dropzone" data-drop data-c="criterion"><h3>3</h3><small>What counts as acceptable?</small></div>
+  <div class="dropzone" data-drop data-c="expected"><h3>4</h3><small>What do we expect?</small></div>
+  <div class="dropzone" data-drop data-c="actual"><h3>5</h3><small>What happened?</small></div>
+</div>
+
+<button class="btn" id="checkTestBtn" type="button">CHECK TEST RECORD</button>
+<div id="sf" class="feedback" aria-live="polite"></div>
+
+<div class="row">
+  <span class="small">20 points</span>
+  <button id="nextInter" class="btn next" onclick="go(8)">Finish →</button>
+</div>
+</section>
+
+<section class="screen" id="s8"><div class="hero"><span class="tag">ACTIVITY COMPLETE</span><h2>Your Result</h2><div style="font-size:14px;color:var(--muted);letter-spacing:.8px">TOTAL SCORE</div><div id="finalScore" style="font-size:64px;font-weight:900;color:var(--cyan)">0 / 50</div><div id="finalBadge" style="font-size:18px;font-weight:800;margin:8px 0 18px"></div><div class="scenario" style="text-align:left;max-width:760px;margin:22px auto"><strong>KEY MESSAGE</strong><br><br>Testing is structured learning. Define the requirement and test condition first, then compare expected and actual evidence against a clear criterion.</div><p id="finalMsg" class="sub"></p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap"><button class="btn" onclick="location.reload()">▶ Take Quiz Again</button><button class="btn secondary" onclick="location.reload()">↻ Play Again</button></div></div></section></div><script>
+let score=0,done=0,total=7,selectedDrag=null;
+function update(){document.getElementById('score').textContent=score;document.getElementById('bar').style.width=Math.min(100,done/total*100)+'%'}
+function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');if(n===8)finalResult();window.scrollTo({top:0,behavior:'smooth'});update()}
+function mc(id,btn,ok,msg,next){const box=btn.closest('.options');if(!box||box.dataset.done==='1')return;box.dataset.done='1';box.querySelectorAll('.opt').forEach(b=>b.disabled=true);btn.classList.add(ok?'good':'bad');const f=document.getElementById('f'+id);f.className='feedback show '+(ok?'ok':'no');f.innerHTML=msg;if(ok)score+=5;done++;document.getElementById(next).classList.add('show');update()}
+function selectDrop(){
+ const cards=[...document.querySelectorAll('.drag')];
+ cards.forEach((d,i)=>{
+  d.dataset.cardId='card-'+i;
+  d.addEventListener('dragstart',e=>{selectedDrag=d;d.classList.add('selected');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',d.dataset.cardId)});
+  d.addEventListener('dragend',()=>{d.classList.remove('selected');selectedDrag=null});
+  d.addEventListener('click',e=>{e.stopPropagation();cards.forEach(c=>c.classList.remove('selected'));selectedDrag=(selectedDrag===d?null:d);if(selectedDrag)selectedDrag.classList.add('selected')});
+ });
+ document.querySelectorAll('[data-drop]').forEach(z=>{
+  z.addEventListener('dragover',e=>{e.preventDefault();z.style.borderColor='var(--cyan)'});
+  z.addEventListener('dragleave',()=>z.style.borderColor='');
+  z.addEventListener('drop',e=>{e.preventDefault();z.style.borderColor='';let id=e.dataTransfer.getData('text/plain');let d=document.querySelector('.drag[data-card-id="'+id+'"]');if(d){z.appendChild(d);d.classList.remove('selected');selectedDrag=null}});
+  z.addEventListener('click',()=>{if(selectedDrag){z.appendChild(selectedDrag);selectedDrag.classList.remove('selected');selectedDrag=null}});
+ });
+}
+function finalResult(){const max=50,pct=Math.round(score/max*100);let badge='Keep Practising',msg='Review the feedback and try the activity again.';if(pct>=90){badge='Excellent Work';msg='You are making strong implementation and prototyping decisions.'}else if(pct>=75){badge='Strong Understanding';msg='You have a solid grasp of the module concepts.'}else if(pct>=60){badge='Good Start';msg='You have the basics; another attempt will strengthen your reasoning.'}document.getElementById('finalScore').textContent=score+' / '+max;document.getElementById('finalBadge').textContent=badge+' • '+pct+'%';document.getElementById('finalMsg').textContent=msg;document.getElementById('bar').style.width='100%'}
+let selectedTestCard=null;
+
+function setupTestDragDrop(){
+  const cards=[...document.querySelectorAll('#testBank .drag')];
+  const zones=[...document.querySelectorAll('#testSlots .dropzone')];
+
+  cards.forEach((card,index)=>{
+    card.dataset.cardId='test-card-'+index;
+
+    card.addEventListener('dragstart',function(e){
+      selectedTestCard=card;
+      card.classList.add('selected');
+      e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.setData('text/plain',card.dataset.cardId);
+    });
+
+    card.addEventListener('dragend',function(){
+      card.classList.remove('selected');
+    });
+
+    // Touch/preview fallback: click card first, then click destination.
+    card.addEventListener('click',function(e){
+      e.stopPropagation();
+      cards.forEach(c=>c.classList.remove('selected'));
+      if(selectedTestCard===card){
+        selectedTestCard=null;
+      }else{
+        selectedTestCard=card;
+        card.classList.add('selected');
+      }
+    });
+  });
+
+  zones.forEach(zone=>{
+    zone.addEventListener('dragover',function(e){
+      e.preventDefault();
+      zone.style.borderColor='var(--cyan)';
+    });
+
+    zone.addEventListener('dragleave',function(){
+      zone.style.borderColor='';
+    });
+
+    zone.addEventListener('drop',function(e){
+      e.preventDefault();
+      zone.style.borderColor='';
+
+      const id=e.dataTransfer.getData('text/plain');
+      const card=document.querySelector('#testBank .drag[data-card-id="'+id+'"], #testSlots .drag[data-card-id="'+id+'"]');
+
+      if(card){
+        const occupant=zone.querySelector('.drag');
+        if(occupant && occupant!==card){
+          // Swap with existing card.
+          const source=card.parentElement;
+          if(source && source.classList.contains('dropzone')){
+            source.appendChild(occupant);
+          }else{
+            document.getElementById('testBank').appendChild(occupant);
+          }
+        }
+        zone.appendChild(card);
+        card.classList.remove('selected');
+        selectedTestCard=null;
+      }
+    });
+
+    zone.addEventListener('click',function(e){
+      e.stopPropagation();
+      if(selectedTestCard){
+        const occupant=zone.querySelector('.drag');
+        if(occupant && occupant!==selectedTestCard){
+          const source=selectedTestCard.parentElement;
+          if(source && source.classList.contains('dropzone')){
+            source.appendChild(occupant);
+          }else{
+            document.getElementById('testBank').appendChild(occupant);
+          }
+        }
+        zone.appendChild(selectedTestCard);
+        selectedTestCard.classList.remove('selected');
+        selectedTestCard=null;
+      }
+    });
+  });
+}
+
+function checkTestRecord(){
+  const expected=['requirement','condition','criterion','expected','actual'];
+  const zones=[...document.querySelectorAll('#testSlots .dropzone')];
+  const actual=zones.map(z=>{
+    const card=z.querySelector('.drag');
+    return card ? card.dataset.v : null;
+  });
+
+  const feedback=document.getElementById('sf');
+  feedback.className='feedback show';
+
+  if(actual.some(v=>!v)){
+    feedback.classList.add('no');
+    feedback.innerHTML='<strong>Keep arranging.</strong> Put one card in each numbered position before checking.';
+    return;
+  }
+
+  const correct=actual.every((value,index)=>value===expected[index]);
+
+  if(correct){
+    if(!document.getElementById('checkTestBtn').dataset.awarded){
+      score+=20;
+      done++;
+      document.getElementById('checkTestBtn').dataset.awarded='1';
+    }
+
+    feedback.classList.add('ok');
+    feedback.innerHTML='<strong>Test record organised.</strong> First define the requirement and test condition, then establish what counts as acceptable and what you expect before collecting the actual result.';
+    document.getElementById('nextInter').classList.add('show');
+    update();
+  }else{
+    feedback.classList.add('no');
+    feedback.innerHTML='<strong>Rearrange and try again.</strong> The cards remain movable. Think: requirement → condition → acceptance criterion → expected result → actual result.';
+  }
+}
+
+document.getElementById('checkTestBtn').addEventListener('click',checkTestRecord);
+setupTestDragDrop();
+update();
+</script></body></html>
