@@ -1,46 +1,465 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Activity 3: Think Before You Build</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 3: Think Before You Build — Extended</title>
 <style>
-:root{--bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;--muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;--warn:#ffc15a;--line:#2c4161}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17335a 0,#07111f 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-.wrap{max-width:900px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;letter-spacing:.7px}.brand b{color:var(--accent)}.stats{display:flex;gap:8px}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
-.progress{height:8px;background:#0c1829;border-radius:9px;margin:16px 0 24px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good))}
-.screen{display:none;animation:fade .3s}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:32px;margin:8px 0 12px}.accent{color:var(--accent)}.sub{color:var(--muted);font-size:17px;line-height:1.5}
-.card,.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:20px;margin:18px 0}.scenario strong{color:var(--warn)}
-.options{display:grid;gap:10px;margin:18px 0}.opt{padding:15px;border-radius:13px;text-align:left;background:#0d192b;border:1px solid var(--line);color:var(--text);font-size:16px;cursor:pointer}.opt:hover{border-color:var(--accent)}.opt:disabled{cursor:default}.correct{border-color:var(--good)!important;background:rgba(113,220,145,.12)!important}.wrong{border-color:var(--bad)!important;background:rgba(240,112,120,.1)!important}
-.feedback{display:none;padding:15px;border-radius:12px;background:#0d192b;border-left:5px solid var(--accent);line-height:1.5}.feedback.show{display:block}.feedback.good{border-color:var(--good)}.feedback.bad{border-color:var(--bad)}
-.btn{border:0;border-radius:13px;padding:13px 20px;background:var(--accent);color:#041017;font-size:16px;font-weight:800;cursor:pointer}.btn.next{display:none}.btn.next.show{display:inline-block}.btn.secondary{background:#18273d;color:#fff;border:1px solid var(--line)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}.hero{text-align:center;padding:50px 10px}.tag{display:inline-block;border:1px solid var(--line);padding:6px 10px;border-radius:99px;color:var(--muted);font-size:13px}
-.result{font-size:42px;font-weight:800;color:var(--accent);text-align:center}.mini{font-size:14px;color:var(--muted)}
-@media(max-width:600px){.wrap{padding:14px}.row{align-items:flex-start;flex-direction:column}}
-</style>
-</head><body><div class="wrap">
-<div class="top"><div class="brand"><b>EPICS</b> • Activity 3: Think Before You Build</div><div class="stats"><div class="pill">⭐ Score: <span id="score">0</span></div></div></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
+:root{
+ --bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;
+ --muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;
+ --warn:#ffc15a;--line:#2c4161
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:radial-gradient(circle at top,#17335a 0,#07111f 55%);
+ color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh
+}
+.wrap{max-width:980px;margin:auto;padding:22px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.7px}.brand b{color:var(--accent)}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-size:16px}
+.progress{height:9px;background:#0c1829;border-radius:9px;margin:16px 0 20px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good))}
+.interaction{background:rgba(64,214,232,.07);border:1px solid rgba(64,214,232,.25);border-radius:13px;padding:13px 16px;color:var(--muted);font-size:17px;line-height:1.45;margin-bottom:20px}
+.screen{display:none;animation:fade .3s}.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:12px 0}
+h2{font-size:clamp(29px,4.5vw,38px);line-height:1.12;margin:8px 0 16px}
+.accent{color:var(--accent)}
+.sub{color:var(--muted);font-size:19px;line-height:1.55}
+.card,.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}
+.scenario{font-size:22px;line-height:1.55}
+.scenario strong{color:var(--warn);font-size:18px;letter-spacing:.5px}
+.options{display:grid;gap:13px;margin:20px 0}
+.opt{padding:18px 19px;border-radius:14px;text-align:left;background:#0d192b;border:1px solid var(--line);color:var(--text);font-size:20px;line-height:1.42;cursor:pointer;transition:.18s}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt:disabled{cursor:default}
+.correct{border-color:var(--good)!important;background:rgba(113,220,145,.12)!important}
+.wrong{border-color:var(--bad)!important;background:rgba(240,112,120,.10)!important}
+.feedback{display:none;padding:17px 18px;border-radius:13px;background:#0d192b;border-left:5px solid var(--accent);line-height:1.55;font-size:19px}
+.feedback.show{display:block}.feedback.good{border-color:var(--good)}.feedback.bad{border-color:var(--bad)}
+.btn{border:0;border-radius:13px;padding:14px 22px;background:var(--accent);color:#041017;font-size:18px;font-weight:800;cursor:pointer}
+.btn.next{display:none}.btn.next.show{display:inline-block}.btn.secondary{background:#18273d;color:#fff;border:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
+.hero{text-align:center;padding:50px 10px}
+.tag{display:inline-block;border:1px solid var(--line);padding:7px 11px;border-radius:99px;color:var(--muted);font-size:14px}
+.result{font-size:44px;font-weight:800;color:var(--accent);text-align:center}
+.mini{font-size:16px;color:var(--muted)}
 
-<section class="screen active" id="s0"><div class="hero"><span class="tag">ACTIVITY 3 • ABOUT 20 MINUTES</span><h1>Think Before You <span class="accent">Build</span></h1><p class="sub">Practise observation, assumptions and simple evidence-based decisions.</p><button class="btn" onclick="go(1)">START →</button></div></section>
-<section class="screen" id="s1"><h2>Question 1 — What is an observation?</h2><div class="scenario"><strong>CASE:</strong><br><br>During a 10-minute observation, a team sees 25 students waiting near a bus stop.</div><div class="options"><button class="opt" onclick="answer(1,this,true,'This is directly stated as something the team observed.')">A. “25 students were waiting near the bus stop.”</button><button class="opt" onclick="answer(1,this,false,'This is a possible interpretation, but the observation does not prove why they were waiting.')">B. “The bus system is poorly managed.”</button><button class="opt" onclick="answer(1,this,false,'This is a causal claim that needs evidence.')">C. “The bus is always late.”</button><button class="opt" onclick="answer(1,this,false,'This is a solution proposal.')">D. “The college needs a tracking app.”</button></div><div id="f1" class="feedback"></div><div class="row"><span></span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div></section>
-<section class="screen" id="s2"><h2>Question 2 — What is an assumption?</h2><div class="scenario"><strong>CASE:</strong><br><br>A bin is overflowing at 1:00 PM.</div><div class="options"><button class="opt" onclick="answer(2,this,false,'This is the information directly given in the case.')">A. “The bin was overflowing at 1:00 PM.”</button><button class="opt" onclick="answer(2,this,true,'This may be true, but the single observation does not prove why the bin overflowed.')">B. “The bin overflowed because students do not care about cleanliness.”</button><button class="opt" onclick="answer(2,this,false,'This is a question that could help gather more information.')">C. “How often does the bin overflow?”</button><button class="opt" onclick="answer(2,this,false,'This is a possible solution, not an assumption.')">D. “We should install a larger bin.”</button></div><div id="f2" class="feedback"></div><div class="row"><span></span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div></section>
-<section class="screen" id="s3"><h2>Question 3 — What information is missing?</h2><div class="scenario"><strong>CASE:</strong><br><br>A government-school classroom feels uncomfortable during hot afternoons.</div><div class="options"><button class="opt" onclick="answer(3,this,true,'This information would help the team understand the severity and possible causes of the problem.')">A. “What are the classroom temperature, airflow, occupancy and existing ventilation conditions?”</button><button class="opt" onclick="answer(3,this,false,'This selects a technology before identifying the relevant requirements.')">B. “Which air conditioner should we buy?”</button><button class="opt" onclick="answer(3,this,false,'The problem should be investigated rather than dismissed.')">C. “Why should we bother measuring anything?”</button><button class="opt" onclick="answer(3,this,false,'This assumes that solar electricity is the key issue.')">D. “How many solar panels can fit on the roof?”</button></div><div id="f3" class="feedback"></div><div class="row"><span></span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div></section>
-<section class="screen" id="s4"><h2>Question 4 — Which is the strongest first step?</h2><div class="scenario"><strong>CASE:</strong><br><br>Residents report that water is sometimes wasted from an overhead tank. The team does not yet know when it happens or why.</div><div class="options"><button class="opt" onclick="answer(4,this,false,'')">A. Immediately buy sensors.</button><button class="opt" onclick="answer(4,this,true,'The team first needs evidence about the situation, users and current process before selecting an engineering response.')">B. Observe the system and speak with residents and maintenance staff to understand when and how the problem occurs.</button><button class="opt" onclick="answer(4,this,false,'The problem has been reported and should first be understood.')">C. Assume the residents are using the tank incorrectly.</button><button class="opt" onclick="answer(4,this,false,'The technology is being selected before the need is fully understood.')">D. Build a mobile app.</button></div><div id="f4" class="feedback"></div><div class="row"><span></span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div></section>
-<section class="screen" id="s5"><h2>Final Basic Scenario 🏁</h2><div class="scenario"><strong>A LOCAL LIBRARY PROBLEM:</strong><br><br>Students say the library becomes crowded in the evening. One team member says, “Let us build a seat-booking app.” What is the most reasonable response?</div><div class="options"><button class="opt" onclick="answer(5,this,false,'The app may later be useful, but the current information does not establish that booking is the main problem.')">A. Yes. Start coding immediately.</button><button class="opt" onclick="answer(5,this,true,'First find out when crowding occurs, how seats are used, who is affected and what constraints exist. Then evaluate possible responses.')">B. First observe the library and understand the crowding pattern before choosing a solution.</button><button class="opt" onclick="answer(5,this,false,'The reported issue deserves investigation.')">C. Ignore the students.</button><button class="opt" onclick="answer(5,this,false,'This is still selecting a solution before understanding the need.')">D. Buy more chairs immediately.</button></div><div id="f5" class="feedback"></div><div class="row"><span></span><button id="n5" class="btn next" onclick="go(6)">See Result →</button></div></section>
-<section class="screen" id="s6"><div class="hero"><span class="tag">MODULE 1 PRACTICE COMPLETE</span><h2>Think first. Build later.</h2><div class="result"><span id="finalScore"></span> / 50</div><p class="sub">You practised separating observations, assumptions, unanswered questions and premature solutions.</p><button class="btn secondary" onclick="location.reload()">PLAY AGAIN</button></div></section>
+.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.dropzone{min-height:220px;padding:18px;border:2px dashed var(--line);border-radius:16px;background:#0d192b;transition:.15s}
+.dropzone h3{margin:0 0 14px;font-size:22px}
+.dropzone.over,.dropzone.target{border-color:var(--accent);background:rgba(64,214,232,.08)}
+.drag-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.drag-item{user-select:none;-webkit-user-select:none;cursor:grab;background:var(--panel2);border:1px solid var(--line);padding:14px 16px;border-radius:12px;font-size:18px;line-height:1.3}
+.drag-item:active{cursor:grabbing}
+.drag-item.selected{border-color:var(--accent);box-shadow:0 0 0 2px rgba(64,214,232,.18);background:rgba(64,214,232,.10)}
+.drag-item.dragging{opacity:.45}
+.rank-list{display:grid;gap:10px;margin:18px 0}
+.rank-row{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;padding:13px;background:#0d192b;border:1px solid var(--line);border-radius:13px;font-size:19px;min-height:62px}
+.rank-row.over,.rank-row.target{border-color:var(--accent);background:rgba(64,214,232,.08)}
+.rank-no{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--line);font-weight:800}
+.rank-slot{min-height:36px;display:flex;align-items:center}
+
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.choice{background:#0d192b;border:1px solid var(--line);border-radius:14px;padding:17px;text-align:center;font-size:19px;line-height:1.35;cursor:pointer}
+.choice:hover{border-color:var(--accent)}
+.choice.selected{border-color:var(--accent);background:rgba(64,214,232,.1)}
+@media(max-width:700px){
+ .wrap{padding:14px}.row{align-items:flex-start;flex-direction:column}
+ .drag-area,.choice-grid{grid-template-columns:1fr}
+ .opt{font-size:18px}.scenario{font-size:20px}.drag-item{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+<div class="brand"><b>EPICS</b> • Activity 3: Think Before You Build</div>
+<div class="stats">
+<div class="pill">⭐ Score: <span id="score">0</span></div>
+<div class="pill">Questions: <span id="done">0</span>/<span id="total">15</span></div>
+</div>
+</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="interaction"><b style="color:var(--accent)">Think before building:</b> Separate what you observed from what you assume. Look for missing evidence before choosing a solution.</div>
+
+<section class="screen active" id="s0">
+<div class="hero">
+<span class="tag">ACTIVITY 3 • ABOUT 40–50 MINUTES</span>
+<h1>Think Before You <span class="accent">Build</span></h1>
+<p class="sub">Practise observation, assumptions, missing information, evidence and simple engineering decisions before selecting a solution.</p>
+<div class="card" style="text-align:left">
+<b style="color:var(--accent)">Core idea:</b>
+A quick observation can tell you what happened. It does not automatically tell you why it happened or what should be built.
+</div>
+<button class="btn" onclick="go(1)">START →</button>
+</div>
+</section>
+
+<section class="screen" id="s1">
+<h2>Question 1 — What is an observation?</h2>
+<div class="scenario"><strong>CASE</strong><br><br>During a 10-minute observation, a team sees 25 students waiting near a bus stop.</div>
+<div class="options">
+<button class="opt" onclick="answer(1,this,true,'This is directly observable and does not add a cause, judgement or proposed solution.')">A. “25 students were waiting near the bus stop during the observation period.”</button>
+<button class="opt" onclick="answer(1,this,false,'This is an interpretation about the system rather than a direct description of what was observed.')">B. “The college bus system is poorly managed because students are waiting near the stop.”</button>
+<button class="opt" onclick="answer(1,this,false,'The observation does not establish that the bus is always late; the claim would need additional evidence.')">C. “The college bus is always late, which is why students were waiting near the stop.”</button>
+<button class="opt" onclick="answer(1,this,false,'This is a proposed solution and cannot be concluded from the observation alone.')">D. “The college should develop a tracking application so students can monitor the bus.”</button>
+</div><div id="f1" class="feedback"></div><div class="row"><span></span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div>
+</section>
+
+<section class="screen" id="s2">
+<h2>Question 2 — What is an assumption?</h2>
+<div class="scenario"><strong>CASE</strong><br><br>A waste bin is overflowing at 1:00 PM. The team has not yet studied how often the bin fills or what happens before it overflows.</div>
+<div class="options">
+<button class="opt" onclick="answer(2,this,false,'This statement simply repeats the direct information given in the case and does not add an explanation.')">A. “The waste bin was overflowing at 1:00 PM when the team checked the area.”</button>
+<button class="opt" onclick="answer(2,this,true,'The statement assigns a reason and blame without evidence showing why the bin overflowed or who caused it.')">B. “The bin overflowed because students do not care about cleanliness in the campus.”</button>
+<button class="opt" onclick="answer(2,this,false,'This is an unanswered question that could guide further evidence collection rather than an assumption.')">C. “How often does the bin overflow, and what is happening immediately before it becomes full?”</button>
+<button class="opt" onclick="answer(2,this,false,'A larger bin is a possible solution, but it is not an assumption about the cause of the current problem.')">D. “We should replace the existing bin with a larger container before investigating the situation.”</button>
+</div><div id="f2" class="feedback"></div><div class="row"><span></span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div>
+</section>
+
+<section class="screen" id="s3">
+<h2>Question 3 — What information is missing?</h2>
+<div class="scenario"><strong>CASE</strong><br><br>A government-school classroom feels uncomfortable during hot afternoons. The team has not measured the indoor conditions.</div>
+<div class="options">
+<button class="opt" onclick="answer(3,this,true,'Temperature, airflow, occupancy and existing ventilation help the team describe the severity and possible contributors before selecting an intervention.')">A. “What are the classroom temperature, airflow, occupancy and existing ventilation conditions during the uncomfortable period?”</button>
+<button class="opt" onclick="answer(3,this,false,'The question jumps to a specific technology before the team understands the actual thermal conditions and constraints.')">B. “Which air conditioner should the school buy so that the students will feel comfortable during summer?”</button>
+<button class="opt" onclick="answer(3,this,false,'The problem has been reported, so dismissing measurement removes an opportunity to understand what is happening.')">C. “Why should the team measure anything when everyone already knows that the room feels hot?”</button>
+<button class="opt" onclick="answer(3,this,false,'Roof area and solar panels may become relevant later, but the immediate missing evidence is about the classroom condition.')">D. “How many solar panels can fit on the roof so that the school can operate additional equipment?”</button>
+</div><div id="f3" class="feedback"></div><div class="row"><span></span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div>
+</section>
+
+<section class="screen" id="s4">
+<h2>Question 4 — What should happen first?</h2>
+<div class="scenario"><strong>CASE</strong><br><br>Residents report that water is sometimes wasted from an overhead tank. The team does not yet know when the loss occurs or what causes it.</div>
+<div class="options">
+<button class="opt" onclick="answer(4,this,false,'Buying sensors may become useful later, but doing so immediately selects a technology before the team understands the problem.')">A. Purchase sensors immediately because collecting more technical data will automatically reveal the correct solution.</button>
+<button class="opt" onclick="answer(4,this,true,'Observation and stakeholder input can reveal the timing, workflow, failure points and existing practices that should shape later engineering decisions.')">B. Observe the system and speak with residents and maintenance staff to understand when and how the problem occurs.</button>
+<button class="opt" onclick="answer(4,this,false,'The team has no evidence yet that residents are causing the problem, so blaming users would introduce an unsupported assumption.')">C. Assume the residents are using the tank incorrectly and focus the project on changing their behaviour before investigating the system.</button>
+<button class="opt" onclick="answer(4,this,false,'A mobile app could be one option, but the team has not yet established that information access is the actual root problem.')">D. Build a mobile application first so that residents can report water wastage whenever they notice it.</button>
+</div><div id="f4" class="feedback"></div><div class="row"><span></span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div>
+</section>
+
+<section class="screen" id="s5">
+<h2>Scenario 1 — Do not confuse a symptom with a cause</h2>
+<div class="scenario"><strong>CASE</strong><br><br>Students report that a campus drinking-water point often has a queue. A team concludes that “the water dispenser is too slow” after seeing a queue once.</div>
+<div class="options">
+<button class="opt" onclick="answer(5,this,false,'A single queue observation does not prove that dispenser speed is the cause; arrival rate, number of taps and refill timing may also matter.')">A. Accept the conclusion because the queue was visible, so the dispenser must be the only reason students were waiting for water.</button>
+<button class="opt" onclick="answer(5,this,true,'The queue is an observation or symptom. The cause could involve demand, number of outlets, refill timing, layout, or several factors together.')">B. Treat the queue as evidence of a problem, then investigate arrival rate, service time, outlet capacity, refill timing and user flow.</button>
+<button class="opt" onclick="answer(5,this,false,'Installing another dispenser may help, but choosing it before understanding why the queue forms is still a premature solution decision.')">C. Install another dispenser immediately because increasing capacity is obviously the fastest way to eliminate any queue.</button>
+<button class="opt" onclick="answer(5,this,false,'A queue does not by itself demonstrate careless behaviour, and making that judgement could prevent the team from finding the actual cause.')">D. Conclude that students are wasting time at the water point because they are not using the existing dispenser efficiently.</button>
+</div><div id="f5" class="feedback"></div><div class="row"><span></span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div>
+</section>
+
+<section class="screen" id="s6">
+<h2>Drag & Drop — Observation, assumption or solution?</h2>
+<p class="sub">Desktop: drag each card into the correct box. Mobile/tablet: tap a card, then tap the correct box.</p>
+<div class="drag-area">
+<div class="dropzone" id="obsZone"><h3>OBSERVATION</h3><div class="mini">Something directly seen, counted, timed or recorded.</div></div>
+<div class="dropzone" id="assumeZone"><h3>ASSUMPTION / SOLUTION LEAP</h3><div class="mini">An unsupported explanation, judgement or premature design choice.</div></div>
+</div>
+<div class="drag-items" id="sortItems">
+<div class="drag-item" draggable="true" data-kind="obs">18 users reached the queue between 10:00 and 10:10.</div>
+<div class="drag-item" draggable="true" data-kind="assume">Students are careless about using the water point.</div>
+<div class="drag-item" draggable="true" data-kind="obs">The bin was full when inspected at 1:00 PM.</div>
+<div class="drag-item" draggable="true" data-kind="assume">The campus needs a larger smart bin with sensors.</div>
+<div class="drag-item" draggable="true" data-kind="obs">The classroom measured 32°C at 2:00 PM.</div>
+<div class="drag-item" draggable="true" data-kind="assume">The room feels hot because the fan is too old.</div>
+</div>
+<div id="sortFeedback" class="feedback"></div>
+<div class="row"><span></span><button id="n6" class="btn next" onclick="go(7)">Next →</button></div>
+</section>
+
+<section class="screen" id="s7">
+<h2>Question 7 — Which statement is evidence-friendly?</h2>
+<div class="options">
+<button class="opt" onclick="answer(7,this,false,'This statement is a judgement about people’s feelings and motives, not a directly recorded observation. It would require supporting evidence from users.')">A. “The community clearly hates the current system because nobody would choose it if they had a better option.”</button>
+<button class="opt" onclick="answer(7,this,true,'This statement can be checked against repeated observations or recorded data and does not assume a cause. It describes evidence rather than assigning an unsupported explanation.')">B. “During three separate observations, the queue exceeded 10 people for at least five minutes each time.”</button>
+<button class="opt" onclick="answer(7,this,false,'This combines an assumption about behaviour with a conclusion about the cause of the problem. The team would need evidence before making that claim.')">C. “People wait because they are impatient and therefore create unnecessary congestion at the service point.”</button>
+<button class="opt" onclick="answer(7,this,false,'This is a proposed intervention rather than evidence describing the current condition of the community. The solution should come after the problem is better understood.')">D. “The best solution is to install an automated queue-management system at the entrance.”</button>
+</div><div id="f7" class="feedback"></div><div class="row"><span></span><button id="n7" class="btn next" onclick="go(8)">Next →</button></div>
+</section>
+
+<section class="screen" id="s8">
+<h2>Scenario 2 — What would you measure?</h2>
+<div class="scenario"><strong>CASE</strong><br><br>A community hall becomes uncomfortable during afternoon events. The team suspects poor ventilation, but several other factors may contribute.</div>
+<div class="options">
+<button class="opt" onclick="answer(8,this,false,'Choosing fans immediately assumes that the main cause is air movement and ignores the opportunity to compare other measurable factors.')">A. Count the number of fans and immediately purchase more fans because ventilation is the team’s first technical guess.</button>
+<button class="opt" onclick="answer(8,this,true,'Measurements of temperature, humidity, occupancy, airflow and event timing can help separate competing explanations before design.')">B. Measure temperature, humidity, occupancy, airflow and event timing so the team can compare possible contributors to discomfort.</button>
+<button class="opt" onclick="answer(8,this,false,'Asking only whether people feel hot is useful but incomplete because it does not help distinguish the possible causes.')">C. Ask whether people feel hot and then choose the most popular technical solution without recording environmental conditions.</button>
+<button class="opt" onclick="answer(8,this,false,'A single technology cannot be justified before the team understands whether the issue is ventilation, heat gain, occupancy or another factor.')">D. Install an air-conditioning unit for one event and assume that the result will prove what caused the discomfort in the hall.</button>
+</div><div id="f8" class="feedback"></div><div class="row"><span></span><button id="n8" class="btn next" onclick="go(9)">Next →</button></div></section>
+
+<section class="screen" id="s9">
+<h2>Question 9 — What is a good engineering question?</h2>
+<p class="sub">Choose the question that reduces uncertainty instead of simply confirming what the team already believes.</p>
+<div class="options">
+<button class="opt" onclick="answer(9,this,false,'This question assumes the cause before it has been tested, so it may encourage the team to look only for confirming evidence.')">A. “How many students are wasting electricity by leaving the lights on when they leave the room?”</button>
+<button class="opt" onclick="answer(9,this,true,'This question is open enough to investigate different causes and focuses on evidence about when and why the observed condition occurs.')">B. “When does the lighting remain on after the room becomes empty, and what conditions or behaviours are associated with those events?”</button>
+<button class="opt" onclick="answer(9,this,false,'This selects a specific technology before the cause of the energy use has been established.')">C. “Which motion sensor should we buy so that the lights can switch off automatically whenever students leave?”</button>
+<button class="opt" onclick="answer(9,this,false,'This question dismisses potentially useful evidence instead of identifying what is unknown about the problem.')">D. “Why measure occupancy when everyone knows that students sometimes forget to switch the lights off?”</button>
+</div><div id="f9" class="feedback"></div><div class="row"><span></span><button id="n9" class="btn next" onclick="go(10)">Next →</button></div>
+</section>
+
+<section class="screen" id="s10">
+<h2>Drag & Drop — Put the investigation steps in order</h2>
+<p class="sub">Desktop: drag a stage onto a numbered position. Mobile/tablet: tap a stage, then tap its position.</p>
+<div class="rank-list" id="rankList">
+<div class="rank-row"><div class="rank-no">1</div><div class="rank-slot"></div></div>
+<div class="rank-row"><div class="rank-no">2</div><div class="rank-slot"></div></div>
+<div class="rank-row"><div class="rank-no">3</div><div class="rank-slot"></div></div>
+<div class="rank-row"><div class="rank-no">4</div><div class="rank-slot"></div></div>
+<div class="rank-row"><div class="rank-no">5</div><div class="rank-slot"></div></div>
+</div>
+<div class="drag-items" id="rankItems">
+<div class="drag-item" draggable="true" data-order="1">Observe the current situation and record what is happening</div>
+<div class="drag-item" draggable="true" data-order="2">Identify what is known, unknown and assumed</div>
+<div class="drag-item" draggable="true" data-order="3">Collect the missing evidence or measurements</div>
+<div class="drag-item" draggable="true" data-order="4">Compare explanations and define the evidence-supported problem</div>
+<div class="drag-item" draggable="true" data-order="5">Only then compare possible engineering responses</div>
+</div>
+<div id="rankFeedback" class="feedback"></div>
+<div class="row"><span></span><button id="n10" class="btn next" onclick="go(11)">Next →</button></div>
+</section>
+
+<section class="screen" id="s11">
+<h2>Question 11 — Which conclusion is too strong?</h2>
+<div class="scenario"><strong>CASE</strong><br><br>The team observes that a queue appears on three occasions at a community service point. No service-time measurements have been collected yet.</div>
+<div class="options">
+<button class="opt" onclick="answer(11,this,true,'The observation supports the existence of a recurring queue, but it does not yet establish the exact cause, so claiming the dispenser is too slow goes beyond the evidence.')">A. “The queue appears repeatedly, so the team should investigate arrival rate, service time and capacity before deciding what causes it.”</button>
+<button class="opt" onclick="answer(11,this,false,'A recurring queue is useful evidence, but this statement still jumps directly from the symptom to a single technical cause without measurement.')">B. “The queue appears repeatedly, so the dispenser must be too slow and should be replaced before collecting more evidence.”</button>
+<button class="opt" onclick="answer(11,this,false,'Repeated observation is useful, but the team should still distinguish the existence of a queue from the reasons why it occurs.')">C. “The queue has been seen several times, so the next step is to investigate which conditions make the queue longer or shorter.”</button>
+<button class="opt" onclick="answer(11,this,false,'This is a reasonable next question, but it is not itself an over-strong conclusion because it remains open to multiple explanations.')">D. “The team should record service time and arrival rate before deciding whether capacity is actually insufficient.”</button>
+</div><div id="f11" class="feedback"></div><div class="row"><span></span><button id="n11" class="btn next" onclick="go(12)">Next →</button></div>
+</section>
+
+<section class="screen" id="s12">
+<h2>Scenario 3 — A solution can hide the real question</h2>
+<div class="scenario"><strong>CASE</strong><br><br>A school reports that electricity bills are high. A student says, “Let us install solar panels.” The team has not yet studied consumption patterns, equipment use, tariff structure or operating behaviour.</div>
+<div class="options">
+<button class="opt" onclick="answer(12,this,false,'Solar panels may become part of a later response, but the current evidence is not enough to show that generation capacity is the main problem.')">A. Approve the solar-panel idea immediately because reducing grid consumption is always the most appropriate response to a high electricity bill.</button>
+<button class="opt" onclick="answer(12,this,true,'The high bill is an observed outcome. The team should understand when energy is used, which loads contribute, and what other factors affect the bill before choosing a response.')">B. Investigate the consumption pattern, major loads, operating behaviour and tariff information before comparing possible interventions.</button>
+<button class="opt" onclick="answer(12,this,false,'A questionnaire may contribute evidence, but asking only about one technology still keeps the investigation anchored to a predetermined solution.')">C. Ask staff whether they would prefer solar panels or batteries, then select whichever option receives more votes.</button>
+<button class="opt" onclick="answer(12,this,false,'Equipment replacement is another solution choice and may address the wrong cause if the high bill is driven by usage pattern, tariffs or operating hours.')">D. Replace the largest electrical equipment first because more efficient equipment will automatically identify why the electricity bill is high.</button>
+</div><div id="f12" class="feedback"></div><div class="row"><span></span><button id="n12" class="btn next" onclick="go(13)">Next →</button></div>
+</section>
+
+<section class="screen" id="s13">
+<h2>Question 13 — When is more data actually useful?</h2>
+<div class="options">
+<button class="opt" onclick="answer(13,this,false,'Collecting everything can increase effort and noise. Useful data should be connected to a specific uncertainty or decision the team needs to make.')">A. More data is always better because a larger dataset automatically gives the engineering team a more accurate understanding of every community problem.</button>
+<button class="opt" onclick="answer(13,this,true,'Good evidence collection is purposeful: the team should identify the uncertainty and collect the minimum useful information needed to distinguish realistic explanations or decisions.')">B. More data is useful when it is connected to a specific unanswered question, uncertainty or decision that the team needs to resolve.</button>
+<button class="opt" onclick="answer(13,this,false,'Data volume alone does not guarantee understanding, and collecting irrelevant information can consume time without improving the decision.')">C. Data collection should continue for as long as possible because the team should avoid making any engineering decision until every possible variable has been measured.</button>
+<button class="opt" onclick="answer(13,this,false,'One data point can be informative, but important engineering conclusions often require enough repeated evidence to understand variation and avoid over-generalising.')">D. One measurement is generally enough if it appears to support the team’s preferred explanation of what is causing the community problem.</button>
+</div><div id="f13" class="feedback"></div><div class="row"><span></span><button id="n13" class="btn next" onclick="go(14)">Next →</button></div>
+</section>
+
+<section class="screen" id="s14">
+<h2>Question 14 — Which statement keeps evidence and inference separate?</h2>
+<div class="options">
+<button class="opt" onclick="answer(14,this,false,'This combines an observation with an untested conclusion about the reason behind the behaviour.')">A. “The bin was full, so students clearly caused the problem by ignoring the waste-segregation rules.”</button>
+<button class="opt" onclick="answer(14,this,true,'The first clause records an observation while the second clearly identifies an inference that still needs evidence.')">B. “The bin was full at 1:00 PM; the cause of the overflow is still unknown and needs further investigation.”</button>
+<button class="opt" onclick="answer(14,this,false,'The statement jumps from an observation to a particular solution without showing that the selected intervention addresses the cause.')">C. “The bin was full at 1:00 PM, so the community should install a larger smart bin immediately.”</button>
+<button class="opt" onclick="answer(14,this,false,'This assigns a behavioural cause without evidence linking the observed overflow to a particular user group or action.')">D. “The bin was full at 1:00 PM, which proves that users are not taking responsibility for waste management.”</button>
+</div><div id="f14" class="feedback"></div><div class="row"><span></span><button id="n14" class="btn next" onclick="go(15)">Next →</button></div>
+</section>
+
+<section class="screen" id="s15">
+<h2>Question 15 — What does “think before you build” mean?</h2>
+<div class="options">
+<button class="opt" onclick="answer(15,this,false,'Technology can be valuable, but choosing it before understanding the problem can lock the team into an unsuitable direction.')">A. “Start with the technology you already know, build a quick prototype, and then search for evidence showing that the prototype solves a community problem.”</button>
+<button class="opt" onclick="answer(15,this,true,'The mindset is to observe carefully, identify assumptions, gather relevant evidence, and use that understanding to guide later engineering choices.')">B. “Understand what is happening, separate observations from assumptions, collect useful evidence, and then compare engineering responses to the supported problem.”</button>
+<button class="opt" onclick="answer(15,this,false,'Speed is useful only when it does not sacrifice understanding; a quick solution to the wrong problem is not efficient engineering.')">C. “Move quickly to the first practical solution because spending too much time investigating the problem reduces the time available for building and testing.”</button>
+<button class="opt" onclick="answer(15,this,false,'Innovation and advanced technology can be appropriate, but novelty alone does not establish need, feasibility or usefulness in the real context.')">D. “Choose the most innovative technical solution available because a more advanced system is likely to create greater value for the community.”</button>
+</div><div id="f15" class="feedback"></div><div class="row"><span></span><button id="n15" class="btn next" onclick="go(16)">Finish →</button></div>
+</section>
+
+<section class="screen" id="s16">
+<div class="hero">
+<span class="tag">ACTIVITY COMPLETE</span>
+<h2>Think first. Build later.</h2>
+<div class="result"><span id="finalScore">0</span> / 170</div>
+<p class="sub">You practised separating observation from assumption, identifying missing evidence, testing explanations and delaying solution selection until the problem is understood better.</p>
+<div class="card" style="text-align:left">
+<b style="color:var(--accent)">Key takeaway:</b>
+An observation tells you what happened. An assumption tries to explain why. Engineering evidence helps you decide what is actually worth building.
+</div>
+<button class="btn secondary" onclick="location.reload()">PLAY AGAIN</button>
+</div>
+</section>
 
 </div>
+
 <script>
 let score=0,current=0,answered={};
-function update(){document.getElementById('score').textContent=score;document.getElementById('bar').style.width=(current/8*100)+'%';}
-function go(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');current=n;update();window.scrollTo({top:0,behavior:'smooth'});}
+const totalQuestions=15;
+document.getElementById('total').textContent=totalQuestions;
+
+function update(){
+ document.getElementById('score').textContent=score;
+ document.getElementById('done').textContent=Object.keys(answered).length;
+ document.getElementById('bar').style.width=(current/16*100)+'%';
+}
+function go(n){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ const target=document.getElementById('s'+n);
+ if(target)target.classList.add('active');
+ current=n;update();window.scrollTo({top:0,behavior:'smooth'});
+}
 function answer(q,btn,correct,msg){
- if(answered[q])return;answered[q]=true;
+ if(answered[q])return;
+ if(!btn)return;
+ answered[q]=true;
  btn.parentElement.querySelectorAll('.opt').forEach(x=>x.disabled=true);
  const f=document.getElementById('f'+q);
- if(correct){score+=10;btn.classList.add('correct');f.className='feedback show good';f.innerHTML=msg;}
- else{btn.classList.add('wrong');f.className='feedback show bad';f.innerHTML='<b>Not quite.</b> '+msg;}
- document.getElementById('n'+q).classList.add('show');update();
+ if(correct){
+  score+=10;btn.classList.add('correct');
+  f.className='feedback show good';f.innerHTML='<b>Correct.</b> '+msg;
+ }else{
+  btn.classList.add('wrong');
+  f.className='feedback show bad';f.innerHTML='<b>Not quite.</b> '+msg;
+ }
+ const n=document.getElementById('n'+q);if(n)n.classList.add('show');
+ update();
 }
-const oldGo=go;go=function(n){oldGo(n);if(n===6)document.getElementById('finalScore').textContent=score;};
+
+/* ---------- Observation / assumption sorting ---------- */
+let selectedSort=null;
+document.querySelectorAll('#sortItems .drag-item').forEach(item=>{
+ item.draggable=true;
+ item.addEventListener('dragstart',e=>{
+  e.dataTransfer.effectAllowed='move';
+  e.dataTransfer.setData('text/plain','sort');
+  selectedSort=item;item.classList.add('dragging');
+ });
+ item.addEventListener('dragend',()=>{
+  item.classList.remove('dragging');
+  document.querySelectorAll('#obsZone,#assumeZone').forEach(z=>z.classList.remove('over'));
+ });
+ item.addEventListener('click',e=>{
+  e.stopPropagation();
+  document.querySelectorAll('#sortItems .drag-item').forEach(x=>x.classList.remove('selected'));
+  selectedSort=(selectedSort===item)?null:item;
+  if(selectedSort){
+   item.classList.add('selected');
+   document.querySelectorAll('#obsZone,#assumeZone').forEach(z=>z.classList.add('target'));
+  }else{
+   document.querySelectorAll('#obsZone,#assumeZone').forEach(z=>z.classList.remove('target'));
+  }
+ });
+});
+['obsZone','assumeZone'].forEach(id=>{
+ const zone=document.getElementById(id);
+ zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over')});
+ zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+ zone.addEventListener('drop',e=>{
+  e.preventDefault();zone.classList.remove('over');
+  if(selectedSort){zone.appendChild(selectedSort);selectedSort.classList.remove('dragging','selected');selectedSort=null;clearTargets();checkSort();}
+ });
+ zone.addEventListener('click',()=>{
+  if(selectedSort && document.getElementById('sortItems').contains(selectedSort)){
+   zone.appendChild(selectedSort);selectedSort.classList.remove('selected');selectedSort=null;clearTargets();checkSort();
+  }
+ });
+});
+function clearTargets(){document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'))}
+function checkSort(){
+ if(document.querySelectorAll('#sortItems .drag-item').length)return;
+ const obs=[...document.querySelectorAll('#obsZone .drag-item')];
+ const ass=[...document.querySelectorAll('#assumeZone .drag-item')];
+ const ok=obs.length===3&&ass.length===3&&obs.every(x=>x.dataset.kind==='obs')&&ass.every(x=>x.dataset.kind==='assume');
+ const f=document.getElementById('sortFeedback');
+ if(ok){
+  if(!answered[6]){score+=10;answered[6]=true;}
+  f.className='feedback show good';
+  f.innerHTML='<b>Excellent classification.</b> The observations can be recorded directly; the assumptions or solution leaps require evidence before being treated as conclusions.';
+  document.getElementById('n6').classList.add('show');
+ }else{
+  f.className='feedback show bad';
+  f.innerHTML='<b>Review the cards.</b> Ask: “Could I directly see, count, time or record this?” If not, it may be an assumption or a solution leap.';
+ }
+ update();
+}
+
+/* ---------- Process sequence ---------- */
+let selectedRank=null,dragRank=null;
+document.querySelectorAll('#rankItems .drag-item').forEach(item=>{
+ item.draggable=true;
+ item.addEventListener('dragstart',e=>{
+  dragRank=item;item.classList.add('dragging');
+  e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain','rank');
+ });
+ item.addEventListener('dragend',()=>{
+  item.classList.remove('dragging');dragRank=null;
+  document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('over'));
+ });
+ item.addEventListener('click',e=>{
+  e.stopPropagation();
+  document.querySelectorAll('#rankItems .drag-item').forEach(x=>x.classList.remove('selected'));
+  selectedRank=(selectedRank===item)?null:item;
+  document.querySelectorAll('.rank-row').forEach(r=>r.classList.toggle('target',!!selectedRank));
+  if(selectedRank)item.classList.add('selected');
+ });
+});
+document.querySelectorAll('#rankList .rank-row').forEach(row=>{
+ row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('over')});
+ row.addEventListener('dragleave',()=>row.classList.remove('over'));
+ row.addEventListener('drop',e=>{
+  e.preventDefault();row.classList.remove('over');
+  if(dragRank)placeRank(dragRank,row);
+ });
+ row.addEventListener('click',()=>{
+  if(selectedRank && document.getElementById('rankItems').contains(selectedRank))placeRank(selectedRank,row);
+ });
+});
+function placeRank(item,row){
+ const slot=row.querySelector('.rank-slot');
+ const old=slot.querySelector('.placed-rank');
+ if(old){
+  const original=[...document.querySelectorAll('#rankItems .drag-item')].find(x=>x.dataset.order===old.dataset.order);
+  if(original)original.style.display='';
+  old.remove();
+ }
+ const clone=item.cloneNode(true);
+ clone.draggable=false;clone.classList.remove('selected','dragging');clone.classList.add('placed-rank');
+ clone.addEventListener('click',e=>{
+  e.stopPropagation();
+  const original=[...document.querySelectorAll('#rankItems .drag-item')].find(x=>x.dataset.order===clone.dataset.order);
+  if(original)original.style.display='';
+  clone.remove();checkSequence();
+ });
+ slot.appendChild(clone);
+ item.style.display='none';item.classList.remove('selected');selectedRank=null;
+ document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('target'));
+ checkSequence();
+}
+function checkSequence(){
+ const rows=[...document.querySelectorAll('#rankList .rank-row')];
+ if(rows.some(r=>!r.querySelector('.rank-slot .placed-rank')))return;
+ const vals=rows.map(r=>Number(r.querySelector('.rank-slot .placed-rank').dataset.order));
+ const f=document.getElementById('rankFeedback');
+ if(vals.every((v,i)=>v===i+1)){
+  if(!answered[10]){score+=10;answered[10]=true;}
+  f.className='feedback show good';
+  f.innerHTML='<b>Correct sequence.</b> First observe the situation, then separate knowns from assumptions, collect missing evidence, define the evidence-supported problem, and only then compare possible responses.';
+  document.getElementById('n10').classList.add('show');
+ }else{
+  f.className='feedback show bad';
+  f.innerHTML='<b>Think about the order.</b> The team should not explain or solve the problem before it has observed the situation and collected the evidence needed to test its assumptions.';
+ }
+ update();
+}
+
+const oldGo=go;
+go=function(n){
+ oldGo(n);
+ if(n===16)document.getElementById('finalScore').textContent=score;
+}
 update();
-</script></body></html>
+</script>
+</body>
+</html>
