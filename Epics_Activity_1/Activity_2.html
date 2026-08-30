@@ -1,171 +1,208 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Activity 2: People & Community</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 2: People & Community — Extended</title>
 <style>
-:root{--bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;--muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;--warn:#ffc15a;--line:#2c4161}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17335a 0,#07111f 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-.wrap{max-width:900px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;letter-spacing:.7px}.brand b{color:var(--accent)}.stats{display:flex;gap:8px}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
-.progress{height:8px;background:#0c1829;border-radius:9px;margin:16px 0 24px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good))}
-.screen{display:none;animation:fade .3s}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:clamp(28px,4vw,38px);line-height:1.12;margin:8px 0 16px}.accent{color:var(--accent)}.sub{color:var(--muted);font-size:19px;line-height:1.55}
-.card,.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}.scenario{font-size:22px;line-height:1.55}.scenario strong{color:var(--warn);font-size:18px;letter-spacing:.5px}
-.options{display:grid;gap:13px;margin:20px 0}.opt{padding:18px 19px;border-radius:14px;text-align:left;background:#0d192b;border:1px solid var(--line);color:var(--text);font-size:20px;line-height:1.38;cursor:pointer}.opt:hover{border-color:var(--accent)}.opt:disabled{cursor:default}.correct{border-color:var(--good)!important;background:rgba(113,220,145,.12)!important}.wrong{border-color:var(--bad)!important;background:rgba(240,112,120,.1)!important}
-.feedback{display:none;padding:17px 18px;border-radius:13px;background:#0d192b;border-left:5px solid var(--accent);line-height:1.55;font-size:19px}.feedback.show{display:block}.feedback.good{border-color:var(--good)}.feedback.bad{border-color:var(--bad)}
-.btn{border:0;border-radius:13px;padding:14px 22px;background:var(--accent);color:#041017;font-size:18px;font-weight:800;cursor:pointer}.btn.next{display:none}.btn.next.show{display:inline-block}.btn.secondary{background:#18273d;color:#fff;border:1px solid var(--line)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}.hero{text-align:center;padding:50px 10px}.tag{display:inline-block;border:1px solid var(--line);padding:6px 10px;border-radius:99px;color:var(--muted);font-size:13px}
-.result{font-size:42px;font-weight:800;color:var(--accent);text-align:center}.mini{font-size:16px;color:var(--muted)}
-.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
-.dropzone{min-height:210px;padding:18px;border:2px dashed var(--line);border-radius:16px;background:#0d192b}
-.dropzone h3{margin:0 0 12px;font-size:22px}
-.drag-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-.drag-item{
-  user-select:none;-webkit-user-select:none;
-  cursor:pointer;background:var(--panel2);border:1px solid var(--line);
-  padding:15px 17px;border-radius:12px;font-size:19px;line-height:1.35;
-  min-height:52px;display:flex;align-items:center;
+:root{
+  --bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;
+  --muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;
+  --warn:#ffc15a;--line:#2c4161
 }
-.drag-item:active{transform:scale(.99)}
-.drag-item.selected{
-  border-color:var(--accent)!important;
-  background:rgba(64,214,232,.12)!important;
-  box-shadow:0 0 0 2px rgba(64,214,232,.18);
-}
-.drag-item.dragging{opacity:.35}
-.dropzone{
-  min-height:210px;padding:18px;border:2px dashed var(--line);
-  border-radius:16px;background:#0d192b;transition:.15s
-}
-.dropzone h3{margin:0 0 12px;font-size:22px}
-.dropzone.target,.dropzone.over{border-color:var(--accent);background:rgba(64,214,232,.08)}
-.rank-list{display:grid;gap:10px;margin:18px 0}
-.rank-row{
-  display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;
-  padding:12px;background:#0d192b;border:1px solid var(--line);
-  border-radius:13px;font-size:19px;min-height:60px
-}
-.rank-row.target,.rank-row.over{border-color:var(--accent);background:rgba(64,214,232,.08)}
-.rank-no{
-  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;background:var(--panel2);border:1px solid var(--line);
-  font-weight:800
-}
-.rank-slot{min-height:36px;display:flex;align-items:center}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#17335a 0,#07111f 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+.wrap{max-width:980px;margin:auto;padding:22px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.7px}.brand b{color:var(--accent)}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-size:16px}
+.progress{height:9px;background:#0c1829;border-radius:9px;margin:16px 0 20px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good))}
+.interaction{background:rgba(64,214,232,.07);border:1px solid rgba(64,214,232,.25);border-radius:13px;padding:13px 16px;color:var(--muted);font-size:17px;line-height:1.45;margin-bottom:20px}
+.screen{display:none;animation:fade .3s}.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:12px 0}
+h2{font-size:clamp(29px,4.5vw,38px);line-height:1.12;margin:8px 0 16px}
+.accent{color:var(--accent)}
+.sub{color:var(--muted);font-size:19px;line-height:1.55}
+.card,.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}
+.scenario{font-size:22px;line-height:1.55}
+.scenario strong{color:var(--warn);font-size:18px;letter-spacing:.5px}
+.options{display:grid;gap:13px;margin:20px 0}
+.opt{padding:18px 19px;border-radius:14px;text-align:left;background:#0d192b;border:1px solid var(--line);color:var(--text);font-size:20px;line-height:1.42;cursor:pointer;transition:.18s}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt:disabled{cursor:default}
+.correct{border-color:var(--good)!important;background:rgba(113,220,145,.12)!important}
+.wrong{border-color:var(--bad)!important;background:rgba(240,112,120,.1)!important}
+.feedback{display:none;padding:17px 18px;border-radius:13px;background:#0d192b;border-left:5px solid var(--accent);line-height:1.55;font-size:19px}
+.feedback.show{display:block}.feedback.good{border-color:var(--good)}.feedback.bad{border-color:var(--bad)}
+.btn{border:0;border-radius:13px;padding:14px 22px;background:var(--accent);color:#041017;font-size:18px;font-weight:800;cursor:pointer}
+.btn.next{display:none}.btn.next.show{display:inline-block}.btn.secondary{background:#18273d;color:#fff;border:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
+.hero{text-align:center;padding:50px 10px}
+.tag{display:inline-block;border:1px solid var(--line);padding:7px 11px;border-radius:99px;color:var(--muted);font-size:14px}
+.result{font-size:44px;font-weight:800;color:var(--accent);text-align:center}
 .mini{font-size:16px;color:var(--muted)}
-.note{background:rgba(255,193,90,.08);border:1px solid rgba(255,193,90,.35);border-radius:14px;padding:16px;font-size:18px;line-height:1.5}
-@media(max-width:700px){.drag-area{grid-template-columns:1fr}.opt{font-size:18px}.scenario{font-size:20px}}
-@media(max-width:600px){.wrap{padding:14px}.row{align-items:flex-start;flex-direction:column}}
+.drag-area{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.dropzone{min-height:220px;padding:18px;border:2px dashed var(--line);border-radius:16px;background:#0d192b;transition:.15s}
+.dropzone h3{margin:0 0 14px;font-size:22px}
+.dropzone.over,.dropzone.target{border-color:var(--accent);background:rgba(64,214,232,.08)}
+.drag-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.drag-item{user-select:none;-webkit-user-select:none;cursor:grab;background:var(--panel2);border:1px solid var(--line);padding:14px 16px;border-radius:12px;font-size:18px;line-height:1.3}
+.drag-item:active{cursor:grabbing}
+.drag-item.selected{border-color:var(--accent);box-shadow:0 0 0 2px rgba(64,214,232,.18);background:rgba(64,214,232,.10)}
+.drag-item.dragging{opacity:.45}
+.rank-list{display:grid;gap:10px;margin:18px 0}
+.rank-row{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;padding:13px;background:#0d192b;border:1px solid var(--line);border-radius:13px;font-size:19px;min-height:60px}
+.rank-row.over,.rank-row.target{border-color:var(--accent);background:rgba(64,214,232,.08)}
+.rank-no{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--line);font-weight:800}
+.rank-slot{min-height:36px;display:flex;align-items:center}
+@media(max-width:700px){.wrap{padding:14px}.row{align-items:flex-start;flex-direction:column}.drag-area{grid-template-columns:1fr}.opt{font-size:18px}.scenario{font-size:20px}.drag-item{width:100%}}
 </style>
-</head><body><div class="wrap">
-<div class="top"><div class="brand"><b>EPICS</b> • Activity 2: People & Community</div><div class="stats"><div class="pill">⭐ Score: <span id="score">0</span></div></div></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
+</head>
+<body>
+<div class="wrap">
 
+<div class="top">
+  <div class="brand"><b>EPICS</b> • Activity 2: People & Community</div>
+  <div class="stats">
+    <div class="pill">⭐ Score: <span id="score">0</span></div>
+    <div class="pill">Questions: <span id="done">0</span>/<span id="total">15</span></div>
+  </div>
+</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="interaction"><b style="color:var(--accent)">Interact:</b> On desktop, press and drag a card. On mobile/tablet, tap a card and then tap the destination.</div>
 
 <section class="screen active" id="s0">
-  <div class="hero">
-    <span class="tag">ACTIVITY 2 • ABOUT 40–50 MINUTES</span>
-    <h1>People & <span class="accent">Community</span></h1>
-    <p class="sub">Explore stakeholders, community needs, listening, observation, inclusion, and ethical engagement before deciding what an engineering project should do.</p>
-    <div class="note"><b>Core idea:</b> A community problem is experienced by people. Different people may see different parts of the same problem.</div>
-    <button class="btn" onclick="go(1)">START →</button>
-  </div>
+<div class="hero">
+<span class="tag">ACTIVITY 2 • ABOUT 40–50 MINUTES</span>
+<h1>People & <span class="accent">Community</span></h1>
+<p class="sub">Explore stakeholders, listening, observation, inclusion and community needs before deciding what an engineering project should build.</p>
+<div class="card" style="text-align:left">
+<b style="color:var(--accent)">Core idea:</b>
+Different people can experience different parts of the same problem. Good EPICS work starts by understanding those perspectives.
+</div>
+<button class="btn" onclick="go(1)">START →</button>
+</div>
 </section>
 
-<section class="screen" id="s1"><h2>Question 1 — Who is a stakeholder?</h2><p class="sub">Choose the definition that is broad enough for an engineering project.</p>
+<section class="screen" id="s1">
+<h2>Question 1 — Who is a stakeholder?</h2>
+<p class="sub">Choose the definition that is broad enough for a community-centred engineering project.</p>
 <div class="options">
-<button class="opt" onclick="answer(1,this,false,'A stakeholder is not limited to the person who pays. Users, maintainers, decision-makers and affected groups can all matter.')">A. A stakeholder is only the individual or organisation that pays for the engineering project and approves its budget.</button>
-<button class="opt" onclick="answer(1,this,true,'A stakeholder can use, experience, support, maintain, approve, regulate, fund, or otherwise be affected by the project.')">B. A stakeholder is a person, group, or organisation connected to, affected by, or able to influence the project.</button>
-<button class="opt" onclick="answer(1,this,false,'The engineering team is only one stakeholder group and does not represent everyone affected by the project.')">C. A stakeholder is only the group of engineering students and faculty members who are responsible for designing and building the solution.</button>
-<button class="opt" onclick="answer(1,this,false,'Technical qualifications do not determine whether someone is a stakeholder.')">D. A stakeholder is only a person with an engineering degree who has enough technical knowledge to evaluate the proposed design.</button>
-</div><div id="f1" class="feedback"></div><div class="row"><span></span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div></section>
+<button class="opt" onclick="answer(1,this,false,'A stakeholder is not limited to the person who pays; users, maintainers, decision-makers and affected groups can also matter.')">A. A stakeholder is only the individual or organisation that pays for the engineering project and approves its budget.</button>
+<button class="opt" onclick="answer(1,this,true,'A stakeholder can use, experience, support, maintain, approve, regulate, fund or otherwise be affected by the project.')">B. A stakeholder is a person, group or organisation connected to, affected by, or able to influence the project.</button>
+<button class="opt" onclick="answer(1,this,false,'The engineering team is only one stakeholder group and cannot represent everyone affected by the project.')">C. A stakeholder is only the engineering team because engineers are responsible for making the technical decisions in the project.</button>
+<button class="opt" onclick="answer(1,this,false,'Technical qualification is not what makes someone a stakeholder; the relationship to the project is what matters.')">D. A stakeholder is only a technical expert who has enough engineering knowledge to evaluate the proposed design.</button>
+</div><div id="f1" class="feedback"></div><div class="row"><span></span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div>
+</section>
 
-<section class="screen" id="s2"><h2>Question 2 — Whose perspective should you hear?</h2>
-<div class="scenario"><strong>SCENARIO</strong><br><br>A school wants to improve access to drinking water. Students use the water points every day, teachers supervise the school, maintenance staff repair the plumbing, and management controls spending and approval.</div>
+<section class="screen" id="s2">
+<h2>Question 2 — Who should the team speak to?</h2>
+<div class="scenario"><strong>SCENARIO</strong><br><br>A school wants to improve access to drinking water. Students use the water points every day, teachers supervise them, maintenance staff repair the plumbing, and management controls spending and approval.</div>
 <div class="options">
-<button class="opt" onclick="answer(2,this,false,'Students are essential users, but they cannot provide the complete picture about maintenance, approval, cost, reliability, and system constraints.')">A. Speak only with students because they use the water points most often and therefore already represent every important perspective.</button>
-<button class="opt" onclick="answer(2,this,true,'Different stakeholders hold different pieces of the problem: users describe experience, maintenance staff know failure points, and management understands constraints.')">B. Speak with students, teachers, maintenance staff and relevant management so that the team can compare user experience, operation and constraints.</button>
-<button class="opt" onclick="answer(2,this,false,'Management can explain budgets and approval, but cannot fully describe the day-to-day user experience of drinking-water access.')">C. Speak only with the principal because the person in charge of the school can provide all the information needed for an engineering design.</button>
-<button class="opt" onclick="answer(2,this,false,'Engineers bring useful skills, but assuming they already understand the community can introduce avoidable design errors.')">D. Speak to nobody initially because the engineering team should first decide what the problem is and then ask the community to approve the finished solution.</button>
-</div><div id="f2" class="feedback"></div><div class="row"><span></span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div></section>
+<button class="opt" onclick="answer(2,this,false,'Students are important users, but they cannot provide the complete picture about maintenance, approval, cost, reliability and system constraints.')">A. Speak only with students because they use the water points most often and can therefore describe every important project requirement.</button>
+<button class="opt" onclick="answer(2,this,true,'Different stakeholders provide different information about use, operation, maintenance, approval and constraints. Comparing these views gives a stronger problem picture.')">B. Speak with students, teachers, maintenance staff and relevant management because each can contribute different information.</button>
+<button class="opt" onclick="answer(2,this,false,'Management may understand approval and cost, but cannot fully describe the day-to-day user experience of drinking-water access.')">C. Speak only with the principal because the person responsible for the school can provide all the information needed for an engineering design.</button>
+<button class="opt" onclick="answer(2,this,false,'The engineering team should not assume it already understands the community situation without talking to people who experience and manage it.')">D. Speak to nobody initially because the engineering team should decide the problem independently before asking users to review it.</button>
+</div><div id="f2" class="feedback"></div><div class="row"><span></span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div>
+</section>
 
-<section class="screen" id="s3"><h2>Question 3 — Primary or supporting stakeholder?</h2>
-<p class="sub">A maintenance worker will regularly inspect and repair a proposed community water-level indicator.</p>
+<section class="screen" id="s3">
+<h2>Question 3 — Primary or supporting stakeholder?</h2>
+<p class="sub">A maintenance worker will regularly repair a proposed water-level indicator. Which description is best?</p>
 <div class="options">
-<button class="opt" onclick="answer(3,this,false,'The worker may not be the primary user, but that does not make the worker irrelevant to the project or its long-term success.')">A. The worker is not a stakeholder because the worker does not use the water-level information in exactly the same way as the residents.</button>
-<button class="opt" onclick="answer(3,this,true,'Maintenance staff may be a supporting stakeholder whose knowledge strongly affects installation, repair, reliability and long-term usefulness.')">B. The worker is a supporting stakeholder with important knowledge about maintenance, failure, access and long-term operation.</button>
-<button class="opt" onclick="answer(3,this,false,'A stakeholder role depends on the relationship to the project, not on who happens to use the system most visibly.')">C. The worker automatically becomes the primary user because maintenance staff have technical responsibility for keeping the device working.</button>
-<button class="opt" onclick="answer(3,this,false,'Stakeholder status does not depend on whose opinion is the loudest or most influential in a discussion.')">D. The worker becomes the most important stakeholder if that person has a stronger opinion than the residents who actually use the system.</button>
-</div><div id="f3" class="feedback"></div><div class="row"><span></span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div></section>
+<button class="opt" onclick="answer(3,this,false,'The worker may not directly use the service like residents do, but still has an important relationship with the project.')">A. The worker is not a stakeholder because the worker does not use the water service in exactly the same way as the residents.</button>
+<button class="opt" onclick="answer(3,this,true,'Maintenance staff may be a supporting stakeholder whose knowledge strongly affects installation, reliability, repair and long-term operation.')">B. The worker is a supporting stakeholder whose maintenance knowledge can strongly influence reliability and long-term success.</button>
+<button class="opt" onclick="answer(3,this,false,'Being responsible for maintenance does not automatically make someone the primary user of the service or product.')">C. The worker automatically becomes the primary user because maintenance staff have technical responsibility for the equipment.</button>
+<button class="opt" onclick="answer(3,this,false,'Stakeholder status is not determined by who speaks most strongly or whose opinion is the loudest in a meeting.')">D. The worker becomes the most important stakeholder if that person has a stronger opinion than the people using the system.</button>
+</div><div id="f3" class="feedback"></div><div class="row"><span></span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div>
+</section>
 
-<section class="screen" id="s4"><h2>Question 4 — Which interview question is most useful?</h2>
-<div class="scenario"><strong>SCENARIO</strong><br><br>You are meeting a community member who regularly uses a public service that your student team is studying.</div>
+<section class="screen" id="s4">
+<h2>Question 4 — Which interview question is most useful?</h2>
+<div class="scenario"><strong>CONTEXT</strong><br><br>You are meeting a community member who regularly performs the task your student team is studying.</div>
 <div class="options">
-<button class="opt" onclick="answer(4,this,false,'This question assumes that the team already knows the problem and has already selected a possible solution.')">A. “Would you like the new device we are planning to install, and which colour would you prefer it to be?”</button>
-<button class="opt" onclick="answer(4,this,true,'An open question allows the person to describe the current process, difficulty, workarounds, priorities and context in their own words.')">B. “Can you describe how you currently do this task, what usually makes it difficult, and what you do when the problem occurs?”</button>
-<button class="opt" onclick="answer(4,this,false,'Leading questions can pressure participants into agreeing with the engineering team instead of revealing their actual experience.')">C. “You agree that a mobile application would be the best way to solve this problem, so what features should we add to it?”</button>
-<button class="opt" onclick="answer(4,this,false,'A vague question is unlikely to produce specific evidence about the current task, difficulty or context.')">D. “Everything is generally fine here, isn’t it, so is there anything small that you think our team should change?”</button>
-</div><div id="f4" class="feedback"></div><div class="row"><span></span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div></section>
+<button class="opt" onclick="answer(4,this,false,'This question assumes the team already knows the preferred solution before understanding the current experience or difficulty.')">A. “Would you like the new device we are planning to install, and which features would you prefer us to include?”</button>
+<button class="opt" onclick="answer(4,this,true,'An open question lets the stakeholder explain the current process, difficulties, workarounds and priorities in their own words.')">B. “Can you describe how you currently do this task, what is difficult, and what you do when the difficulty occurs?”</button>
+<button class="opt" onclick="answer(4,this,false,'This is a leading question because it asks the participant to agree with a solution the engineering team already prefers.')">C. “You agree that our proposed mobile application is the best solution, so which features should we include first?”</button>
+<button class="opt" onclick="answer(4,this,false,'This wording is vague and suggests that the situation is already satisfactory rather than inviting specific evidence about the task.')">D. “Everything is generally working well here, isn’t it, and is there anything small that you think our team should change?”</button>
+</div><div id="f4" class="feedback"></div><div class="row"><span></span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div>
+</section>
 
-<section class="screen" id="s5"><h2>Scenario 1 — Observe before solving</h2>
+<section class="screen" id="s5">
+<h2>Scenario 1 — Observe before solving</h2>
 <div class="scenario"><strong>CASE</strong><br><br>A wheelchair user says reaching a classroom is difficult. A student team immediately says, “We need to build a ramp.”</div>
 <div class="options">
-<button class="opt" onclick="answer(5,this,false,'A ramp may be one possible intervention, but the team should first understand the entire journey, including surface, door width, slope, signage and other barriers.')">A. Begin designing a ramp immediately because the user has already identified a difficulty and a ramp is a familiar engineering solution.</button>
-<button class="opt" onclick="answer(5,this,true,'The team should understand the route and barriers first. The final intervention could involve a ramp, handrail, doorway change, signage, surface improvement, or another combination.')">B. Study the route and speak with the user before deciding what should change, so the team can identify the actual access barriers.</button>
-<button class="opt" onclick="answer(5,this,false,'A community problem does not need to affect a large number of people before it deserves investigation; severity and user impact also matter.')">C. Ignore the problem because only one person reported the difficulty and therefore it cannot represent a meaningful engineering requirement.</button>
-<button class="opt" onclick="answer(5,this,false,'An automatic door may help in some contexts, but selecting it without investigating the route and barrier is still a technology-first decision.')">D. Build an automatic door instead because accessibility projects should preferably use advanced technology rather than simpler physical changes.</button>
-</div><div id="f5" class="feedback"></div><div class="row"><span></span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div></section>
+<button class="opt" onclick="answer(5,this,false,'A ramp may eventually be appropriate, but the team first needs to understand the whole route, the barriers and what the user actually experiences.')">A. Start designing the ramp immediately because the user has already identified a difficulty and a ramp is a familiar accessibility solution.</button>
+<button class="opt" onclick="answer(5,this,true,'The team should investigate the complete route and user experience first. The eventual response may be a ramp, doorway change, surface improvement or another intervention.')">B. Study the complete route and speak with the user before deciding what should change, so the actual access barriers are understood.</button>
+<button class="opt" onclick="answer(5,this,false,'A problem does not need to affect a large group before it can be investigated; severity, impact and exclusion also matter.')">C. Ignore the issue because only one person has reported the difficulty and therefore it may not represent a meaningful engineering problem.</button>
+<button class="opt" onclick="answer(5,this,false,'An automatic door is another solution choice made before investigating the actual route and access barriers.')">D. Choose an automatic door immediately because an advanced technical solution should provide better accessibility than a simpler physical intervention.</button>
+</div><div id="f5" class="feedback"></div><div class="row"><span></span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div>
+</section>
 
-<section class="screen" id="s6"><h2>Drag & Drop — Who belongs in the stakeholder map?</h2>
-<p class="sub">Drag each card into the group you think best describes its role. Discuss cards that could fit more than one group.</p>
+<section class="screen" id="s6">
+<h2>Drag & Drop — Build the stakeholder picture</h2>
+<p class="sub">Drag each card into the group you think best describes its role. On mobile, tap a card and then tap its destination.</p>
 <div class="drag-area">
-<div class="dropzone" id="primaryZone"><h3>DIRECTLY USES / EXPERIENCES</h3><div class="mini">People who directly perform the task or experience the problem.</div></div>
-<div class="dropzone" id="supportZone"><h3>SUPPORTS / ENABLES / MAINTAINS</h3><div class="mini">People who operate, maintain, approve, fund or support the system.</div></div>
+<div class="dropzone" id="primaryZone"><h3>DIRECT USERS / EXPERIENCE</h3><div class="mini">People who directly perform the task or experience the problem.</div></div>
+<div class="dropzone" id="supportZone"><h3>SUPPORT / ENABLE / MAINTAIN</h3><div class="mini">People who maintain, approve, fund, regulate or support the system.</div></div>
 </div>
 <div class="drag-items" id="stakeItems">
-<div class="drag-item" draggable="true" data-answer="primary">Student who uses the school water point</div>
-<div class="drag-item" draggable="true" data-answer="support">Maintenance worker who repairs the plumbing</div>
-<div class="drag-item" draggable="true" data-answer="primary">Wheelchair user who travels through the building</div>
-<div class="drag-item" draggable="true" data-answer="support">School administrator who approves expenditure</div>
-<div class="drag-item" draggable="true" data-answer="primary">Resident who carries water from the community tap</div>
-<div class="drag-item" draggable="true" data-answer="support">Local authority responsible for the public facility</div>
+<div class="drag-item" draggable="true" data-kind="primary">Student who uses the school water point</div>
+<div class="drag-item" draggable="true" data-kind="support">Maintenance worker who repairs the plumbing</div>
+<div class="drag-item" draggable="true" data-kind="primary">Wheelchair user who travels through the building</div>
+<div class="drag-item" draggable="true" data-kind="support">School administrator who approves expenditure</div>
+<div class="drag-item" draggable="true" data-kind="primary">Resident who carries water from the community tap</div>
+<div class="drag-item" draggable="true" data-kind="support">Local authority responsible for the public facility</div>
 </div>
 <div id="dragFeedback" class="feedback"></div>
-<div class="row"><span></span><button id="n6" class="btn next" onclick="go(7)">Next →</button></div></section>
+<div class="row"><span></span><button id="n6" class="btn next" onclick="go(7)">Next →</button></div>
+</section>
 
-<section class="screen" id="s7"><h2>Question 7 — Primary need or assumed solution?</h2>
-<p class="sub">Which statement is strongest for the beginning of an EPICS project?</p>
+<section class="screen" id="s7">
+<h2>Question 7 — Need, observation or assumption?</h2>
+<p class="sub">Choose the statement that records something observable rather than an unsupported judgement.</p>
 <div class="options">
-<button class="opt" onclick="answer(7,this,false,'This specifies a device before the team has established the real need, user priorities or operating context.')">A. “Residents need a sensor-based water-management system with a mobile application and an automated notification feature.”</button>
-<button class="opt" onclick="answer(7,this,true,'This describes the user, task and difficulty while leaving room for multiple engineering solutions to be considered later.')">B. “Residents collecting water from the community point experience unnecessary effort because containers are difficult to carry over the distance to their homes.”</button>
-<button class="opt" onclick="answer(7,this,false,'This is a broad social statement and does not define a specific, observable problem that the project team can investigate.')">C. “Water is an important resource in society, so engineers should use modern technology to improve water management wherever possible.”</button>
-<button class="opt" onclick="answer(7,this,false,'This combines a goal with a predetermined technology and therefore narrows the solution space too early.')">D. “The community should receive a smart monitoring platform that can collect information and automatically recommend the best water-management actions.”</button>
-</div><div id="f7" class="feedback"></div><div class="row"><span></span><button id="n7" class="btn next" onclick="go(8)">Next →</button></div></section>
+<button class="opt" onclick="answer(7,this,true,'This statement is specific, observable and measurable. It records what happened, where and when without assigning a cause.')">A. “Three users waited more than five minutes at the public water point between 9:00 and 9:15.”</button>
+<button class="opt" onclick="answer(7,this,false,'This is an interpretation of how users feel. It would need supporting evidence from interviews, behaviour or other observations.')">B. “Users dislike the public water point because they are unhappy with how the system has been designed.”</button>
+<button class="opt" onclick="answer(7,this,false,'This statement assigns blame and a cause without recording what was actually observed in the field.')">C. “People are careless and therefore leave the water taps running whenever they are in a hurry.”</button>
+<button class="opt" onclick="answer(7,this,false,'This is a broad assumption about an entire community and does not show evidence that every user wants the same solution.')">D. “Everyone in the community wants a mobile application because digital tools are easier for modern users.”</button>
+</div><div id="f7" class="feedback"></div><div class="row"><span></span><button id="n7" class="btn next" onclick="go(8)">Next →</button></div>
+</section>
 
-<section class="screen" id="s8"><h2>Scenario 2 — Whose “need” is it?</h2>
-<div class="scenario"><strong>CASE</strong><br><br>A college team studies waste segregation. Students say the bins are confusing. Housekeeping staff say the labels are unclear. Administrators want compliance data. The team is tempted to build a “smart bin”.</div>
+<section class="screen" id="s8">
+<h2>Scenario 2 — The loudest voice is not the whole community</h2>
+<div class="scenario"><strong>CASE</strong><br><br>During a community meeting, one resident strongly requests a smartphone application. Another explains that several older residents rarely use smartphones and prefer existing communication methods.</div>
 <div class="options">
-<button class="opt" onclick="answer(8,this,false,'The smart bin may become useful later, but it does not yet address what each stakeholder needs or why segregation is failing.')">A. Choose the smart bin immediately because technology will make the waste-segregation system more visible and modern.</button>
-<button class="opt" onclick="answer(8,this,true,'The team should compare the different perspectives first: user understanding, housekeeping workflow, administrative needs and existing constraints.')">B. Understand why users make mistakes, how housekeeping operates the bins, and what information administrators actually need before selecting the intervention.</button>
-<button class="opt" onclick="answer(8,this,false,'Housekeeping staff have valuable knowledge, but excluding students would miss the behaviour and usability side of the problem.')">C. Listen only to housekeeping staff because they handle waste every day and therefore completely represent the needs of all other stakeholders.</button>
-<button class="opt" onclick="answer(8,this,false,'Administrators may define reporting needs, but compliance data alone cannot explain why users are putting waste into the wrong bins.')">D. Listen only to administrators because measurement and reporting are more important than the day-to-day experiences of people using the bins.</button>
-</div><div id="f8" class="feedback"></div><div class="row"><span></span><button id="n8" class="btn next" onclick="go(9)">Next →</button></div></section>
+<button class="opt" onclick="answer(8,this,false,'One strong request is useful information, but it should not automatically become the final requirement for every stakeholder group.')">A. Build the requested application immediately because the most confident participant has already identified the correct solution for the entire community.</button>
+<button class="opt" onclick="answer(8,this,true,'The disagreement is valuable evidence. It suggests the team should investigate different user groups, access, preferences, inclusion and the actual service barrier.')">B. Investigate the different user groups, their access and preferences, and the actual service barrier before deciding whether an application is appropriate.</button>
+<button class="opt" onclick="answer(8,this,false,'Excluding older users could create an intervention that works for one group while leaving another group unable or unwilling to use it.')">C. Focus only on residents who already use smartphones because people who do not use digital services should not influence a digital engineering project.</button>
+<button class="opt" onclick="answer(8,this,false,'Rejecting digital solutions without investigation is also premature; the team should determine where digital tools help and where another channel is needed.')">D. Reject all digital solutions immediately because some residents are uncomfortable with smartphones and may prefer non-digital communication.</button>
+</div><div id="f8" class="feedback"></div><div class="row"><span></span><button id="n8" class="btn next" onclick="go(9)">Next →</button></div>
+</section>
 
-<section class="screen" id="s9"><h2>Question 9 — Open-ended, neutral or leading?</h2>
-<p class="sub">Which question is least likely to bias the stakeholder?</p>
+<section class="screen" id="s9">
+<h2>Question 9 — Which question is neutral?</h2>
+<p class="sub">Choose the question least likely to lead the stakeholder toward the team’s preferred answer.</p>
 <div class="options">
-<button class="opt" onclick="answer(9,this,false,'The phrase “would you not prefer” pushes the respondent toward a particular response and assumes that the new design is desirable.')">A. “Would you not prefer an automatic system, since it would obviously be easier than the manual process you use today?”</button>
-<button class="opt" onclick="answer(9,this,true,'This invites the stakeholder to describe priorities without suggesting what the answer should be.')">B. “When this task is difficult, what matters most to you, and how do you currently manage it?”</button>
-<button class="opt" onclick="answer(9,this,false,'This question suggests that the app is already the preferred solution and asks only for confirmation.')">C. “Which three features should our app include so that the problem can finally be solved in the way you want?”</button>
-<button class="opt" onclick="answer(9,this,false,'The question frames the situation negatively and asks the respondent to agree with the team’s judgement rather than describe their own experience.')">D. “You probably find this process frustrating, so what changes would make our proposed solution easier for you?”</button>
-</div><div id="f9" class="feedback"></div><div class="row"><span></span><button id="n9" class="btn next" onclick="go(10)">Next →</button></div></section>
+<button class="opt" onclick="answer(9,this,false,'The wording pushes the participant toward agreeing with an automatic system and assumes the proposed change is already desirable.')">A. “Would you not prefer an automatic system, since it would obviously be easier than the manual process you use today?”</button>
+<button class="opt" onclick="answer(9,this,true,'The question allows the stakeholder to describe priorities and current practice without suggesting which answer is expected.')">B. “When this task is difficult, what matters most to you, and how do you currently manage it?”</button>
+<button class="opt" onclick="answer(9,this,false,'This assumes that an application is already the preferred solution and asks for feature choices rather than exploring the underlying need.')">C. “Which three features should our application include so that the problem can finally be solved in the way you want?”</button>
+<button class="opt" onclick="answer(9,this,false,'This assumes the participant is frustrated and immediately shifts the discussion toward the team’s proposed solution.')">D. “You probably find this process frustrating, so what changes would make our proposed solution easier for you?”</button>
+</div><div id="f9" class="feedback"></div><div class="row"><span></span><button id="n9" class="btn next" onclick="go(10)">Next →</button></div>
+</section>
 
-<section class="screen" id="s10"><h2>Drag & Drop — Put the community-engagement process in order</h2>
-<p class="sub">Select a stage, then select its numbered position.</p>
+<section class="screen" id="s10">
+<h2>Drag & Drop — Sequence the community-engagement process</h2>
+<p class="sub">Arrange the stages in a sequence that makes sense for an EPICS project. Desktop: drag. Mobile/tablet: tap the card, then tap its position.</p>
 <div class="rank-list" id="rankList">
-<div class="rank-row" data-rank="1"><div class="rank-no">1</div><div class="rank-slot"></div></div>
-<div class="rank-row" data-rank="2"><div class="rank-no">2</div><div class="rank-slot"></div></div>
-<div class="rank-row" data-rank="3"><div class="rank-no">3</div><div class="rank-slot"></div></div>
-<div class="rank-row" data-rank="4"><div class="rank-no">4</div><div class="rank-slot"></div></div>
-<div class="rank-row" data-rank="5"><div class="rank-no">5</div><div class="rank-slot"></div></div>
+<div class="rank-row" data-pos="1"><div class="rank-no">1</div><div class="rank-slot"></div></div>
+<div class="rank-row" data-pos="2"><div class="rank-no">2</div><div class="rank-slot"></div></div>
+<div class="rank-row" data-pos="3"><div class="rank-no">3</div><div class="rank-slot"></div></div>
+<div class="rank-row" data-pos="4"><div class="rank-no">4</div><div class="rank-slot"></div></div>
+<div class="rank-row" data-pos="5"><div class="rank-no">5</div><div class="rank-slot"></div></div>
 </div>
 <div class="drag-items" id="rankItems">
 <div class="drag-item" draggable="true" data-order="1">Listen to users and observe the current situation</div>
@@ -175,61 +212,73 @@ h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:cl
 <div class="drag-item" draggable="true" data-order="5">Choose, test and refine a response using evidence</div>
 </div>
 <div id="rankFeedback" class="feedback"></div>
-<div class="row"><span></span><button id="n10" class="btn next" onclick="go(11)">Next →</button></div></section>
+<div class="row"><span></span><button id="n10" class="btn next" onclick="go(11)">Next →</button></div>
+</section>
 
-<section class="screen" id="s11"><h2>Scenario 3 — The loudest voice is not always the requirement</h2>
-<div class="scenario"><strong>CASE</strong><br><br>During a community meeting, one resident strongly demands a smartphone application. Another resident says the main problem is that older people in the area do not use smartphones regularly.</div>
+<section class="screen" id="s11">
+<h2>Scenario 3 — A good need statement leaves room for solutions</h2>
+<div class="scenario"><strong>CASE</strong><br><br>A college team notices that students struggle to find a free study space during examination weeks.</div>
 <div class="options">
-<button class="opt" onclick="answer(11,this,false,'The loudest request should not automatically become the design requirement; the team needs evidence about the broader population and context.')">A. Build the application because the most confident participant has already identified the solution and the engineering team should respect that decision.</button>
-<button class="opt" onclick="answer(11,this,true,'The disagreement is useful evidence. The team should investigate access, preferences, age, digital literacy, existing practices and the actual service barrier.')">B. Treat the disagreement as a signal to investigate different user groups and understand whether a smartphone-based solution would exclude some people.</button>
-<button class="opt" onclick="answer(11,this,false,'Older users should not automatically be excluded from a digital solution, but their needs and ability to access it must be investigated first.')">C. Ignore older residents because technology projects should be designed mainly for people who are comfortable using smartphones and digital services.</button>
-<button class="opt" onclick="answer(11,this,false,'Rejecting smartphones completely is also a premature design decision; the goal is to understand whether and where digital access is appropriate.')">D. Reject all digital solutions immediately because some community members may not use smartphones comfortably or regularly.</button>
-</div><div id="f11" class="feedback"></div><div class="row"><span></span><button id="n11" class="btn next" onclick="go(12)">Next →</button></div></section>
+<button class="opt" onclick="answer(11,this,false,'This immediately chooses a technology and particular intervention before investigating why students struggle to find space.')">A. Build a mobile booking application so that students can reserve every study room before arriving during examination weeks.</button>
+<button class="opt" onclick="answer(11,this,true,'This identifies users, context and difficulty without deciding whether booking, signage, scheduling or another intervention is best.')">B. Students have difficulty finding available study spaces during examination weeks, leading to wasted time and uncertainty.</button>
+<button class="opt" onclick="answer(11,this,false,'This is broad and positive but does not define a specific user, observable difficulty or clear context that the team can investigate.')">C. The college needs a modern and innovative way to improve the study environment for all students during examinations.</button>
+<button class="opt" onclick="answer(11,this,false,'This chooses occupancy sensors and a dashboard before evidence shows that this technology is the appropriate response to the actual difficulty.')">D. Install occupancy sensors in every study room and connect them to a live dashboard for students and faculty.</button>
+</div><div id="f11" class="feedback"></div><div class="row"><span></span><button id="n11" class="btn next" onclick="go(12)">Next →</button></div>
+</section>
 
-<section class="screen" id="s12"><h2>Question 12 — Observation or assumption?</h2>
-<p class="sub">Which statement is an observation that can be recorded directly?</p>
+<section class="screen" id="s12">
+<h2>Question 12 — Stakeholder concern or obstacle?</h2>
+<div class="scenario"><strong>SCENARIO</strong><br><br>A team proposes an automatic tap-shutoff device. Users like the idea, but the maintenance worker says replacement parts are difficult to obtain locally.</div>
 <div class="options">
-<button class="opt" onclick="answer(12,this,true,'“Three users waited more than five minutes” is observable and can be recorded using a defined method and time measurement.')">A. “Three users waited more than five minutes at the public water point between 9:00 and 9:15.”</button>
-<button class="opt" onclick="answer(12,this,false,'“Users dislike the system” is an interpretation unless you have evidence such as interviews, behaviour, ratings or repeated observations supporting that conclusion.')">B. “Users dislike the public water point because they are unhappy with how the system has been designed.”</button>
-<button class="opt" onclick="answer(12,this,false,'“People are careless” assigns a cause or judgement rather than documenting what actually happened.')">C. “People are careless and therefore leave the water taps running whenever they are in a hurry.”</button>
-<button class="opt" onclick="answer(12,this,false,'“Everyone wants an app” is a generalised assumption unless it has been systematically established from the relevant stakeholder group.')">D. “Everyone in the community wants a mobile application because digital tools are easier for modern users.”</button>
-</div><div id="f12" class="feedback"></div><div class="row"><span></span><button id="n12" class="btn next" onclick="go(13)">Next →</button></div></section>
+<button class="opt" onclick="answer(12,this,false,'User enthusiasm is valuable, but ignoring maintainability could produce a solution that works initially and then fails after a short period.')">A. Ignore the maintenance concern because users are the most important stakeholders and the device has already received positive feedback.</button>
+<button class="opt" onclick="answer(12,this,true,'The maintenance concern reveals a feasibility and sustainability requirement that should be investigated before the design is finalised.')">B. Investigate parts availability and maintenance needs because long-term usefulness depends on more than the initial user reaction.</button>
+<button class="opt" onclick="answer(12,this,false,'More advanced imported components could make the maintenance problem worse, so the team needs evidence before changing the hardware.')">C. Replace the components with more advanced imported parts immediately because better technology should solve maintenance problems automatically.</button>
+<button class="opt" onclick="answer(12,this,false,'A maintenance limitation is useful engineering evidence and should not be hidden simply because it complicates the design story.')">D. Remove the maintenance concern from the report because discussing constraints may make the final engineering design look less successful.</button>
+</div><div id="f12" class="feedback"></div><div class="row"><span></span><button id="n12" class="btn next" onclick="go(13)">Next →</button></div>
+</section>
 
-<section class="screen" id="s13"><h2>Question 13 — What should happen when stakeholders disagree?</h2>
+<section class="screen" id="s13">
+<h2>Question 13 — What should happen when stakeholders disagree?</h2>
 <div class="options">
-<button class="opt" onclick="answer(13,this,false,'Disagreement is not a reason to select the most convenient opinion. It is information that requires further investigation and prioritisation.')">A. Choose the opinion of the person with the highest authority because an engineering team needs one person to make the decision quickly.</button>
-<button class="opt" onclick="answer(13,this,true,'Different perspectives can reveal different requirements. The team should gather evidence, understand trade-offs and make priorities explicit.')">B. Investigate why the stakeholders disagree, gather evidence, identify trade-offs, and document how the final priorities were chosen.</button>
-<button class="opt" onclick="answer(13,this,false,'Averaging opinions can hide important safety, accessibility or contextual differences between stakeholder groups.')">C. Average everyone’s opinions so that each stakeholder receives exactly the same influence, regardless of the nature of the requirement.</button>
-<button class="opt" onclick="answer(13,this,false,'Ignoring disagreement removes useful information and can create a solution that satisfies no important stakeholder adequately.')">D. Ignore the disagreement and proceed with the engineering team’s preferred design because stakeholder discussion should not delay technical progress.</button>
-</div><div id="f13" class="feedback"></div><div class="row"><span></span><button id="n13" class="btn next" onclick="go(14)">Next →</button></div></section>
+<button class="opt" onclick="answer(13,this,false,'Authority can be relevant, but it should not automatically replace evidence from people who use, maintain or are affected by the system.')">A. Choose the opinion of the person with the highest authority because the engineering team needs to make one decision quickly.</button>
+<button class="opt" onclick="answer(13,this,true,'Disagreement can reveal different requirements. The team should investigate the reason, gather evidence, identify trade-offs and document priorities.')">B. Investigate why the stakeholders disagree, gather evidence, identify trade-offs, and document how final priorities were selected.</button>
+<button class="opt" onclick="answer(13,this,false,'Averaging opinions can hide important safety, accessibility or operational differences that cannot simply be reduced to a numerical average.')">C. Average everyone’s opinions so that every stakeholder receives exactly the same influence regardless of the requirement involved.</button>
+<button class="opt" onclick="answer(13,this,false,'Ignoring disagreement removes useful information and can produce a design that fails to satisfy an important stakeholder group.')">D. Ignore the disagreement and proceed with the engineering team’s preferred design so stakeholder discussion does not delay technical work.</button>
+</div><div id="f13" class="feedback"></div><div class="row"><span></span><button id="n13" class="btn next" onclick="go(14)">Next →</button></div>
+</section>
 
-<section class="screen" id="s14"><h2>Scenario 4 — Inclusion changes the design</h2>
-<div class="scenario"><strong>CASE</strong><br><br>A team is designing a public information kiosk. Most students test it successfully. A few older community members struggle to read the screen and cannot reach one of the controls comfortably.</div>
+<section class="screen" id="s14">
+<h2>Scenario 4 — Inclusion can change the design</h2>
+<div class="scenario"><strong>CASE</strong><br><br>A public information kiosk works well for most college students, but older visitors struggle to read the screen and cannot comfortably reach one of the controls.</div>
 <div class="options">
-<button class="opt" onclick="answer(14,this,false,'Designing only for the majority may leave out the very users the community intervention is supposed to serve.')">A. Keep the design unchanged because most users can operate it successfully and the smaller group can ask someone else for help.</button>
-<button class="opt" onclick="answer(14,this,true,'The different experience reveals an accessibility requirement. The team should investigate readability, reach, controls, language and alternative interaction methods.')">B. Treat the difficulty as valid evidence and investigate accessibility changes that allow the different users to interact independently where appropriate.</button>
-<button class="opt" onclick="answer(14,this,false,'Adding features without identifying the actual barrier may increase complexity without improving accessibility.')">C. Add more advanced technology and additional controls because extra features will make the kiosk more useful for every possible user.</button>
-<button class="opt" onclick="answer(14,this,false,'Accessibility should be investigated as part of design rather than treated as a post-project exception or separate task.')">D. Finish the main design first and consider accessibility later only if the project has enough time remaining after the other requirements are completed.</button>
-</div><div id="f14" class="feedback"></div><div class="row"><span></span><button id="n14" class="btn next" onclick="go(15)">Next →</button></div></section>
+<button class="opt" onclick="answer(14,this,false,'Designing only for the majority can exclude a stakeholder group and may mean the project has not adequately solved the community problem.')">A. Keep the design unchanged because most users can operate it successfully and the smaller group can ask someone else for assistance.</button>
+<button class="opt" onclick="answer(14,this,true,'The different user experience is evidence that accessibility is part of the problem. The team should investigate readability, reach and alternative interaction needs.')">B. Treat the difficulty as valid evidence and investigate accessibility changes that allow different users to interact appropriately.</button>
+<button class="opt" onclick="answer(14,this,false,'Adding technology without identifying the actual barrier may increase complexity without making the kiosk more accessible for the affected users.')">C. Add more advanced technology and extra controls because additional features will automatically make the kiosk inclusive for every visitor.</button>
+<button class="opt" onclick="answer(14,this,false,'Accessibility should be investigated during problem definition and design rather than treated as an optional improvement at the end.')">D. Finish the main design first and consider accessibility only if enough time remains after all other engineering work is complete.</button>
+</div><div id="f14" class="feedback"></div><div class="row"><span></span><button id="n14" class="btn next" onclick="go(15)">Next →</button></div>
+</section>
 
-<section class="screen" id="s15"><h2>Question 15 — Why document community interactions?</h2>
-<p class="sub">Choose the strongest engineering reason.</p>
+<section class="screen" id="s15">
+<h2>Question 15 — Why document stakeholder interactions?</h2>
 <div class="options">
-<button class="opt" onclick="answer(15,this,false,'Documentation is not mainly about producing more pages; it should preserve useful evidence and support transparent engineering decisions.')">A. Documentation is mainly useful because a longer report makes a community project look more professional and academically complete.</button>
-<button class="opt" onclick="answer(15,this,true,'Recording who was consulted, what was observed, what changed and why helps the team trace decisions and reduce unsupported assumptions.')">B. Documentation creates an evidence trail showing who was consulted, what was learned, what changed, and why design decisions were made.</button>
-<button class="opt" onclick="answer(15,this,false,'Community interaction changes design decisions in many cases, so recording only positive comments would create a misleading picture.')">C. Documentation should contain mainly positive comments from community members so that the final report demonstrates that the project was well received.</button>
-<button class="opt" onclick="answer(15,this,false,'A complete record can include different opinions and limitations; hiding disagreement weakens the credibility of the engineering process.')">D. Documentation should avoid recording disagreement because reporting conflicting opinions may make the engineering team appear uncertain about the final solution.</button>
-</div><div id="f15" class="feedback"></div><div class="row"><span></span><button id="n15" class="btn next" onclick="go(16)">Finish →</button></div></section>
+<button class="opt" onclick="answer(15,this,false,'A longer report is not the purpose. Documentation is valuable because it preserves evidence and makes engineering decisions traceable.')">A. Documentation is mainly useful because a longer report makes the community project look more professional and academically complete.</button>
+<button class="opt" onclick="answer(15,this,true,'A clear evidence trail helps the team show who was consulted, what was learned, what changed and why decisions were made.')">B. Documentation creates an evidence trail showing who was consulted, what was observed, what changed, and why design decisions were made.</button>
+<button class="opt" onclick="answer(15,this,false,'Recording only positive comments would hide important concerns and could make the project record misleading or incomplete.')">C. Documentation should contain mainly positive community comments so that the final report demonstrates that the engineering project was accepted.</button>
+<button class="opt" onclick="answer(15,this,false,'Disagreement can reveal requirements and trade-offs, so removing it from the record weakens the credibility of the engineering process.')">D. Documentation should avoid recording disagreement because conflicting stakeholder views could make the engineering team appear uncertain.</button>
+</div><div id="f15" class="feedback"></div><div class="row"><span></span><button id="n15" class="btn next" onclick="go(16)">Finish →</button></div>
+</section>
 
 <section class="screen" id="s16">
 <div class="hero">
 <span class="tag">ACTIVITY COMPLETE</span>
 <h2>People are part of the engineering problem.</h2>
-<div class="result"><span id="finalScore"></span> / 150</div>
-<p class="sub">Main idea: understand the community, identify stakeholders, listen without leading, distinguish observations from assumptions, and let evidence shape the project direction.</p>
+<div class="result"><span id="finalScore">0</span> / 170</div>
+<p class="sub">Main idea: identify stakeholders, listen without leading, distinguish observations from assumptions, include different perspectives, and use evidence from people and context to shape the engineering project.</p>
 <button class="btn secondary" onclick="location.reload()">PLAY AGAIN</button>
 </div>
 </section>
+
+</div>
 
 <script>
 let score=0,current=0,answered={};
@@ -243,9 +292,9 @@ function update(){
 }
 function go(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  const target=document.getElementById('s'+n);
-  if(target) target.classList.add('active');
-  current=n; update();
+  const t=document.getElementById('s'+n);
+  if(t)t.classList.add('active');
+  current=n;update();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function answer(q,btn,correct,msg){
@@ -254,142 +303,146 @@ function answer(q,btn,correct,msg){
   btn.parentElement.querySelectorAll('.opt').forEach(x=>x.disabled=true);
   const f=document.getElementById('f'+q);
   if(correct){
-    score+=10;
-    btn.classList.add('correct');
-    f.className='feedback show good';
-    f.innerHTML='<b>Correct.</b> '+msg;
+    score+=10;btn.classList.add('correct');
+    f.className='feedback show good';f.innerHTML='<b>Correct.</b> '+msg;
   }else{
     btn.classList.add('wrong');
-    f.className='feedback show bad';
-    f.innerHTML='<b>Not quite.</b> '+msg;
+    f.className='feedback show bad';f.innerHTML='<b>Not quite.</b> '+msg;
   }
   const n=document.getElementById('n'+q);
   if(n)n.classList.add('show');
   update();
 }
 
-/* =========================================================
-   CLICK / TOUCH STAKEHOLDER SORT
-   Select a card -> select destination.
-   ========================================================= */
-let selectedStake=null;
+/* ---------------- Stakeholder drag + click ---------------- */
+let draggedStake=null,selectedStake=null;
 
 document.querySelectorAll('#stakeItems .drag-item').forEach(item=>{
-  item.draggable=false;
+  item.addEventListener('dragstart',e=>{
+    draggedStake=item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain','stakeholder');
+  });
+  item.addEventListener('dragend',()=>{
+    item.classList.remove('dragging');
+    draggedStake=null;
+    document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('over'));
+  });
   item.addEventListener('click',e=>{
     e.stopPropagation();
-
     if(selectedStake===item){
-      item.classList.remove('selected');
-      selectedStake=null;
+      selectedStake=null;item.classList.remove('selected');
       document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('target'));
-      return;
+    }else{
+      document.querySelectorAll('#stakeItems .drag-item').forEach(x=>x.classList.remove('selected'));
+      selectedStake=item;item.classList.add('selected');
+      document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.add('target'));
     }
-
-    document.querySelectorAll('#stakeItems .drag-item').forEach(x=>x.classList.remove('selected'));
-    selectedStake=item;
-    item.classList.add('selected');
-    document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.add('target'));
   });
 });
 
-document.getElementById('primaryZone').addEventListener('click',()=>{
-  if(!selectedStake)return;
-  document.getElementById('primaryZone').appendChild(selectedStake);
-  selectedStake.classList.remove('selected');
-  selectedStake=null;
-  document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('target'));
-  checkStakeholders();
+document.querySelectorAll('#primaryZone,#supportZone').forEach(zone=>{
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();zone.classList.remove('over');
+    if(draggedStake)moveStake(draggedStake,zone);
+  });
+  zone.addEventListener('click',()=>{
+    if(selectedStake)moveStake(selectedStake,zone);
+  });
 });
 
-document.getElementById('supportZone').addEventListener('click',()=>{
-  if(!selectedStake)return;
-  document.getElementById('supportZone').appendChild(selectedStake);
-  selectedStake.classList.remove('selected');
-  selectedStake=null;
+function moveStake(item,zone){
+  if(!item)return;
+  zone.appendChild(item);
+  item.classList.remove('selected','dragging');
+  selectedStake=null;draggedStake=null;
   document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('target'));
   checkStakeholders();
-});
-
+}
 function checkStakeholders(){
   if(document.querySelectorAll('#stakeItems .drag-item').length)return;
-
-  const primary=[...document.querySelectorAll('#primaryZone .drag-item')];
-  const support=[...document.querySelectorAll('#supportZone .drag-item')];
-  const ok=primary.length===3 && support.length===3 &&
-    primary.every(x=>x.dataset.answer==='primary') &&
-    support.every(x=>x.dataset.answer==='support');
-
+  const p=[...document.querySelectorAll('#primaryZone .drag-item')];
+  const s=[...document.querySelectorAll('#supportZone .drag-item')];
+  const ok=p.length===3&&s.length===3 &&
+    p.every(x=>x.dataset.kind==='primary')&&
+    s.every(x=>x.dataset.kind==='support');
   const f=document.getElementById('dragFeedback');
-
   if(ok){
     if(!answered[6]){score+=10;answered[6]=true;}
     f.className='feedback show good';
-    f.innerHTML='<b>Excellent.</b> You have separated direct users/people experiencing the issue from people who support, maintain, approve or enable the project. In a real project, some stakeholder roles may overlap.';
+    f.innerHTML='<b>Excellent.</b> You have separated people who directly experience the task from people who support, maintain, approve, fund or enable the system.';
     document.getElementById('n6').classList.add('show');
   }else{
     f.className='feedback show bad';
-    f.innerHTML='<b>Review the mapping.</b> A direct stakeholder experiences or performs the task; a supporting stakeholder may maintain, approve, fund, regulate or enable the system. Select the cards and move them to the correct group.';
+    f.innerHTML='<b>Review the mapping.</b> Direct users experience or perform the task. Supporting stakeholders help maintain, approve, fund, regulate or enable the system.';
   }
   update();
 }
 
-/* =========================================================
-   CLICK / TOUCH SEQUENCE
-   Select a stage -> select numbered position.
-   ========================================================= */
-let selectedRank=null;
+/* ---------------- Sequence drag + click ---------------- */
+let draggedRank=null,selectedRank=null;
 
 document.querySelectorAll('#rankItems .drag-item').forEach(item=>{
-  item.draggable=false;
+  item.addEventListener('dragstart',e=>{
+    draggedRank=item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain','rank');
+  });
+  item.addEventListener('dragend',()=>{
+    item.classList.remove('dragging');
+    draggedRank=null;
+    document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.remove('over'));
+  });
   item.addEventListener('click',e=>{
     e.stopPropagation();
-
     if(selectedRank===item){
-      item.classList.remove('selected');
-      selectedRank=null;
+      selectedRank=null;item.classList.remove('selected');
       document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.remove('target'));
-      return;
+    }else{
+      document.querySelectorAll('#rankItems .drag-item').forEach(x=>x.classList.remove('selected'));
+      selectedRank=item;item.classList.add('selected');
+      document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.add('target'));
     }
-
-    document.querySelectorAll('#rankItems .drag-item').forEach(x=>x.classList.remove('selected'));
-    selectedRank=item;
-    item.classList.add('selected');
-    document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.add('target'));
   });
 });
 
 document.querySelectorAll('#rankList .rank-row').forEach(row=>{
-  row.addEventListener('click',e=>{
-    e.stopPropagation();
-    if(!selectedRank)return;
-    placeRankItem(selectedRank,row);
+  row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('over');});
+  row.addEventListener('dragleave',()=>row.classList.remove('over'));
+  row.addEventListener('drop',e=>{
+    e.preventDefault();row.classList.remove('over');
+    if(draggedRank)placeRank(draggedRank,row);
+  });
+  row.addEventListener('click',()=>{
+    if(selectedRank)placeRank(selectedRank,row);
   });
 });
 
-function placeRankItem(item,row){
+function placeRank(item,row){
   if(!item)return;
-
   const slot=row.querySelector('.rank-slot');
-
-  /* Return an existing item to the source list. */
-  const previous=slot.querySelector('.drag-item');
-  if(previous){
-    const source=[...document.querySelectorAll('#rankItems .drag-item')]
-      .find(x=>x.dataset.order===previous.dataset.order);
-    if(source)source.style.display='';
-    previous.remove();
+  const old=slot.querySelector('.placed-rank');
+  if(old){
+    const original=[...document.querySelectorAll('#rankItems .drag-item')]
+      .find(x=>x.dataset.order===old.dataset.order);
+    if(original)original.style.display='';
+    old.remove();
   }
 
   const clone=item.cloneNode(true);
+  clone.classList.remove('selected','dragging');
+  clone.classList.add('placed-rank');
   clone.draggable=false;
-  clone.classList.remove('selected');
 
   clone.addEventListener('click',e=>{
     e.stopPropagation();
-    const source=[...document.querySelectorAll('#rankItems .drag-item')]
+    const original=[...document.querySelectorAll('#rankItems .drag-item')]
       .find(x=>x.dataset.order===clone.dataset.order);
-    if(source)source.style.display='';
+    if(original)original.style.display='';
     clone.remove();
     checkSequence();
   });
@@ -404,20 +457,17 @@ function placeRankItem(item,row){
 
 function checkSequence(){
   const rows=[...document.querySelectorAll('#rankList .rank-row')];
-
-  if(rows.some(r=>!r.querySelector('.rank-slot .drag-item')))return;
-
-  const vals=rows.map(r=>Number(r.querySelector('.rank-slot .drag-item').dataset.order));
+  if(rows.some(r=>!r.querySelector('.rank-slot .placed-rank')))return;
+  const vals=rows.map(r=>Number(r.querySelector('.rank-slot .placed-rank').dataset.order));
   const f=document.getElementById('rankFeedback');
-
   if(vals.every((v,i)=>v===i+1)){
     if(!answered[10]){score+=10;answered[10]=true;}
     f.className='feedback show good';
-    f.innerHTML='<b>Correct sequence.</b> Start by understanding people and the current situation, identify stakeholders and clarify the problem, then develop requirements and explore alternatives before testing and refining a response.';
+    f.innerHTML='<b>Correct sequence.</b> Understand people and the current situation, identify stakeholders, define the problem, then develop requirements and alternatives before choosing, testing and refining a response.';
     document.getElementById('n10').classList.add('show');
   }else{
     f.className='feedback show bad';
-    f.innerHTML='<b>Think about the logic.</b> A team should not define requirements or choose a solution before it understands the people, context and problem. Select a placed stage to remove it, then try again.';
+    f.innerHTML='<b>Think about the logic.</b> The team should understand people and context before defining the problem and selecting a solution. You can click a placed stage to remove it and try again.';
   }
   update();
 }
@@ -429,3 +479,5 @@ go=function(n){
 }
 update();
 </script>
+</body>
+</html>
