@@ -20,11 +20,11 @@ h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:cl
 .drag-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .drag-item{
   user-select:none;-webkit-user-select:none;
-  cursor:grab;background:var(--panel2);border:1px solid var(--line);
+  cursor:pointer;background:var(--panel2);border:1px solid var(--line);
   padding:15px 17px;border-radius:12px;font-size:19px;line-height:1.35;
   min-height:52px;display:flex;align-items:center;
 }
-.drag-item:active{cursor:grabbing}
+.drag-item:active{transform:scale(.99)}
 .drag-item.selected{
   border-color:var(--accent)!important;
   background:rgba(64,214,232,.12)!important;
@@ -159,7 +159,7 @@ h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:cl
 </div><div id="f9" class="feedback"></div><div class="row"><span></span><button id="n9" class="btn next" onclick="go(10)">Next →</button></div></section>
 
 <section class="screen" id="s10"><h2>Drag & Drop — Put the community-engagement process in order</h2>
-<p class="sub">Desktop: drag a stage onto a numbered space. Mobile: tap a stage, then tap the numbered space.</p>
+<p class="sub">Select a stage, then select its numbered position.</p>
 <div class="rank-list" id="rankList">
 <div class="rank-row" data-rank="1"><div class="rank-no">1</div><div class="rank-slot"></div></div>
 <div class="rank-row" data-rank="2"><div class="rank-no">2</div><div class="rank-slot"></div></div>
@@ -254,7 +254,8 @@ function answer(q,btn,correct,msg){
   btn.parentElement.querySelectorAll('.opt').forEach(x=>x.disabled=true);
   const f=document.getElementById('f'+q);
   if(correct){
-    score+=10; btn.classList.add('correct');
+    score+=10;
+    btn.classList.add('correct');
     f.className='feedback show good';
     f.innerHTML='<b>Correct.</b> '+msg;
   }else{
@@ -267,80 +268,47 @@ function answer(q,btn,correct,msg){
   update();
 }
 
-/* =========================
-   STAKEHOLDER SORT
-   ========================= */
+/* =========================================================
+   CLICK / TOUCH STAKEHOLDER SORT
+   Select a card -> select destination.
+   ========================================================= */
 let selectedStake=null;
-let dragStake=null;
 
-const stakeItems=document.querySelectorAll('#stakeItems .drag-item');
-stakeItems.forEach(item=>{
-  item.draggable=true;
-
-  item.addEventListener('dragstart',e=>{
-    dragStake=item;
-    item.classList.add('dragging');
-    e.dataTransfer.effectAllowed='move';
-    e.dataTransfer.setData('text/plain',item.dataset.answer);
-  });
-
-  item.addEventListener('dragend',()=>{
-    item.classList.remove('dragging');
-    dragStake=null;
-    document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('over'));
-  });
-
-  /* Click/tap selection fallback */
+document.querySelectorAll('#stakeItems .drag-item').forEach(item=>{
+  item.draggable=false;
   item.addEventListener('click',e=>{
-    if(item.closest('#primaryZone') || item.closest('#supportZone')) return;
+    e.stopPropagation();
+
     if(selectedStake===item){
       item.classList.remove('selected');
       selectedStake=null;
-      document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'));
-    }else{
-      document.querySelectorAll('#stakeItems .drag-item').forEach(x=>x.classList.remove('selected'));
-      selectedStake=item;
-      item.classList.add('selected');
-      document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.add('target'));
+      document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('target'));
+      return;
     }
+
+    document.querySelectorAll('#stakeItems .drag-item').forEach(x=>x.classList.remove('selected'));
+    selectedStake=item;
+    item.classList.add('selected');
+    document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.add('target'));
   });
 });
 
-['primaryZone','supportZone'].forEach(id=>{
-  const zone=document.getElementById(id);
+document.getElementById('primaryZone').addEventListener('click',()=>{
+  if(!selectedStake)return;
+  document.getElementById('primaryZone').appendChild(selectedStake);
+  selectedStake.classList.remove('selected');
+  selectedStake=null;
+  document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('target'));
+  checkStakeholders();
+});
 
-  zone.addEventListener('dragover',e=>{
-    e.preventDefault();
-    if(dragStake) zone.classList.add('over');
-    e.dataTransfer.dropEffect='move';
-  });
-
-  zone.addEventListener('dragleave',()=>{
-    zone.classList.remove('over');
-  });
-
-  zone.addEventListener('drop',e=>{
-    e.preventDefault();
-    zone.classList.remove('over');
-    if(dragStake){
-      zone.appendChild(dragStake);
-      dragStake.classList.remove('selected');
-      selectedStake=null;
-      document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'));
-      checkStakeholders();
-    }
-  });
-
-  /* Click/tap destination */
-  zone.addEventListener('click',e=>{
-    if(selectedStake && document.getElementById('stakeItems').contains(selectedStake)){
-      zone.appendChild(selectedStake);
-      selectedStake.classList.remove('selected');
-      selectedStake=null;
-      document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'));
-      checkStakeholders();
-    }
-  });
+document.getElementById('supportZone').addEventListener('click',()=>{
+  if(!selectedStake)return;
+  document.getElementById('supportZone').appendChild(selectedStake);
+  selectedStake.classList.remove('selected');
+  selectedStake=null;
+  document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.remove('target'));
+  checkStakeholders();
 });
 
 function checkStakeholders(){
@@ -361,73 +329,41 @@ function checkStakeholders(){
     document.getElementById('n6').classList.add('show');
   }else{
     f.className='feedback show bad';
-    f.innerHTML='<b>Review the mapping.</b> A direct stakeholder experiences or performs the task; a supporting stakeholder may maintain, approve, fund, regulate or enable the system. Try the cards again.';
+    f.innerHTML='<b>Review the mapping.</b> A direct stakeholder experiences or performs the task; a supporting stakeholder may maintain, approve, fund, regulate or enable the system. Select the cards and move them to the correct group.';
   }
   update();
 }
 
-/* =========================
-   PROCESS SEQUENCE SORT
-   ========================= */
+/* =========================================================
+   CLICK / TOUCH SEQUENCE
+   Select a stage -> select numbered position.
+   ========================================================= */
 let selectedRank=null;
-let dragRank=null;
 
-const rankItems=document.querySelectorAll('#rankItems .drag-item');
-rankItems.forEach(item=>{
-  item.draggable=true;
-
-  item.addEventListener('dragstart',e=>{
-    dragRank=item;
-    item.classList.add('dragging');
-    e.dataTransfer.effectAllowed='move';
-    e.dataTransfer.setData('text/plain',item.dataset.order);
-  });
-
-  item.addEventListener('dragend',()=>{
-    item.classList.remove('dragging');
-    dragRank=null;
-    document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('over'));
-  });
-
+document.querySelectorAll('#rankItems .drag-item').forEach(item=>{
+  item.draggable=false;
   item.addEventListener('click',e=>{
-    if(item.closest('.rank-slot')) return;
+    e.stopPropagation();
+
     if(selectedRank===item){
       item.classList.remove('selected');
       selectedRank=null;
-      document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('target'));
-    }else{
-      document.querySelectorAll('#rankItems .drag-item').forEach(x=>x.classList.remove('selected'));
-      selectedRank=item;
-      item.classList.add('selected');
-      document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.add('target'));
+      document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.remove('target'));
+      return;
     }
+
+    document.querySelectorAll('#rankItems .drag-item').forEach(x=>x.classList.remove('selected'));
+    selectedRank=item;
+    item.classList.add('selected');
+    document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.add('target'));
   });
 });
 
 document.querySelectorAll('#rankList .rank-row').forEach(row=>{
-  row.addEventListener('dragover',e=>{
-    e.preventDefault();
-    if(dragRank) row.classList.add('over');
-    e.dataTransfer.dropEffect='move';
-  });
-
-  row.addEventListener('dragleave',()=>{
-    row.classList.remove('over');
-  });
-
-  row.addEventListener('drop',e=>{
-    e.preventDefault();
-    row.classList.remove('over');
-    if(dragRank){
-      placeRankItem(dragRank,row);
-      dragRank=null;
-    }
-  });
-
-  row.addEventListener('click',()=>{
-    if(selectedRank && document.getElementById('rankItems').contains(selectedRank)){
-      placeRankItem(selectedRank,row);
-    }
+  row.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(!selectedRank)return;
+    placeRankItem(selectedRank,row);
   });
 });
 
@@ -436,35 +372,33 @@ function placeRankItem(item,row){
 
   const slot=row.querySelector('.rank-slot');
 
-  /* If this row already has an item, return that item to the source pool. */
+  /* Return an existing item to the source list. */
   const previous=slot.querySelector('.drag-item');
   if(previous){
-    const original=previous.dataset.order;
     const source=[...document.querySelectorAll('#rankItems .drag-item')]
-      .find(x=>x.dataset.order===original && x.style.display==='none');
+      .find(x=>x.dataset.order===previous.dataset.order);
     if(source)source.style.display='';
     previous.remove();
   }
 
   const clone=item.cloneNode(true);
   clone.draggable=false;
-  clone.classList.remove('selected','dragging');
+  clone.classList.remove('selected');
+
   clone.addEventListener('click',e=>{
     e.stopPropagation();
-    if(slot.contains(clone)){
-      const source=[...document.querySelectorAll('#rankItems .drag-item')]
-        .find(x=>x.dataset.order===clone.dataset.order);
-      if(source)source.style.display='';
-      clone.remove();
-      checkSequence();
-    }
+    const source=[...document.querySelectorAll('#rankItems .drag-item')]
+      .find(x=>x.dataset.order===clone.dataset.order);
+    if(source)source.style.display='';
+    clone.remove();
+    checkSequence();
   });
 
   slot.appendChild(clone);
   item.style.display='none';
   item.classList.remove('selected');
   selectedRank=null;
-  document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('target'));
+  document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.remove('target'));
   checkSequence();
 }
 
@@ -483,7 +417,7 @@ function checkSequence(){
     document.getElementById('n10').classList.add('show');
   }else{
     f.className='feedback show bad';
-    f.innerHTML='<b>Think about the logic.</b> A team should not define requirements or choose a solution before it understands the people, context and problem. Rearrange the stages and try again.';
+    f.innerHTML='<b>Think about the logic.</b> A team should not define requirements or choose a solution before it understands the people, context and problem. Select a placed stage to remove it, then try again.';
   }
   update();
 }
