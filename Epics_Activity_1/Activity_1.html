@@ -1,46 +1,542 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Activity 1: EPICS Basics</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Activity 1: EPICS Basics — Extended</title>
 <style>
-:root{--bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;--muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;--warn:#ffc15a;--line:#2c4161}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17335a 0,#07111f 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-.wrap{max-width:900px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;letter-spacing:.7px}.brand b{color:var(--accent)}.stats{display:flex;gap:8px}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
-.progress{height:8px;background:#0c1829;border-radius:9px;margin:16px 0 24px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good))}
-.screen{display:none;animation:fade .3s}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:32px;margin:8px 0 12px}.accent{color:var(--accent)}.sub{color:var(--muted);font-size:17px;line-height:1.5}
-.card,.scenario{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:20px;margin:18px 0}.scenario strong{color:var(--warn)}
-.options{display:grid;gap:10px;margin:18px 0}.opt{padding:15px;border-radius:13px;text-align:left;background:#0d192b;border:1px solid var(--line);color:var(--text);font-size:16px;cursor:pointer}.opt:hover{border-color:var(--accent)}.opt:disabled{cursor:default}.correct{border-color:var(--good)!important;background:rgba(113,220,145,.12)!important}.wrong{border-color:var(--bad)!important;background:rgba(240,112,120,.1)!important}
-.feedback{display:none;padding:15px;border-radius:12px;background:#0d192b;border-left:5px solid var(--accent);line-height:1.5}.feedback.show{display:block}.feedback.good{border-color:var(--good)}.feedback.bad{border-color:var(--bad)}
-.btn{border:0;border-radius:13px;padding:13px 20px;background:var(--accent);color:#041017;font-size:16px;font-weight:800;cursor:pointer}.btn.next{display:none}.btn.next.show{display:inline-block}.btn.secondary{background:#18273d;color:#fff;border:1px solid var(--line)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}.hero{text-align:center;padding:50px 10px}.tag{display:inline-block;border:1px solid var(--line);padding:6px 10px;border-radius:99px;color:var(--muted);font-size:13px}
-.result{font-size:42px;font-weight:800;color:var(--accent);text-align:center}.mini{font-size:14px;color:var(--muted)}
-@media(max-width:600px){.wrap{padding:14px}.row{align-items:flex-start;flex-direction:column}}
+:root{
+  --bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;
+  --muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;
+  --warn:#ffc15a;--line:#2c4161;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#17335a 0,#07111f 55%);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+}
+.wrap{max-width:980px;margin:auto;padding:22px}
+.top{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  flex-wrap:wrap
+}
+.brand{font-weight:800;letter-spacing:.7px}
+.brand b{color:var(--accent)}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.pill{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:999px;padding:9px 13px;font-size:16px
+}
+.progress{
+  height:9px;background:#0c1829;border-radius:9px;margin:16px 0 24px;overflow:hidden
+}
+.bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--accent),var(--good))
+}
+.screen{display:none;animation:fade .3s}
+.screen.active{display:block}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:12px 0}
+h2{font-size:clamp(28px,4vw,38px);line-height:1.12;margin:8px 0 16px}
+h3{font-size:24px}
+.accent{color:var(--accent)}
+.sub{
+  color:var(--muted);font-size:19px;line-height:1.55
+}
+.card,.scenario{
+  background:linear-gradient(145deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0
+}
+.scenario{
+  font-size:22px;line-height:1.55
+}
+.scenario strong{color:var(--warn);font-size:18px;letter-spacing:.5px}
+.options{display:grid;gap:13px;margin:20px 0}
+.opt{
+  padding:18px 19px;border-radius:14px;text-align:left;
+  background:#0d192b;border:1px solid var(--line);color:var(--text);
+  font-size:20px;line-height:1.38;cursor:pointer;transition:.18s
+}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt:disabled{cursor:default}
+.correct{border-color:var(--good)!important;background:rgba(113,220,145,.12)!important}
+.wrong{border-color:var(--bad)!important;background:rgba(240,112,120,.10)!important}
+.feedback{
+  display:none;padding:17px 18px;border-radius:13px;background:#0d192b;
+  border-left:5px solid var(--accent);line-height:1.55;
+  font-size:19px
+}
+.feedback.show{display:block}
+.feedback.good{border-color:var(--good)}
+.feedback.bad{border-color:var(--bad)}
+.btn{
+  border:0;border-radius:13px;padding:14px 22px;background:var(--accent);
+  color:#041017;font-size:18px;font-weight:800;cursor:pointer
+}
+.btn.next{display:none}
+.btn.next.show{display:inline-block}
+.btn.secondary{
+  background:#18273d;color:#fff;border:1px solid var(--line)
+}
+.row{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px
+}
+.hero{text-align:center;padding:50px 10px}
+.tag{
+  display:inline-block;border:1px solid var(--line);padding:7px 11px;
+  border-radius:99px;color:var(--muted);font-size:14px
+}
+.result{font-size:44px;font-weight:800;color:var(--accent);text-align:center}
+.mini{font-size:16px;color:var(--muted)}
+.drag-area{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0
+}
+.dropzone{
+  min-height:220px;padding:18px;border:2px dashed var(--line);
+  border-radius:16px;background:#0d192b
+}
+.dropzone h3{margin:0 0 14px;font-size:22px}
+.drag-items{
+  display:flex;flex-wrap:wrap;gap:12px;margin-top:16px
+}
+.drag-item{
+  user-select:none;cursor:grab;background:var(--panel2);
+  border:1px solid var(--line);padding:13px 15px;border-radius:12px;
+  font-size:18px;line-height:1.3
+}
+.drag-item:active{cursor:grabbing}
+.dropzone.over{border-color:var(--accent);background:rgba(64,214,232,.08)}
+.sort-status{
+  margin-top:12px;color:var(--muted);font-size:17px
+}
+.rank-list{
+  display:grid;gap:10px;margin:18px 0
+}
+.rank-row{
+  display:grid;grid-template-columns:44px 1fr;
+  align-items:center;gap:12px;padding:13px;
+  background:#0d192b;border:1px solid var(--line);border-radius:13px;
+  font-size:18px
+}
+.rank-no{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--panel2);border:1px solid var(--line);font-weight:800
+}
+.note{
+  background:rgba(255,193,90,.08);
+  border:1px solid rgba(255,193,90,.35);
+  border-radius:14px;padding:16px;font-size:18px;line-height:1.5
+}
+@media(max-width:700px){
+  .wrap{padding:14px}
+  .row{align-items:flex-start;flex-direction:column}
+  .drag-area{grid-template-columns:1fr}
+  .opt{font-size:18px}
+  .scenario{font-size:20px}
+}
 </style>
-</head><body><div class="wrap">
-<div class="top"><div class="brand"><b>EPICS</b> • Activity 1: EPICS Basics</div><div class="stats"><div class="pill">⭐ Score: <span id="score">0</span></div></div></div>
+</head>
+
+<body>
+<div class="wrap">
+
+<div class="top">
+  <div class="brand"><b>EPICS</b> • Activity 1: EPICS Basics — Extended</div>
+  <div class="stats">
+    <div class="pill">⭐ Score: <span id="score">0</span></div>
+    <div class="pill">⏱️ Questions: <span id="done">0</span>/<span id="total">14</span></div>
+  </div>
+</div>
+
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<section class="screen active" id="s0"><div class="hero"><span class="tag">ACTIVITY 1 • ABOUT 20 MINUTES</span><h1>EPICS <span class="accent">Basics</span></h1><p class="sub">A short game to understand what this course is about before we start solving problems.</p><button class="btn" onclick="go(1)">START →</button></div></section>
-<section class="screen" id="s1"><h2>Question 1 — What does EPICS stand for?</h2><div class="options"><button class="opt" onclick="answer(1,this,true,'EPICS stands for Engineering Projects in Community Service.')">A. Engineering Projects in Community Service</button><button class="opt" onclick="answer(1,this,false,'Close in spirit, but this is not the expansion of EPICS.')">B. Engineering Practice in Community Systems</button><button class="opt" onclick="answer(1,this,false,'This is not the course expansion.')">C. Engineering Process for Innovative Community Solutions</button><button class="opt" onclick="answer(1,this,false,'This is not the expansion of EPICS.')">D. Engineering Projects for Industrial and Community Systems</button></div><div id="f1" class="feedback"></div><div class="row"><span></span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div></section>
-<section class="screen" id="s2"><h2>Question 2 — Which situation is closest to an EPICS project?</h2><div class="options"><button class="opt" onclick="answer(2,this,false,'This may be a useful engineering exercise, but no community need or stakeholder is identified.')">A. Build any robot just to demonstrate a sensor.</button><button class="opt" onclick="answer(2,this,true,'A real need, a stakeholder and an engineering response are all present.')">B. Work with a school to understand why students struggle to access drinking water and develop an appropriate response.</button><button class="opt" onclick="answer(2,this,false,'This is primarily an exam-preparation activity.')">C. Memorise the names of engineering tools.</button><button class="opt" onclick="answer(2,this,false,'Winning a competition alone does not make a project community-engaged.')">D. Copy a popular project from the internet without studying where it will be used.</button></div><div id="f2" class="feedback"></div><div class="row"><span></span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div></section>
-<section class="screen" id="s3"><h2>Question 3 — What can engineers do first?</h2><div class="scenario"><strong>SCENARIO:</strong><br><br>Students complain that they often do not know when the college bus will arrive.</div><div class="options"><button class="opt" onclick="answer(3,this,false,'An app may eventually be useful, but the information given does not yet show that an app is the best response.')">A. Immediately build a mobile app.</button><button class="opt" onclick="answer(3,this,true,'First understand what information is missing, who is affected and what constraints exist.')">B. Understand the situation and the people affected before selecting a solution.</button><button class="opt" onclick="answer(3,this,false,'Ignoring the situation does not help define the problem.')">C. Wait and assume the problem will disappear.</button><button class="opt" onclick="answer(3,this,false,'Technology is not automatically the first answer.')">D. Buy sensors before finding out what information users need.</button></div><div id="f3" class="feedback"></div><div class="row"><span></span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div></section>
-<section class="screen" id="s4"><h2>Quick Check — Need or Solution?</h2><p class="sub">Which statement describes the problem rather than proposing a solution?</p><div class="options"><button class="opt" onclick="answer(4,this,false,'This proposes a solution.')">A. “We should build an app.”</button><button class="opt" onclick="answer(4,this,true,'It describes what needs to be improved without deciding the solution.')">B. “Students do not know when the college bus will arrive.”</button><button class="opt" onclick="answer(4,this,false,'This proposes a possible intervention.')">C. “We should install a digital display.”</button><button class="opt" onclick="answer(4,this,false,'This selects a technology too early.')">D. “We should use GPS tracking.”</button></div><div id="f4" class="feedback"></div><div class="row"><span></span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div></section>
-<section class="screen" id="s5"><h2>Question 5 — Why is engineering connected to society?</h2><div class="options"><button class="opt" onclick="answer(5,this,false,'Engineers work with much more than machines.')">A. Engineers only work with machines.</button><button class="opt" onclick="answer(5,this,true,'Engineering decisions can influence people, safety, resources and the environment.')">B. Engineering decisions can affect people, safety, resources and the environment.</button><button class="opt" onclick="answer(5,this,false,'Technical decisions can have social consequences.')">C. Engineering has no effect outside the laboratory.</button><button class="opt" onclick="answer(5,this,false,'Engineers may work with communities and stakeholders.')">D. Communities are unrelated to engineering.</button></div><div id="f5" class="feedback"></div><div class="row"><span></span><button id="n5" class="btn next" onclick="go(6)">Finish →</button></div></section>
-<section class="screen" id="s6"><div class="hero"><span class="tag">ACTIVITY COMPLETE</span><h2>You have completed the basics.</h2><div class="result"><span id="finalScore"></span> / 50</div><p class="sub">Main idea: EPICS connects engineering learning with authentic community needs. Before choosing a technology, understand the situation first.</p><button class="btn secondary" onclick="location.reload()">PLAY AGAIN</button></div></section>
+<section class="screen active" id="s0">
+  <div class="hero">
+    <span class="tag">ACTIVITY 1 • ABOUT 35–45 MINUTES</span>
+    <h1>EPICS <span class="accent">Basics</span></h1>
+    <p class="sub">
+      A discovery-first activity to understand what EPICS is about before you begin solving community problems.
+      You will answer questions, analyse scenarios, sort concepts, and make simple design decisions.
+    </p>
+    <button class="btn" onclick="go(1)">START →</button>
+  </div>
+</section>
+
+<section class="screen" id="s1">
+  <h2>Question 1 — What does EPICS stand for?</h2>
+  <p class="sub">Choose the expansion that matches the course title.</p>
+  <div class="options">
+    <button class="opt" onclick="answer(1,this,true,'EPICS stands for Engineering Projects in Community Service. This captures both the engineering component and the community-service purpose of the course.')">A. Engineering Projects in Community Service, combining engineering work with service to address community needs.</button>
+    <button class="opt" onclick="answer(1,this,false,'This sounds plausible because it uses engineering and community language, but it is not the official expansion of EPICS.')">B. Engineering Practice in Community Systems, focusing mainly on applying engineering practice to local community systems.</button>
+    <button class="opt" onclick="answer(1,this,false,'This describes an attractive engineering philosophy, but it is not the official expansion of the EPICS acronym.')">C. Engineering Process for Innovative Community Solutions, emphasising innovation rather than the actual course title.</button>
+    <button class="opt" onclick="answer(1,this,false,'The phrase combines industrial and community work, but it is not the official expansion of the EPICS acronym used in this course.')">D. Engineering Projects for Industrial and Community Systems, combining industrial projects with community-oriented engineering.</button>
+  </div>
+  <div id="f1" class="feedback"></div>
+  <div class="row"><span></span><button id="n1" class="btn next" onclick="go(2)">Next →</button></div>
+</section>
+
+<section class="screen" id="s2">
+  <h2>Question 2 — Which situation is closest to an EPICS project?</h2>
+  <p class="sub">Look for a real community need, identifiable people, and an engineering response.</p>
+  <div class="options">
+    <button class="opt" onclick="answer(2,this,false,'A robot built only as a technical demonstration may be excellent engineering practice, but the example does not yet show a community need or a defined stakeholder.')">A. Build a robot only to demonstrate a sensor, motor and controller, without identifying who in the community needs the system.</button>
+    <button class="opt" onclick="answer(2,this,true,'This has the essential EPICS ingredients: a real need, identifiable users and a reason to investigate an engineering response before selecting a solution.')">B. Work with a school to understand why students struggle to access drinking water and then develop an appropriate engineering response with the users.</button>
+    <button class="opt" onclick="answer(2,this,false,'Learning engineering terminology is useful, but memorisation alone does not constitute a community-centred engineering project.')">C. Memorise the names of engineering tools and technologies so that students can recognise them in future engineering examinations.</button>
+    <button class="opt" onclick="answer(2,this,false,'A copied project may demonstrate technical ability, but EPICS requires understanding the actual context instead of assuming a solution will transfer unchanged.')">D. Copy a popular project from the internet and install it locally without first studying the community, users or context in which it will operate.</button>
+  </div>
+  <div id="f2" class="feedback"></div>
+  <div class="row"><span></span><button id="n2" class="btn next" onclick="go(3)">Next →</button></div>
+</section>
+
+<section class="screen" id="s3">
+  <h2>Scenario 1 — What should engineers do first?</h2>
+  <div class="scenario"><strong>SCENARIO</strong><br><br>
+    Students complain that they often do not know when the college bus will arrive.
+    A team immediately suggests building a mobile application with GPS tracking.
+  </div>
+  <div class="options">
+    <button class="opt" onclick="answer(3,this,false,'A mobile app might eventually be useful, but the team has selected technology before understanding the actual information gap, current practice and different users.')">A. Start coding the mobile app immediately because GPS tracking is a familiar technology and can probably solve the problem quickly.</button>
+    <button class="opt" onclick="answer(3,this,true,'The first step is to understand the situation, people affected, existing process, missing information and constraints before deciding what should be built.')">B. Understand the situation, users, current process and missing information before deciding whether any technology is actually required.</button>
+    <button class="opt" onclick="answer(3,this,false,'Waiting does not reveal the cause of the problem, and it gives the engineering team no evidence for deciding what intervention might be useful.')">C. Wait for several weeks and assume the problem may disappear naturally without collecting evidence from students, drivers or transport staff.</button>
+    <button class="opt" onclick="answer(3,this,false,'Buying sensors is another technology-first decision and does not establish what information users actually need or how the transport process currently works.')">D. Purchase GPS sensors first because having technical hardware available will make it easier to discover the problem after development begins.</button>
+  </div>
+  <div id="f3" class="feedback"></div>
+  <div class="row"><span></span><button id="n3" class="btn next" onclick="go(4)">Next →</button></div>
+</section>
+
+<section class="screen" id="s4">
+  <h2>Question 4 — Need or Solution?</h2>
+  <p class="sub">Which statement describes the problem without prematurely choosing a technology?</p>
+  <div class="options">
+    <button class="opt" onclick="answer(4,this,false,'This tells us what to build, but it does not explain the underlying user problem or whether an application is actually needed.')">A. “We should build an application that shows the college bus location on students’ phones in real time.”</button>
+    <button class="opt" onclick="answer(4,this,true,'This describes the user problem without deciding whether the final response should be an app, display, timetable, communication process or something else.')">B. “Students do not have reliable information about when the college bus will arrive at their stop.”</button>
+    <button class="opt" onclick="answer(4,this,false,'A digital display is a possible intervention, but it is still a solution choice rather than a neutral description of the need.')">C. “We should install a digital display at the main gate so that students can read the expected bus arrival time.”</button>
+    <button class="opt" onclick="answer(4,this,false,'GPS tracking may be one possible technical approach, but selecting it before understanding the need limits the design space too early.')">D. “We should use GPS tracking so that the bus coordinates can be transmitted to students automatically.”</button>
+  </div>
+  <div id="f4" class="feedback"></div>
+  <div class="row"><span></span><button id="n4" class="btn next" onclick="go(5)">Next →</button></div>
+</section>
+
+<section class="screen" id="s5">
+  <h2>Scenario 2 — Who are the stakeholders?</h2>
+  <div class="scenario"><strong>SCENARIO</strong><br><br>
+    A team is studying water access in a community school. Students use the taps, teachers supervise them,
+    a maintenance worker repairs the plumbing, and the local authority may fund improvements.
+  </div>
+  <div class="options">
+    <button class="opt" onclick="answer(5,this,false,'Focusing only on students ignores the people who maintain, approve, operate or fund the system and may lead to an incomplete set of requirements.')">A. Consider only the school students because they are the direct users and therefore no other stakeholder can influence the design.</button>
+    <button class="opt" onclick="answer(5,this,true,'The users, teachers, maintenance staff and authority all influence requirements, operation, approval and long-term sustainability of the intervention.')">B. Consider students, teachers, maintenance staff and the local authority because each can influence how the solution is used, maintained or supported.</button>
+    <button class="opt" onclick="answer(5,this,false,'The engineering team is important, but the team should not replace the community voices when defining the actual need or judging usefulness.')">C. Consider only the engineering students because they are responsible for deciding the technical requirements and finalising the prototype.</button>
+    <button class="opt" onclick="answer(5,this,false,'A funding authority may be important, but excluding users and maintenance staff would leave major practical and usability requirements unidentified.')">D. Consider only the funding authority because whoever pays for the intervention should determine every requirement without further stakeholder input.</button>
+  </div>
+  <div id="f5" class="feedback"></div>
+  <div class="row"><span></span><button id="n5" class="btn next" onclick="go(6)">Next →</button></div>
+</section>
+
+<section class="screen" id="s6">
+  <h2>Drag & Drop — Need, Requirement or Solution?</h2>
+  <p class="sub">Drag each card into the category you think is correct. Then discuss any card that could reasonably be interpreted in more than one way.</p>
+
+  <div class="drag-area">
+    <div class="dropzone" id="needZone" data-zone="need">
+      <h3>COMMUNITY NEED / PROBLEM</h3>
+      <div class="mini">Describe the difficulty without selecting the technology.</div>
+    </div>
+    <div class="dropzone" id="solutionZone" data-zone="solution">
+      <h3>POSSIBLE SOLUTION</h3>
+      <div class="mini">A specific intervention, product or technology.</div>
+    </div>
+  </div>
+
+  <div class="drag-items" id="dragItems">
+    <div class="drag-item" draggable="true" data-answer="need">Students do not know when the bus will arrive.</div>
+    <div class="drag-item" draggable="true" data-answer="solution">Install a live bus-tracking display.</div>
+    <div class="drag-item" draggable="true" data-answer="need">Water taps are often left running after use.</div>
+    <div class="drag-item" draggable="true" data-answer="solution">Use an automatic tap shut-off mechanism.</div>
+    <div class="drag-item" draggable="true" data-answer="need">A wheelchair user cannot reach the existing control.</div>
+    <div class="drag-item" draggable="true" data-answer="solution">Redesign the control to be reachable from the wheelchair.</div>
+  </div>
+
+  <div id="dragFeedback" class="feedback"></div>
+  <div class="row">
+    <span></span><button id="n6" class="btn next" onclick="go(7)">Next →</button>
+  </div>
+</section>
+
+<section class="screen" id="s7">
+  <h2>Question 7 — Why is engineering connected to society?</h2>
+  <div class="options">
+    <button class="opt" onclick="answer(7,this,false,'Engineers work with machines and materials, but their decisions also affect people, safety, resources, cost and the environment.')">A. Engineers mainly work with machines and calculations, so social considerations are normally outside the engineering design process.</button>
+    <button class="opt" onclick="answer(7,this,true,'Engineering choices can affect safety, accessibility, resource use, cost, environmental conditions and people’s everyday experiences.')">B. Engineering decisions can affect people, safety, resources, accessibility, cost and the environment in the real world.</button>
+    <button class="opt" onclick="answer(7,this,false,'Engineering decisions can have consequences far beyond the laboratory, especially when systems are used by large groups of people.')">C. Engineering has little effect outside the laboratory because the community usually interacts with a finished product rather than with engineering decisions.</button>
+    <button class="opt" onclick="answer(7,this,false,'Communities are often the reason a project exists, and understanding their needs can change technical requirements and design priorities.')">D. Communities are mostly unrelated to engineering because technical teams can define the solution independently of social context and user experience.</button>
+  </div>
+  <div id="f7" class="feedback"></div>
+  <div class="row"><span></span><button id="n7" class="btn next" onclick="go(8)">Next →</button></div>
+</section>
+
+<section class="screen" id="s8">
+  <h2>Scenario 3 — The problem is bigger than the device</h2>
+  <div class="scenario"><strong>SCENARIO</strong><br><br>
+    A community centre wants to reduce water wastage. One student suggests a “smart tap” immediately.
+    Another asks who turns the taps on, who cleans them, who pays the water bill, and when the wastage occurs.
+  </div>
+  <div class="options">
+    <button class="opt" onclick="answer(8,this,false,'The smart tap might be useful, but choosing it before understanding the workflow risks solving the wrong part of the system.')">A. Select the smart tap because an automated device is more advanced and is therefore more likely to create a successful engineering outcome.</button>
+    <button class="opt" onclick="answer(8,this,true,'The second student is using systems thinking: understanding users, workflow, incentives, maintenance and timing can reveal the real cause before design begins.')">B. Investigate users, workflow, maintenance, costs and timing first so that the team understands where the water is actually being wasted.</button>
+    <button class="opt" onclick="answer(8,this,false,'Water-saving technology may help, but measuring existing behaviour and identifying the point of wastage is necessary before selecting the appropriate intervention.')">C. Start with the most expensive sensor package available because detailed measurements will automatically reveal which intervention the community should adopt.</button>
+    <button class="opt" onclick="answer(8,this,false,'Adding more hardware does not automatically solve a process problem, and it may make maintenance more difficult for the community.')">D. Add multiple sensors and controllers immediately because increasing technical complexity will guarantee that the community uses less water.</button>
+  </div>
+  <div id="f8" class="feedback"></div>
+  <div class="row"><span></span><button id="n8" class="btn next" onclick="go(9)">Next →</button></div>
+</section>
+
+<section class="screen" id="s9">
+  <h2>Scenario 4 — What makes a good problem statement?</h2>
+  <p class="sub">Choose the strongest statement for an EPICS team.</p>
+  <div class="options">
+    <button class="opt" onclick="answer(9,this,false,'This is a proposed product and does not identify the specific user, context, barrier or desired outcome.')">A. “Build an affordable device that helps everyone carry water more easily and efficiently in the community.”</button>
+    <button class="opt" onclick="answer(9,this,true,'This identifies a specific user group, task, context and consequence without deciding the final technology or product.')">B. “Older residents carrying water containers from the community tap to their homes struggle with the weight and distance, increasing effort and risk of dropping the container.”</button>
+    <button class="opt" onclick="answer(9,this,false,'This is a broad social issue rather than a sufficiently focused and observable engineering problem that a student team can investigate and test.')">C. “Water management is a major issue in society, so engineers should develop a modern solution that can improve water-related conditions.”</button>
+    <button class="opt" onclick="answer(9,this,false,'The statement jumps directly to an intervention and does not establish whether the selected technology is necessary or appropriate for the users.')">D. “Develop a sensor-based carrying system with a mobile application so that residents can monitor every water container they move.”</button>
+  </div>
+  <div id="f9" class="feedback"></div>
+  <div class="row"><span></span><button id="n9" class="btn next" onclick="go(10)">Next →</button></div>
+</section>
+
+<section class="screen" id="s10">
+  <h2>Drag & Drop — Which comes first?</h2>
+  <p class="sub">Arrange the EPICS thinking process in the order you would normally follow. Drag the cards onto the numbered spaces.</p>
+
+  <div class="rank-list" id="rankList">
+    <div class="rank-row" data-rank="1"><div class="rank-no">1</div><div class="rank-slot"></div></div>
+    <div class="rank-row" data-rank="2"><div class="rank-no">2</div><div class="rank-slot"></div></div>
+    <div class="rank-row" data-rank="3"><div class="rank-no">3</div><div class="rank-slot"></div></div>
+    <div class="rank-row" data-rank="4"><div class="rank-no">4</div><div class="rank-slot"></div></div>
+    <div class="rank-row" data-rank="5"><div class="rank-no">5</div><div class="rank-slot"></div></div>
+  </div>
+
+  <div class="drag-items" id="rankItems">
+    <div class="drag-item" draggable="true" data-order="1">Understand the community need and stakeholders</div>
+    <div class="drag-item" draggable="true" data-order="2">Define the problem and requirements</div>
+    <div class="drag-item" draggable="true" data-order="3">Generate and compare solution concepts</div>
+    <div class="drag-item" draggable="true" data-order="4">Prototype and test</div>
+    <div class="drag-item" draggable="true" data-order="5">Review results and refine the solution</div>
+  </div>
+
+  <div id="rankFeedback" class="feedback"></div>
+  <div class="row"><span></span><button id="n10" class="btn next" onclick="go(11)">Next →</button></div>
+</section>
+
+<section class="screen" id="s11">
+  <h2>Question 11 — What is a requirement?</h2>
+  <p class="sub">Choose the statement that is most useful for engineering design.</p>
+  <div class="options">
+    <button class="opt" onclick="answer(11,this,false,'“Make it modern” sounds positive but is too vague to guide a design decision or determine whether a prototype has succeeded.')">A. “The solution should look modern and impressive so that community members recognise that advanced engineering has been used.”</button>
+    <button class="opt" onclick="answer(11,this,true,'A measurable requirement helps engineers compare concepts, test prototypes and decide whether the solution meets the intended need.')">B. “The user should be able to operate the mechanism independently within the required task conditions and without unsafe extra effort.”</button>
+    <button class="opt" onclick="answer(11,this,false,'Technology selection is not itself a requirement; the requirement should describe what the system must accomplish for the user or stakeholder.')">C. “The project must use a microcontroller because microcontrollers are common in modern engineering prototypes and can support future features.”</button>
+    <button class="opt" onclick="answer(11,this,false,'Low cost can be an important requirement, but this statement alone does not tell the team what the system must do or how performance should be evaluated.')">D. “The final product should be inexpensive so that the community does not have to spend too much money on engineering equipment.”</button>
+  </div>
+  <div id="f11" class="feedback"></div>
+  <div class="row"><span></span><button id="n11" class="btn next" onclick="go(12)">Next →</button></div>
+</section>
+
+<section class="screen" id="s12">
+  <h2>Scenario 5 — Prototype or final product?</h2>
+  <div class="scenario"><strong>SCENARIO</strong><br><br>
+    Your team believes a particular mechanism will work, but you are uncertain about whether the user can operate it comfortably.
+    You have one week before the next review.
+  </div>
+  <div class="options">
+    <button class="opt" onclick="answer(12,this,false,'Building the complete final product may consume the available time before you have learned whether the central user interaction actually works.')">A. Build the complete final product first, because a polished prototype will give the team the most professional result for the review.</button>
+    <button class="opt" onclick="answer(12,this,true,'A focused prototype can answer the most important uncertainty quickly and cheaply before the team invests time in details that may later change.')">B. Build the simplest prototype that allows the team and user to test the uncertain interaction before investing in the final design.</button>
+    <button class="opt" onclick="answer(12,this,false,'Waiting until the final review removes an opportunity to learn, and the uncertainty may remain hidden until changes become expensive or difficult.')">C. Wait until the review meeting and ask the faculty member whether the mechanism seems comfortable, without testing it with the intended user beforehand.</button>
+    <button class="opt" onclick="answer(12,this,false,'Adding more features increases complexity but does not necessarily provide evidence about the specific uncertainty that the team needs to resolve.')">D. Add sensors, displays and extra functions so that the prototype looks complete even though the basic user interaction has not yet been tested.</button>
+  </div>
+  <div id="f12" class="feedback"></div>
+  <div class="row"><span></span><button id="n12" class="btn next" onclick="go(13)">Next →</button></div>
+</section>
+
+<section class="screen" id="s13">
+  <h2>Scenario 6 — Which evidence is strongest?</h2>
+  <div class="scenario"><strong>SCENARIO</strong><br><br>
+    A team reports: “Our solution is successful because the prototype worked once in the laboratory.”
+    Another team asks whether the real user can use it safely and whether the original problem has improved.
+  </div>
+  <div class="options">
+    <button class="opt" onclick="answer(13,this,false,'A single successful demonstration shows that the prototype can work under one condition, but it does not establish usability, robustness or community impact.')">A. A single successful laboratory demonstration is sufficient evidence because it proves that the engineering principle can work at least once.</button>
+    <button class="opt" onclick="answer(13,this,true,'Strong evidence combines technical performance with user testing and evidence that the intervention addresses the original need in the intended context.')">B. Strong evidence should combine technical testing, user feedback and an appropriate measure of whether the original community problem has improved.</button>
+    <button class="opt" onclick="answer(13,this,false,'User feedback is valuable, but without suitable engineering tests a team may miss structural, electrical, thermal or safety limitations in the design.')">C. User feedback alone is sufficient because community members can decide whether the design works without any technical or performance testing.</button>
+    <button class="opt" onclick="answer(13,this,false,'A polished presentation can communicate results, but it cannot substitute for actual evidence collected from testing, users and the intended context.')">D. A professional presentation with photographs and a confident explanation is sufficient evidence even if the team has limited testing data and no user trial.</button>
+  </div>
+  <div id="f13" class="feedback"></div>
+  <div class="row"><span></span><button id="n13" class="btn next" onclick="go(14)">Next →</button></div>
+</section>
+
+<section class="screen" id="s14">
+  <h2>Question 14 — Which mindset best matches EPICS?</h2>
+  <div class="options">
+    <button class="opt" onclick="answer(14,this,false,'Technical skill is important, but EPICS is not simply a technology demonstration. The community context and user need should shape the engineering work.')">A. “Start with the technology we already know, build something impressive, and then look for a community problem that can use it.”</button>
+    <button class="opt" onclick="answer(14,this,true,'EPICS begins with understanding a real need and develops an engineering response through evidence, collaboration, testing and reflection.')">B. “Start with the community need, understand the users and context, define the problem, compare alternatives, test the design and learn from evidence.”</button>
+    <button class="opt" onclick="answer(14,this,false,'Reducing the number of decisions may feel efficient, but it can cause teams to miss stakeholders, constraints and alternative solutions before committing resources.')">C. “Choose one solution quickly, avoid changing it later, and spend most of the project time making the first concept look polished and complete.”</button>
+    <button class="opt" onclick="answer(14,this,false,'Innovation can be valuable, but novelty alone does not show that the problem matters, that users need the intervention or that the solution is feasible.')">D. “Choose the most innovative technology available, because a highly advanced solution will automatically create greater community value.”</button>
+  </div>
+  <div id="f14" class="feedback"></div>
+  <div class="row"><span></span><button id="n14" class="btn next" onclick="go(15)">Finish →</button></div>
+</section>
+
+<section class="screen" id="s15">
+  <div class="hero">
+    <span class="tag">ACTIVITY COMPLETE</span>
+    <h2>EPICS Basics — Completed</h2>
+    <div class="result"><span id="finalScore">0</span> / 140</div>
+    <p class="sub">
+      Main idea: EPICS connects engineering learning with authentic community needs.
+      The process begins with understanding people and context, not with selecting a technology.
+    </p>
+    <button class="btn secondary" onclick="location.reload()">PLAY AGAIN</button>
+  </div>
+</section>
 
 </div>
+
 <script>
 let score=0,current=0,answered={};
-function update(){document.getElementById('score').textContent=score;document.getElementById('bar').style.width=(current/8*100)+'%';}
-function go(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');current=n;update();window.scrollTo({top:0,behavior:'smooth'});}
-function answer(q,btn,correct,msg){
- if(answered[q])return;answered[q]=true;
- btn.parentElement.querySelectorAll('.opt').forEach(x=>x.disabled=true);
- const f=document.getElementById('f'+q);
- if(correct){score+=10;btn.classList.add('correct');f.className='feedback show good';f.innerHTML=msg;}
- else{btn.classList.add('wrong');f.className='feedback show bad';f.innerHTML='<b>Not quite.</b> '+msg;}
- document.getElementById('n'+q).classList.add('show');update();
+const totalQuestions=14;
+document.getElementById('total').textContent=totalQuestions;
+
+function update(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('done').textContent=Object.keys(answered).length;
+  document.getElementById('bar').style.width=(current/15*100)+'%';
 }
-const oldGo=go;go=function(n){oldGo(n);if(n===6)document.getElementById('finalScore').textContent=score;};
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  current=n;
+  update();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function answer(q,btn,correct,msg){
+  if(answered[q])return;
+  answered[q]=true;
+  btn.parentElement.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+  const f=document.getElementById('f'+q);
+  if(correct){
+    score+=10;
+    btn.classList.add('correct');
+    f.className='feedback show good';
+    f.innerHTML='<b>Correct.</b> '+msg;
+  }else{
+    btn.classList.add('wrong');
+    f.className='feedback show bad';
+    f.innerHTML='<b>Not quite.</b> '+msg;
+  }
+  const n=document.getElementById('n'+q);
+  if(n)n.classList.add('show');
+  update();
+}
+function finish(){
+  document.getElementById('finalScore').textContent=score;
+}
+
+/* Drag & drop: need vs solution */
+let dragged=null;
+document.querySelectorAll('.drag-item').forEach(item=>{
+  item.addEventListener('dragstart',e=>{
+    dragged=item;
+    e.dataTransfer.setData('text/plain','drag');
+  });
+});
+document.querySelectorAll('.dropzone').forEach(zone=>{
+  zone.addEventListener('dragover',e=>{
+    e.preventDefault(); zone.classList.add('over');
+  });
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault(); zone.classList.remove('over');
+    if(!dragged)return;
+    zone.appendChild(dragged);
+    checkNeedSolution();
+  });
+});
+function checkNeedSolution(){
+  const all=[...document.querySelectorAll('#dragItems .drag-item')];
+  if(all.length) return;
+  const need=[...document.querySelectorAll('#needZone .drag-item')];
+  const sol=[...document.querySelectorAll('#solutionZone .drag-item')];
+  const okNeed=need.every(x=>x.dataset.answer==='need');
+  const okSol=sol.every(x=>x.dataset.answer==='solution');
+  const f=document.getElementById('dragFeedback');
+  if(okNeed && okSol){
+    score+=10; answered[6]=true;
+    f.className='feedback show good';
+    f.innerHTML='<b>Excellent classification.</b> You separated the problem from a possible intervention. That distinction is central to EPICS problem definition.';
+    document.getElementById('n6').classList.add('show');
+  }else{
+    f.className='feedback show bad';
+    f.innerHTML='<b>Review the sorting.</b> A need/problem describes the difficulty or situation; a solution names an intervention or technology. Drag the cards again.';
+    const items=[...need,...sol];
+    items.forEach(x=>document.getElementById('dragItems').appendChild(x));
+  }
+  update();
+}
+
+/* Drag & drop sequence */
+let seqDragged=null;
+document.querySelectorAll('#rankItems .drag-item').forEach(item=>{
+  item.addEventListener('dragstart',e=>{
+    seqDragged=item;
+    e.dataTransfer.setData('text/plain','rank');
+  });
+});
+document.querySelectorAll('#rankList .rank-row').forEach(row=>{
+  row.addEventListener('dragover',e=>{
+    e.preventDefault(); row.style.borderColor='var(--accent)';
+  });
+  row.addEventListener('dragleave',()=>row.style.borderColor='var(--line)');
+  row.addEventListener('drop',e=>{
+    e.preventDefault(); row.style.borderColor='var(--line)';
+    if(!seqDragged)return;
+    const slot=row.querySelector('.rank-slot');
+    slot.innerHTML='';
+    slot.appendChild(seqDragged.cloneNode(true));
+    seqDragged.style.display='none';
+    checkSequence();
+  });
+});
+function checkSequence(){
+  const slots=[...document.querySelectorAll('#rankList .rank-row')];
+  if(slots.some(r=>!r.querySelector('.rank-slot .drag-item')))return;
+  const vals=slots.map(r=>Number(r.querySelector('.rank-slot .drag-item').dataset.order));
+  const f=document.getElementById('rankFeedback');
+  if(vals.every((v,i)=>v===i+1)){
+    score+=10; answered[10]=true;
+    f.className='feedback show good';
+    f.innerHTML='<b>Correct sequence.</b> In EPICS, community understanding should inform problem definition; problem definition informs concept generation; testing then provides evidence for refinement.';
+    document.getElementById('n10').classList.add('show');
+  }else{
+    f.className='feedback show bad';
+    f.innerHTML='<b>Think about the logic.</b> You cannot meaningfully define requirements before understanding the need, and you should not finalise a solution before testing alternatives.';
+  }
+  update();
+}
+
+/* Final screen score */
+const originalGo=go;
+go=function(n){
+  originalGo(n);
+  if(n===15)finish();
+}
 update();
-</script></body></html>
+</script>
+</body>
+</html>
