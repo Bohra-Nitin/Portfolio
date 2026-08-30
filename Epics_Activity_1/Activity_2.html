@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Activity 2: People & Community</title>
 <style>
 :root{--bg:#07111f;--panel:#101d31;--panel2:#162842;--text:#f5f7fb;--muted:#aeb9ca;--accent:#40d6e8;--good:#71dc91;--bad:#f07078;--warn:#ffc15a;--line:#2c4161}
@@ -18,70 +18,51 @@ h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:12px 0}h2{font-size:cl
 .dropzone{min-height:210px;padding:18px;border:2px dashed var(--line);border-radius:16px;background:#0d192b}
 .dropzone h3{margin:0 0 12px;font-size:22px}
 .drag-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-.drag-item{touch-action:none;-webkit-tap-highlight-color:transparent;
-  user-select:none;-webkit-user-select:none;touch-action:manipulation;
-  cursor:pointer;background:var(--panel2);border:1px solid var(--line);
+.drag-item{
+  user-select:none;-webkit-user-select:none;
+  cursor:grab;background:var(--panel2);border:1px solid var(--line);
   padding:15px 17px;border-radius:12px;font-size:19px;line-height:1.35;
-  min-height:52px;display:flex;align-items:center
+  min-height:52px;display:flex;align-items:center;
 }
+.drag-item:active{cursor:grabbing}
 .drag-item.selected{
-  border-color:var(--accent);
+  border-color:var(--accent)!important;
+  background:rgba(64,214,232,.12)!important;
   box-shadow:0 0 0 2px rgba(64,214,232,.18);
-  background:rgba(64,214,232,.10)
 }
+.drag-item.dragging{opacity:.35}
 .dropzone{
   min-height:210px;padding:18px;border:2px dashed var(--line);
   border-radius:16px;background:#0d192b;transition:.15s
 }
-.dropzone.over,.dropzone.target{
-  border-color:var(--accent);background:rgba(64,214,232,.08)
-}
+.dropzone h3{margin:0 0 12px;font-size:22px}
+.dropzone.target,.dropzone.over{border-color:var(--accent);background:rgba(64,214,232,.08)}
 .rank-list{display:grid;gap:10px;margin:18px 0}
 .rank-row{
   display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;
   padding:12px;background:#0d192b;border:1px solid var(--line);
   border-radius:13px;font-size:19px;min-height:60px
 }
-.rank-row.target{border-color:var(--accent);background:rgba(64,214,232,.08)}
+.rank-row.target,.rank-row.over{border-color:var(--accent);background:rgba(64,214,232,.08)}
 .rank-no{
   width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
   justify-content:center;background:var(--panel2);border:1px solid var(--line);
   font-weight:800
 }
 .rank-slot{min-height:36px;display:flex;align-items:center}
-.drag-hint{
-  color:var(--muted);font-size:16px;margin:10px 0 0
-}
+.mini{font-size:16px;color:var(--muted)}
 .note{background:rgba(255,193,90,.08);border:1px solid rgba(255,193,90,.35);border-radius:14px;padding:16px;font-size:18px;line-height:1.5}
 @media(max-width:700px){.drag-area{grid-template-columns:1fr}.opt{font-size:18px}.scenario{font-size:20px}}
 @media(max-width:600px){.wrap{padding:14px}.row{align-items:flex-start;flex-direction:column}}
-
-.pointer-drag-clone{
-  background:var(--panel2)!important;
-  border:2px solid var(--accent)!important;
-  border-radius:12px;
-  box-shadow:0 10px 35px rgba(0,0,0,.35);
-}
-.drag-item,.dropzone,.rank-row{
-  -webkit-user-select:none;
-  user-select:none;
-  -webkit-touch-callout:none;
-}
 </style>
 </head><body><div class="wrap">
-<div class="card" style="margin-top:0;margin-bottom:14px">
-  <div style="font-size:18px;line-height:1.5;color:var(--muted)">
-    <b style="color:var(--accent)">How to interact:</b>
-    On a computer, drag the card. On a phone or tablet, tap the card and then tap where it belongs.
-  </div>
-</div>
 <div class="top"><div class="brand"><b>EPICS</b> • Activity 2: People & Community</div><div class="stats"><div class="pill">⭐ Score: <span id="score">0</span></div></div></div>
-<div class="progress"><div class="bar" id="bar"></div></div><div class="card" style="margin:0 0 14px"><div class="mini" style="font-size:17px"><b style="color:var(--accent)">Interact:</b> Desktop — press and drag a card. Mobile/tablet — tap a card, then tap its destination. Both methods are supported.</div></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
 
 
 <section class="screen active" id="s0">
   <div class="hero">
-    <span class="tag">ACTIVITY 2 • ABOUT 40–50 MINUTES • DESKTOP + MOBILE</span>
+    <span class="tag">ACTIVITY 2 • ABOUT 40–50 MINUTES</span>
     <h1>People & <span class="accent">Community</span></h1>
     <p class="sub">Explore stakeholders, community needs, listening, observation, inclusion, and ethical engagement before deciding what an engineering project should do.</p>
     <div class="note"><b>Core idea:</b> A community problem is experienced by people. Different people may see different parts of the same problem.</div>
@@ -286,168 +267,82 @@ function answer(q,btn,correct,msg){
   update();
 }
 
+/* =========================
+   STAKEHOLDER SORT
+   ========================= */
+let selectedStake=null;
+let dragStake=null;
 
-/* ---------- Unified pointer + click interaction ---------- */
-let selectedItem=null;
-let pointerItem=null;
-let pointerStartX=0,pointerStartY=0,pointerDragging=false;
-let pointerClone=null;
+const stakeItems=document.querySelectorAll('#stakeItems .drag-item');
+stakeItems.forEach(item=>{
+  item.draggable=true;
 
-function clearSelection(){
-  if(selectedItem) selectedItem.classList.remove('selected');
-  selectedItem=null;
-  document.querySelectorAll('.dropzone,.rank-row').forEach(x=>{
-    x.classList.remove('target');
-    x.classList.remove('over');
+  item.addEventListener('dragstart',e=>{
+    dragStake=item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',item.dataset.answer);
   });
-}
 
-function selectItem(item){
-  if(!item)return;
-  clearSelection();
-  selectedItem=item;
-  item.classList.add('selected');
+  item.addEventListener('dragend',()=>{
+    item.classList.remove('dragging');
+    dragStake=null;
+    document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('over'));
+  });
 
-  /* Highlight valid destinations */
-  if(item.closest('#stakeItems')){
-    document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.add('target'));
-  }
-  if(item.closest('#rankItems')){
-    document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.add('target'));
-  }
-}
-
-function movePointerClone(clientX,clientY){
-  if(!pointerClone)return;
-  pointerClone.style.left=clientX+'px';
-  pointerClone.style.top=clientY+'px';
-}
-
-function getDropTarget(clientX,clientY){
-  const els=document.elementsFromPoint(clientX,clientY);
-  return els.find(el=>el.classList && (el.classList.contains('dropzone') || el.classList.contains('rank-row'))) || null;
-}
-
-function finishPointerDrop(target){
-  if(!pointerItem)return;
-  const item=pointerItem;
-  const isStake=item.closest('#stakeItems');
-  const isRank=item.closest('#rankItems');
-
-  if(isStake && target && target.classList.contains('dropzone')){
-    target.appendChild(item);
-    clearSelection();
-    pointerItem=null;
-    checkStakeholders();
-    return;
-  }
-
-  if(isRank && target && target.classList.contains('rank-row')){
-    placeRankItem(item,target);
-    pointerItem=null;
-    return;
-  }
-
-  /* Not dropped on a valid target: put it back visually. */
-  if(pointerClone){
-    pointerClone.remove();
-    pointerClone=null;
-  }
-  item.style.opacity='';
-  pointerItem=null;
-  clearSelection();
-}
-
-function startPointerDrag(item,e){
-  pointerItem=item;
-  pointerStartX=e.clientX;
-  pointerStartY=e.clientY;
-  pointerDragging=false;
-
-  const move=(ev)=>{
-    const dx=ev.clientX-pointerStartX;
-    const dy=ev.clientY-pointerStartY;
-
-    if(!pointerDragging && Math.sqrt(dx*dx+dy*dy)<7)return;
-
-    if(!pointerDragging){
-      pointerDragging=true;
-      clearSelection();
-      item.style.opacity='.25';
-
-      pointerClone=item.cloneNode(true);
-      pointerClone.classList.add('pointer-drag-clone');
-      pointerClone.style.position='fixed';
-      pointerClone.style.zIndex='99999';
-      pointerClone.style.pointerEvents='none';
-      pointerClone.style.width=Math.min(item.getBoundingClientRect().width, window.innerWidth-30)+'px';
-      pointerClone.style.transform='translate(-50%,-50%) rotate(1deg)';
-      pointerClone.style.opacity='.92';
-      document.body.appendChild(pointerClone);
-    }
-
-    movePointerClone(ev.clientX,ev.clientY);
-    const target=getDropTarget(ev.clientX,ev.clientY);
-    document.querySelectorAll('.dropzone,.rank-row').forEach(x=>x.classList.remove('over'));
-    if(target)target.classList.add('over');
-  };
-
-  const up=(ev)=>{
-    document.removeEventListener('pointermove',move);
-    document.removeEventListener('pointerup',up);
-
-    if(pointerDragging){
-      const target=getDropTarget(ev.clientX,ev.clientY);
-      if(pointerClone){pointerClone.remove();pointerClone=null;}
-      item.style.opacity='';
-      finishPointerDrop(target);
+  /* Click/tap selection fallback */
+  item.addEventListener('click',e=>{
+    if(item.closest('#primaryZone') || item.closest('#supportZone')) return;
+    if(selectedStake===item){
+      item.classList.remove('selected');
+      selectedStake=null;
+      document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'));
     }else{
-      /* Treat a simple pointer press as selection for mobile and desktop click fallback. */
-      item.style.opacity='';
-      selectItem(item);
-      pointerItem=null;
+      document.querySelectorAll('#stakeItems .drag-item').forEach(x=>x.classList.remove('selected'));
+      selectedStake=item;
+      item.classList.add('selected');
+      document.querySelectorAll('#primaryZone,#supportZone').forEach(z=>z.classList.add('target'));
     }
-    pointerDragging=false;
-  };
-
-  document.addEventListener('pointermove',move,{passive:false});
-  document.addEventListener('pointerup',up,{passive:false});
-}
-
-/* Make all draggable cards work with mouse, touch and stylus. */
-document.querySelectorAll('.drag-item').forEach(item=>{
-  item.setAttribute('draggable','false');
-
-  item.addEventListener('pointerdown',e=>{
-    if(e.button!==undefined && e.button!==0)return;
-    e.preventDefault();
-    startPointerDrag(item,e);
   });
 });
 
-/* Click/tap a target after selecting a card. */
 ['primaryZone','supportZone'].forEach(id=>{
   const zone=document.getElementById(id);
-  zone.addEventListener('pointerup',e=>{
-    if(pointerDragging)return;
-    if(selectedItem && document.getElementById('stakeItems').contains(selectedItem)){
-      zone.appendChild(selectedItem);
-      clearSelection();
+
+  zone.addEventListener('dragover',e=>{
+    e.preventDefault();
+    if(dragStake) zone.classList.add('over');
+    e.dataTransfer.dropEffect='move';
+  });
+
+  zone.addEventListener('dragleave',()=>{
+    zone.classList.remove('over');
+  });
+
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();
+    zone.classList.remove('over');
+    if(dragStake){
+      zone.appendChild(dragStake);
+      dragStake.classList.remove('selected');
+      selectedStake=null;
+      document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'));
+      checkStakeholders();
+    }
+  });
+
+  /* Click/tap destination */
+  zone.addEventListener('click',e=>{
+    if(selectedStake && document.getElementById('stakeItems').contains(selectedStake)){
+      zone.appendChild(selectedStake);
+      selectedStake.classList.remove('selected');
+      selectedStake=null;
+      document.querySelectorAll('.dropzone').forEach(z=>z.classList.remove('target'));
       checkStakeholders();
     }
   });
 });
 
-document.querySelectorAll('#rankList .rank-row').forEach(row=>{
-  row.addEventListener('pointerup',e=>{
-    if(pointerDragging)return;
-    if(selectedItem && document.getElementById('rankItems').contains(selectedItem)){
-      placeRankItem(selectedItem,row);
-    }
-  });
-});
-
-/* ---------- Stakeholder classification ---------- */
 function checkStakeholders(){
   if(document.querySelectorAll('#stakeItems .drag-item').length)return;
 
@@ -471,36 +366,111 @@ function checkStakeholders(){
   update();
 }
 
-/* ---------- Community-engagement sequence ---------- */
+/* =========================
+   PROCESS SEQUENCE SORT
+   ========================= */
+let selectedRank=null;
+let dragRank=null;
+
+const rankItems=document.querySelectorAll('#rankItems .drag-item');
+rankItems.forEach(item=>{
+  item.draggable=true;
+
+  item.addEventListener('dragstart',e=>{
+    dragRank=item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',item.dataset.order);
+  });
+
+  item.addEventListener('dragend',()=>{
+    item.classList.remove('dragging');
+    dragRank=null;
+    document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('over'));
+  });
+
+  item.addEventListener('click',e=>{
+    if(item.closest('.rank-slot')) return;
+    if(selectedRank===item){
+      item.classList.remove('selected');
+      selectedRank=null;
+      document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('target'));
+    }else{
+      document.querySelectorAll('#rankItems .drag-item').forEach(x=>x.classList.remove('selected'));
+      selectedRank=item;
+      item.classList.add('selected');
+      document.querySelectorAll('#rankList .rank-row').forEach(r=>r.classList.add('target'));
+    }
+  });
+});
+
+document.querySelectorAll('#rankList .rank-row').forEach(row=>{
+  row.addEventListener('dragover',e=>{
+    e.preventDefault();
+    if(dragRank) row.classList.add('over');
+    e.dataTransfer.dropEffect='move';
+  });
+
+  row.addEventListener('dragleave',()=>{
+    row.classList.remove('over');
+  });
+
+  row.addEventListener('drop',e=>{
+    e.preventDefault();
+    row.classList.remove('over');
+    if(dragRank){
+      placeRankItem(dragRank,row);
+      dragRank=null;
+    }
+  });
+
+  row.addEventListener('click',()=>{
+    if(selectedRank && document.getElementById('rankItems').contains(selectedRank)){
+      placeRankItem(selectedRank,row);
+    }
+  });
+});
+
 function placeRankItem(item,row){
   if(!item)return;
+
   const slot=row.querySelector('.rank-slot');
-  slot.innerHTML='';
+
+  /* If this row already has an item, return that item to the source pool. */
+  const previous=slot.querySelector('.drag-item');
+  if(previous){
+    const original=previous.dataset.order;
+    const source=[...document.querySelectorAll('#rankItems .drag-item')]
+      .find(x=>x.dataset.order===original && x.style.display==='none');
+    if(source)source.style.display='';
+    previous.remove();
+  }
 
   const clone=item.cloneNode(true);
   clone.draggable=false;
-  clone.style.opacity='';
-  clone.classList.remove('selected');
-
-  clone.addEventListener('pointerdown',e=>{
-    if(e.button!==undefined && e.button!==0)return;
-    e.preventDefault();
-    /* Selected ranked cards are allowed to be moved back to the source pool by tapping. */
-    if(clone.parentElement===slot){
-      document.getElementById('rankItems').appendChild(item);
+  clone.classList.remove('selected','dragging');
+  clone.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(slot.contains(clone)){
+      const source=[...document.querySelectorAll('#rankItems .drag-item')]
+        .find(x=>x.dataset.order===clone.dataset.order);
+      if(source)source.style.display='';
       clone.remove();
-      selectItem(item);
+      checkSequence();
     }
   });
 
   slot.appendChild(clone);
   item.style.display='none';
-  clearSelection();
+  item.classList.remove('selected');
+  selectedRank=null;
+  document.querySelectorAll('.rank-row').forEach(r=>r.classList.remove('target'));
   checkSequence();
 }
 
 function checkSequence(){
   const rows=[...document.querySelectorAll('#rankList .rank-row')];
+
   if(rows.some(r=>!r.querySelector('.rank-slot .drag-item')))return;
 
   const vals=rows.map(r=>Number(r.querySelector('.rank-slot .drag-item').dataset.order));
@@ -517,7 +487,7 @@ function checkSequence(){
   }
   update();
 }
-/* Final screen score */
+
 const originalGo=go;
 go=function(n){
   originalGo(n);
